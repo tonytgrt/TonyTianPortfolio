@@ -1,6 +1,6 @@
 .heading-primary {
   font-size: 6rem;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 3px;
   text-align: center;
   @include respond(phone) {
