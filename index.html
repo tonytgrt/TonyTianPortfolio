@@ -209,6 +209,37 @@
           <div class="projects__row">
             <div class="projects__row-img-cont">
               <img
+                src="./assets/png/pathtracer-hs.png"
+                alt="CUDA Path Tracer Screenshot"
+                class="projects__row-img"
+                loading="lazy"
+              />
+            </div>
+            <div class="projects__row-content">
+              <h3 class="projects__row-content-title">CUDA Path Tracer</h3>
+              <p class="projects__row-content-desc">
+                A physically-based Monte Carlo path tracer built with CUDA, capable of rendering photorealistic 3D scenes with complex lighting and materials.
+              </p>
+              <div class="projects__row-content-desc">
+                <strong>Key Features:</strong>
+                <ul style="margin-top: 0.5rem; margin-bottom: 0; padding-left: 2rem;">
+                  <li><strong>BSDF Materials:</strong> Perfect specular reflection/refraction, Lambertian diffuse, GGX microfacet specular, Oren-Nayar rough diffuse</li>
+                  <li><strong>Advanced Rendering:</strong> Global illumination with Russian Roulette path termination, multiple importance sampling, stochastic anti-aliasing, sub-surface scattering</li>
+                  <li><strong>Asset Pipeline:</strong> glTF model loading with albedo maps, normal maps, metallic-roughness textures, HDR environment maps</li>
+                  <li><strong>GPU Optimization:</strong> 160× speedup via stream compaction, material sorting to reduce warp divergence, first-bounce caching</li>
+                </ul>
+              </div>
+              <a
+                href="https://github.com/tonytgrt/CUDA-Path-Tracer"
+                class="btn btn--med btn--theme dynamicBgClr"
+                target="_blank"
+                >Github Repo</a
+              >
+            </div>
+          </div>
+          <div class="projects__row">
+            <div class="projects__row-img-cont">
+              <img
                 src="./assets/png/webgpu-thumb.png"
                 alt="WebGPU Forward+ Renderer Screenshot"
                 class="projects__row-img"
@@ -231,20 +262,19 @@
           <div class="projects__row">
             <div class="projects__row-img-cont">
               <img
-                src="./assets/png/pathtracer-hs.png"
-                alt="CUDA Path Tracer Screenshot"
+                src="./assets/gif/vulkan_grass.gif"
+                alt="Vulkan Grass Rendering Simulation"
                 class="projects__row-img"
                 loading="lazy"
               />
             </div>
             <div class="projects__row-content">
-              <h3 class="projects__row-content-title">CUDA Path Tracer</h3>
+              <h3 class="projects__row-content-title">Vulkan Grass Rendering</h3>
               <p class="projects__row-content-desc">
-                A Monte Carlo path tracer capable of rendering complex 3D scenes with custom 3D models and environment maps. Implemented shading BSDF kernel supporting global illumination, multiple importance sampling, anti-aliasing,
-                sub-surface scattering, capable of rendering various PBR material types with albedo and texture maps.
+                Real-time grass renderer in Vulkan simulating up to 1 million grass blades at interactive frame rates. Features physics-based animation (gravity, wind, recovery forces), Bezier curve tessellation with dynamic LOD, and intelligent three-tier culling system (orientation, view-frustum, distance) achieving up to 4× performance improvement. Includes custom ImGui performance profiling interface with automated benchmarking.
               </p>
               <a
-                href="https://github.com/tonytgrt/CUDA-Path-Tracer"
+                href="https://github.com/tonytgrt/Project5-Vulkan-Grass-Rendering"
                 class="btn btn--med btn--theme dynamicBgClr"
                 target="_blank"
                 >Github Repo</a
