@@ -1,12 +1,13 @@
 // The portfolio hero's background. This is a copy of the 566-hw1 fireball
 // project, reworked to live behind the page: it draws into the hero's canvas
 // rather than a full-window one, and has none of the standalone project's
-// on-screen tooling.
-import {vec3} from 'gl-matrix';
+// on-screen tooling. The fireball is shrunk down to a comet that circles the
+// mouse cursor.
+import {mat4, vec3} from 'gl-matrix';
 import Icosphere from './geometry/Icosphere';
 import Square from './geometry/Square';
 import OpenGLRenderer from './rendering/gl/OpenGLRenderer';
-import Camera from './Camera';
+import Comet from './Comet';
 import {setGL} from './globals';
 import ShaderProgram, {Shader, FireballParams, BackgroundParams} from './rendering/gl/ShaderProgram';
 
@@ -15,16 +16,39 @@ import lambertFragSource from './shaders/lambert-frag.glsl?raw';
 import backgroundVertSource from './shaders/background-vert.glsl?raw';
 import backgroundFragSource from './shaders/background-frag.glsl?raw';
 
-// Off for now: only the background quad (the planet and starfield) is drawn.
-// Set this to true to put the flame back in front of it.
-const SHOW_FIREBALL = false;
+// Set this to false to draw only the background quad (the planet and starfield).
+const SHOW_FIREBALL = true;
 
 // Full device resolution on a high-DPI screen quadruples the fragment work for
 // a backdrop that is mostly soft noise, so the pixel ratio is capped.
 const MAX_PIXEL_RATIO = 1.5;
 
+// Radius of the comet's head in CSS pixels. Its glow thins out toward the edge,
+// so the bright part of the head reads a little smaller than this.
+const HEAD_RADIUS = 16;
+
+// The tail answers to speed: near the flame's own shape when slow, and drawn
+// out longer and narrower as the comet speeds up. Heights are in head radii.
+// SPEED_SCALE is the speed, in px/s, at which it is about two-thirds grown.
+const FAST_FLAME_HEIGHT = 6.5;
+const FAST_TAPER = 0.75;
+const SPEED_SCALE = 290;
+
+// The sharpest the tail may curve, per head radius. A sudden jerk of the cursor
+// spikes the path's curvature for a frame or two, and without a limit the tail
+// would snap into a hook.
+const MAX_CURVATURE = 0.3;
+
+// Seconds the comet takes to grow in when the cursor first appears.
+const APPEAR_TIME = 0.5;
+
+// Where the comet's glow is seen from: straight out of the screen, to match the
+// orthographic view.
+const EYE = vec3.fromValues(0, 0, 100);
+
 // The art-directed defaults from the standalone project. There is no dat.GUI
-// panel here, so these are simply the values the shaders get.
+// panel here, so these are simply the values the shaders get, except that the
+// comet overrides the flame height and taper every frame from its speed.
 const params: FireballParams & BackgroundParams & {tesselations: number} = {
   tesselations: 5,
   displacement: 0.18,   // amplitude of the low-frequency upward sway
@@ -40,27 +64,19 @@ const params: FireballParams & BackgroundParams & {tesselations: number} = {
   bandBlend: 0.79,      // 0 gives hard cel band edges, 1 an unbroken gradient
   flameHeight: 1.5,     // vertical stretch from sphere to flame
   taper: 0.12,          // how far the crown is drawn in relative to the root
-  bands: 12,             // quantized color bands; below 2 the gradient is smooth
+  bands: 0,             // quantized color bands; below 2 the gradient is smooth. The
+                        // fireball's 12 cel bands read as fire, not as a comet's glow.
   horizon: -0.3,        // where the planet's limb crosses the centre of the screen
   atmosphere: 0.028,    // thickness of the atmospheric halo above the limb
 };
 
 // Everything only the flame needs, created only when it is shown.
 interface Fireball {
-  camera: Camera;
   lambert: ShaderProgram;
   icosphere: Icosphere;
 }
 
-function createFireball(gl: WebGL2RenderingContext, canvas: HTMLCanvasElement): Fireball {
-  // Eye, target and up, all three read off the console readout in Camera.ts.
-  // The up vector is the one that tilts the flame; without it the view comes
-  // back upright however the eye is placed.
-  const camera = new Camera(canvas,
-                            vec3.fromValues(4.48, 1.01, -1.98),
-                            vec3.fromValues(0, 0, 0),
-                            vec3.fromValues(-0.12, 0.69, -0.72));
-
+function createFireball(gl: WebGL2RenderingContext): Fireball {
   const lambert = new ShaderProgram([
     new Shader(gl.VERTEX_SHADER, lambertVertSource),
     new Shader(gl.FRAGMENT_SHADER, lambertFragSource),
@@ -69,7 +85,7 @@ function createFireball(gl: WebGL2RenderingContext, canvas: HTMLCanvasElement): 
   const icosphere = new Icosphere(vec3.fromValues(0, 0, 0), 1, params.tesselations);
   icosphere.create();
 
-  return {camera, lambert, icosphere};
+  return {lambert, icosphere};
 }
 
 function main() {
@@ -98,7 +114,27 @@ function main() {
     new Shader(gl.FRAGMENT_SHADER, backgroundFragSource),
   ]);
 
-  const fireball = SHOW_FIREBALL ? createFireball(gl, canvas) : null;
+  const fireball = SHOW_FIREBALL ? createFireball(gl) : null;
+  const comet = new Comet();
+  const shape = {...params};
+  const viewProj = mat4.create();
+  const model = mat4.create();
+
+  // The cursor, in client coordinates. Tracked on the window, because the
+  // canvas sits underneath the page and never receives the mouse itself. Only
+  // a real mouse counts; on touch screens there is no cursor to circle, so the
+  // comet stays hidden.
+  let pointerX = 0;
+  let pointerY = 0;
+  let hasPointer = false;
+  let appearedAt = -1;
+  window.addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'mouse') {
+      pointerX = e.clientX;
+      pointerY = e.clientY;
+      hasPointer = true;
+    }
+  }, {passive: true});
 
   // Match the drawing buffer to the canvas's CSS size, which follows the hero
   // section rather than the window. Checked every frame, so a resize, a change
@@ -111,13 +147,10 @@ function main() {
       return;
     }
     renderer.setSize(width, height);
-    if (fireball) {
-      fireball.camera.setAspectRatio(width / height);
-      fireball.camera.updateProjectionMatrix();
-    }
   }
 
   const startTime = performance.now();
+  let lastTime = 0;
   let frame = 0;
 
   // This function will be called every frame
@@ -126,6 +159,9 @@ function main() {
     // Seconds since the program started, passed to the shaders so their
     // displacement and color animate over time.
     const time = (performance.now() - startTime) * 0.001;
+    // Capped, so a frame after the loop has been paused doesn't fling the comet.
+    const dt = Math.min(time - lastTime, 0.1);
+    lastTime = time;
     gl.viewport(0, 0, canvas.width, canvas.height);
     renderer.clear();
 
@@ -138,12 +174,47 @@ function main() {
     background.setBackgroundParams(params);
     background.draw(square);
 
-    if (fireball) {
-      gl.enable(gl.DEPTH_TEST);
-      fireball.camera.update();
+    const rect = canvas.getBoundingClientRect();
+    if (fireball && hasPointer && rect.width >= 1 && rect.height >= 1) {
+      // The cursor in the comet's coordinates: CSS pixels from the canvas's
+      // bottom-left corner, y up. Read fresh each frame, since scrolling moves
+      // the canvas under a mouse that hasn't moved.
+      const targetX = pointerX - rect.left;
+      const targetY = rect.bottom - pointerY;
+      if (appearedAt < 0) {
+        comet.reset(targetX, targetY);
+        appearedAt = time;
+      }
+      comet.update(targetX, targetY, dt, time);
+
+      const grow = 1 - Math.exp(-comet.speed / SPEED_SCALE);
+      shape.flameHeight = params.flameHeight + (FAST_FLAME_HEIGHT - params.flameHeight) * grow;
+      shape.taper = params.taper + (FAST_TAPER - params.taper) * grow;
+
+      // Orthographic and sized in pixels: one unit of the flame's own space is
+      // one head radius on screen, centred on the comet. Depth is squashed into
+      // range and flipped so +z faces the eye.
+      const appear = Math.min(1, (time - appearedAt) / APPEAR_TIME);
+      const scale = HEAD_RADIUS * appear * appear * (3 - 2 * appear);
+      mat4.fromTranslation(viewProj, [2 * comet.x / rect.width - 1,
+                                      2 * comet.y / rect.height - 1, 0]);
+      mat4.scale(viewProj, viewProj, [2 * scale / rect.width, 2 * scale / rect.height, -0.1]);
+
+      // Turn the flame's +Y, which is its tail, to point back along the path.
+      mat4.fromZRotation(model, Math.atan2(comet.vx, -comet.vy));
+      const curvature = Math.max(-MAX_CURVATURE,
+                                 Math.min(MAX_CURVATURE, comet.curvature * HEAD_RADIUS));
+
+      // Added on top of the sky rather than drawn over it, which is what makes
+      // the comet glow and its tail thin away to nothing. Addition doesn't care
+      // about order, so the near and far sides of it need no depth test.
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.ONE, gl.ONE);
       fireball.lambert.setTime(time);
-      fireball.lambert.setFireballParams(params);
-      renderer.render(fireball.camera, fireball.lambert, [fireball.icosphere]);
+      fireball.lambert.setFireballParams(shape);
+      fireball.lambert.setCurvature(curvature);
+      renderer.render(viewProj, model, EYE, fireball.lambert, [fireball.icosphere]);
+      gl.disable(gl.BLEND);
     }
 
     // Tell the browser to call `tick` again whenever it renders a new frame

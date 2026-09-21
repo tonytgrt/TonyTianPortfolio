@@ -41,13 +41,17 @@ out float fs_Pulse;         // [0, 1] phase of the explosion cycle, so the fragm
                             // flash the color in step with the geometry's swell.
 out vec4 fs_Pos;            // The displaced world-space position, used for the view vector and
                             // for varying the flicker across the surface.
+out vec3 fs_LocalPos;       // The same point before u_Model turns the comet to face its direction
+                            // of travel, so the color can stream along the tail wherever it points.
+out vec3 fs_ShapeNor;       // The undisplaced sphere's normal, turned by u_Model. Smooth where
+                            // fs_Nor carries every ripple, for the comet's glow falloff.
 
 const vec4 lightPos = vec4(5, 5, 3, 1); //The position of our virtual light, which is used to compute the shading of
                                         //the geometry in the fragment shader.
 
 // ---------------------------------------------------------------------------
-// Tunable art direction. Every one of these is driven by a dat.GUI slider in
-// main.ts;
+// Tunable art direction, set from `params` in main.ts. The flame height and
+// taper are re-set every frame from the comet's speed.
 // ---------------------------------------------------------------------------
 uniform float u_LowFreqAmp;    // high amplitude, low frequency: the overall blobby silhouette
 uniform float u_LowFreqScale;  // spatial frequency of the sinusoidal lobes
@@ -59,6 +63,7 @@ uniform float u_PulsePeriod;   // seconds per "breath"/explosion cycle
 uniform float u_PulseStrength; // 0 holds the ball steady, 1 is the full swell
 uniform float u_FlameHeight;   // how far the sphere is stretched vertically into a flame
 uniform float u_Taper;         // how far the crown is drawn in relative to the root
+uniform float u_Curvature;     // signed curvature of the comet's path, per head radius
 
 const int   MAX_OCTAVES = 8;    // hard bound so the FBM loop always terminates
 const float MIN_TAPER   = 0.05; // keeps the crown from collapsing to zero width
@@ -213,6 +218,9 @@ float pulsePhase(float t)
 // Fire does not bulge in every direction the way a liquid blob does, so the
 // sphere is first bent into a teardrop and then displaced along +Y only. The
 // root of a flame is anchored and smooth; everything that moves, moves upward.
+//
+// On the portfolio this flame is a comet: +Y is its tail, and u_Model turns it
+// so the tail trails behind the direction of travel.
 // ---------------------------------------------------------------------------
 
 // Normalized position along the flame: 0 at the root, 1 at the crown.
@@ -221,8 +229,8 @@ float flameParam(vec3 dir)
     return 0.5 * (dir.y + 1.0);
 }
 
-// Bend the unit sphere into a teardrop: wide and round at the root, drawn in
-// toward the crown, and stretched vertically. This is the static silhouette the
+// Bend the unit sphere into a comet: a round head at the root, drawn in toward
+// the crown, and stretched out into the tail. This is the static silhouette the
 // displacement is then layered on top of.
 vec3 flameShape(vec3 dir, float radius)
 {
@@ -232,7 +240,22 @@ vec3 flameShape(vec3 dir, float radius)
     // pulls the width in only over the upper half.
     float taper = mix(1.0, max(MIN_TAPER, 1.0 - u_Taper), smootherstep(0.20, 1.0, u));
 
-    return radius * vec3(dir.x * taper, dir.y * u_FlameHeight, dir.z * taper);
+    // Only the upper half is stretched, so the head stays round however long the
+    // tail gets. The stretch eases in from the equator, where it and its slope
+    // are both still 1, so head and tail meet without a crease.
+    float stretch = mix(1.0, u_FlameHeight, smootherstep(0.5, 0.9, u));
+
+    return radius * vec3(dir.x * taper, dir.y * stretch, dir.z * taper);
+}
+
+// Curve the tail sideways so it follows the path the comet has just travelled
+// rather than sticking straight out of a turn. Over a short stretch a curve of
+// curvature k falls away from its tangent by k s^2 / 2 at distance s along it.
+// Only the tail (+Y) bends; the head stays where it is.
+vec3 bendTail(vec3 p)
+{
+    float s = max(p.y, 0.0);
+    return vec3(p.x + 0.5 * u_Curvature * s * s, p.y, p.z);
 }
 
 // The displacement, which runs along +Y and nothing else. Writes the raw noise
@@ -279,7 +302,7 @@ vec3 flameOffset(vec3 dir, float radius, float t, out float outSway, out float o
 vec3 flamePoint(vec3 dir, float radius, float t)
 {
     float sway, detail;
-    return flameShape(dir, radius) + flameOffset(dir, radius, t, sway, detail);
+    return bendTail(flameShape(dir, radius) + flameOffset(dir, radius, t, sway, detail));
 }
 
 void main()
@@ -293,7 +316,8 @@ void main()
 
     float sway, detail;
     vec3  offset    = flameOffset(dir, radius, u_Time, sway, detail);
-    vec3  displaced = flameShape(dir, radius) + offset;
+    vec3  unbent    = flameShape(dir, radius) + offset;
+    vec3  displaced = bendTail(unbent);
 
     // Hand the displacement to the fragment shader, remapped to ~[0, 1], so the
     // color stays correlated with the geometry.
@@ -304,8 +328,9 @@ void main()
     fs_Pulse = u_PulseStrength * pulsePhase(u_Time);
 
     // How far up the flame this vertex sits, which is what drives the fragment
-    // shader's gradient: hottest at the root, charred at the crown.
-    fs_Height = clamp(0.5 + 0.5 * displaced.y / max(1e-4, radius * u_FlameHeight), 0.0, 1.0);
+    // shader's gradient: hottest at the root, charred at the crown. The head runs
+    // from -radius and the tail out to radius * u_FlameHeight.
+    fs_Height = clamp((unbent.y + radius) / max(1e-4, radius * (1.0 + u_FlameHeight)), 0.0, 1.0);
 
     // Recompute the normal by finite differencing across the displaced surface.
     // Without this the lighting still reads as a smooth sphere and none of the
@@ -322,6 +347,7 @@ void main()
     vec3 displacedNor = normalize(cross(pt - displaced, pb - displaced));
 
     mat3 invTranspose = mat3(u_ModelInvTr);
+    fs_ShapeNor = invTranspose * dir;
     fs_Nor = vec4(invTranspose * displacedNor, 0);          // Pass the vertex normals to the fragment shader for interpolation.
                                                             // Transform the geometry's normals by the inverse transpose of the
                                                             // model matrix. This is necessary to ensure the normals remain
@@ -333,6 +359,7 @@ void main()
 
     fs_Pos = modelposition;                  // The fragment shader needs the world-space position for
                                              // its view vector and for the spatial flicker phase
+    fs_LocalPos = displaced;
 
     fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies
 

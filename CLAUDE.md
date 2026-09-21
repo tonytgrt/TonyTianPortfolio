@@ -13,7 +13,8 @@ This is a personal portfolio website for Tony Yiding Tian (Computer Graphics Eng
 # Watch and compile SASS files (use this during development)
 npm run compile:scss
 
-# Compile and compress CSS (production build)
+# Production build: compress CSS, build the hero background
+# (fireball/ -> js/fireball.js), then cache-bust every asset reference
 npm run build
 ```
 
@@ -49,6 +50,18 @@ SASS files are organized in `sass/` using a modular structure:
 - Header logo click navigation
 - No frameworks or libraries used
 
+`fireball/` is the hero's WebGL background (a copy of the 566-hw1 fireball
+project, TypeScript + GLSL): a procedural planet with a comet circling the mouse
+cursor. Vite builds it into `js/fireball.js` (`npm run build:fireball`, or
+`npm run watch:fireball` while working on it).
+
+### Cache busting
+The site sits behind Cloudflare, which caches CSS, JS and images for hours.
+Every local asset reference in the pages (and every `url()` in the CSS) carries
+`?v=<hash of the file>`, which `scripts/stamp-assets.mjs` rewrites as the last
+step of `npm run build`. Never edit these stamps by hand; add new references
+without one and the build fills it in.
+
 ## Key Implementation Details
 
 ### Adding New Projects
@@ -78,7 +91,8 @@ The site is configured for deployment to a custom server:
 - Web root: `/var/www/tonyxtian.com`
 - Web server: Nginx
 - The deployment script handles git pull, npm build, file sync, and server restart
-- Assets are served directly from the web root (no build step needed for HTML/JS/images)
+- Assets are served directly from the web root. `npm run build` does rewrite the
+  pages' `?v=` stamps, so commit the HTML it changes along with the assets
 
 ## Resume Link
 

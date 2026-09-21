@@ -13,7 +13,7 @@ precision highp float;
 
 uniform vec4 u_Color;      // The color with which to render this instance of geometry.
                            // Here it tints the whole gradient, so a neutral white
-                           // leaves the fire palette exactly as authored.
+                           // leaves the palette exactly as authored.
 
 uniform float u_Time;      // Seconds elapsed since the program started. Same clock the
                            // vertex shader displaces with, so color and geometry stay in step.
@@ -47,24 +47,31 @@ in float fs_Fbm;           // Just the high-frequency FBM layer, for finer mottl
 in float fs_Height;        // 0 at the root of the flame, 1 at the crown.
 in float fs_Pulse;         // [0, 1] phase of the explosion cycle.
 in vec4 fs_Pos;            // Displaced world-space position of this fragment.
+in vec3 fs_LocalPos;       // The same point in the comet's own frame, tail along +Y.
+in vec3 fs_ShapeNor;       // Normal of the smooth shape under the displacement.
 
 out vec4 out_Col; // This is the final output color that you will see on your
                   // screen for the pixel that is currently being processed.
 
 // ---------------------------------------------------------------------------
-// Fire palette. The gradient runs from cooled-over crust up to a white-hot core;
-// fs_Disp picks the stop, so crests read hot and crevices read dark.
+// Comet palette. On the portfolio the flame is a comet, so where the fireball
+// ran from a charred crown to a white-hot root, this runs from the end of the
+// tail to the nucleus; fs_Disp still picks the stop, so crests read bright and
+// crevices dim. It is drawn additively, so black here is not dark but clear:
+// the tail thins away into the sky instead of ending in a hard edge.
 // ---------------------------------------------------------------------------
-// Fire burns hottest where it is fed and cools as it rises, so this runs from a
-// charred crown down to a white-hot root. Stop placement follows that: the pale
-// end owns a wide slice at the bottom, the dark end a narrow one at the tip.
-const vec3 CHARRED = vec3(0.07, 0.04, 0.04); // burnt-out tips at the very top
-const vec3 EMBER   = vec3(0.30, 0.05, 0.02);
-const vec3 BLOOD   = vec3(0.70, 0.11, 0.02); // deep red upper body
-const vec3 ORANGE  = vec3(0.97, 0.35, 0.03); // the body of the flame
-const vec3 AMBER   = vec3(1.00, 0.65, 0.10);
-const vec3 STRAW   = vec3(1.00, 0.88, 0.42);
-const vec3 COREHOT = vec3(1.00, 0.99, 0.92); // white-hot root
+// Brightest at the nucleus and dimming out along the tail. The coma round the
+// head carries the faint green of a real comet's gas, and the tail the blue of
+// its ion tail. Stop placement is the fireball's: the pale end owns a wide
+// slice at the head, the dark end a narrow one at the tip.
+const vec3 VOID    = vec3(0.00, 0.00, 0.00); // the tip, gone into the sky
+const vec3 WISP    = vec3(0.03, 0.06, 0.22); // the tail's last faint reach
+const vec3 DEEP    = vec3(0.08, 0.20, 0.62); // deep blue of the far tail
+const vec3 ION     = vec3(0.20, 0.52, 1.00); // the body of the tail
+const vec3 CYAN    = vec3(0.45, 0.85, 1.00);
+const vec3 COMA    = vec3(0.72, 1.00, 0.90); // the green-tinged glow round the head
+const vec3 NUCLEUS = vec3(1.00, 1.00, 1.00); // white at the head
+const vec3 HALO    = vec3(0.40, 0.90, 0.85); // tint of the thin outer edge of the glow
 
 // ---------------------------------------------------------------------------
 // Toolbox functions (see the Toolbox Functions slides). GLSL has no include
@@ -114,7 +121,7 @@ float cubicPulse(float c, float w, float x)
 // ---------------------------------------------------------------------------
 
 // Both fixed rather than slider-driven. The octave count keeps the per-pixel
-// cost constant, and the scale is in world units rather than a multiple of
+// cost constant, and the scale is in object units rather than a multiple of
 // u_FbmScale, so pushing the geometry's detail up does not shatter the color
 // into speckle - the two are separate art-direction decisions.
 const int   COLOR_OCTAVES = 3;
@@ -177,17 +184,17 @@ float posterize(float x, float bands, float blend)
 
 // Walk up the palette, easing between each pair of stops. Layering the mixes
 // this way keeps the ramp continuous while letting each band own its own slice.
-vec3 fireRamp(float t)
+vec3 cometRamp(float t)
 {
     t = clamp(t, 0.0, 1.0);
 
-    vec3 c = CHARRED;
-    c = mix(c, EMBER,   smootherstep(0.00, 0.13, t));
-    c = mix(c, BLOOD,   smootherstep(0.09, 0.27, t));
-    c = mix(c, ORANGE,  smootherstep(0.22, 0.44, t));
-    c = mix(c, AMBER,   smootherstep(0.40, 0.60, t));
-    c = mix(c, STRAW,   smootherstep(0.56, 0.74, t));
-    c = mix(c, COREHOT, smootherstep(0.72, 0.88, t));
+    vec3 c = VOID;
+    c = mix(c, WISP,    smootherstep(0.00, 0.13, t));
+    c = mix(c, DEEP,    smootherstep(0.09, 0.27, t));
+    c = mix(c, ION,     smootherstep(0.22, 0.44, t));
+    c = mix(c, CYAN,    smootherstep(0.40, 0.60, t));
+    c = mix(c, COMA,    smootherstep(0.56, 0.74, t));
+    c = mix(c, NUCLEUS, smootherstep(0.72, 0.88, t));
     return c;
 }
 
@@ -197,16 +204,17 @@ void main()
     vec3 lgt  = normalize(vec3(fs_LightVec));
     vec3 view = normalize(u_CameraPos - vec3(fs_Pos));
 
-    // Flowing noise, sampled per pixel in world space and marched downward
-    // through the field so it streams up the flame.
-    vec3  flowPos = vec3(fs_Pos) * COLOR_SCALE
+    // Flowing noise, sampled per pixel in the comet's own frame and marched
+    // downward through the field so it streams up the flame, out along the tail
+    // whichever way the comet is facing.
+    vec3  flowPos = fs_LocalPos * COLOR_SCALE
                   + vec3(0.0, -u_RoilSpeed * u_Time, 0.0);
     float flow    = fbm(flowPos);
 
-    // The dominant term is position along the flame. Fire is fed at its root, so
-    // the base burns white-hot and everything cools on the way up until the
-    // crown is charred. Gain above 0.5 drives the two ends apart, which widens
-    // the white core at the base and deepens the char at the tip.
+    // The dominant term is position along the flame: brightest at the root,
+    // which is the comet's head, and fading on the way up until the crown, the
+    // end of its tail, is gone. Gain above 0.5 drives the two ends apart, which
+    // widens the white nucleus and lets the tail's tip fade out sooner.
     float heat = gain(0.68, 1.0 - fs_Height);
 
     // Warp that gradient with the flowing noise. Displacing the coordinate
@@ -234,23 +242,34 @@ void main()
     // how hard the steps between them read.
     heat = posterize(heat, u_Bands, u_BandBlend);
 
-    vec3 color = fireRamp(heat);
+    vec3 color = cometRamp(heat);
 
     // Fire is emissive, so the Lambert term barely registers - just enough to
     // keep the form readable. It never drives the unlit side toward black.
     float diffuseTerm = max(dot(nor, lgt), 0.0);
     color *= mix(0.92, 1.10, diffuseTerm);
 
-    // Rim glow, but only down where the flame is actually hot, so the charred
-    // crown keeps a hard dark edge instead of being outlined in light.
-    float fresnel = pow(1.0 - max(dot(nor, view), 0.0), 3.0);
-    color += STRAW * fresnel * heat * (0.22 + 0.30 * fs_Pulse);
+    // Dust: a narrow slice of the noise, showing only out along the tail, where
+    // a few flecks catch the light.
+    float dust = cubicPulse(0.86, 0.06, fs_Fbm) * smootherstep(0.55, 1.0, fs_Height);
+    color += CYAN * dust * 0.8;
 
-    // Embers: a narrow slice of the noise, showing only up in the charred crown,
-    // where a few flecks are still glowing.
-    float embers = cubicPulse(0.86, 0.06, fs_Fbm) * smootherstep(0.55, 1.0, fs_Height);
-    color += ORANGE * embers * 1.4;
+    // A comet is a glowing cloud rather than a solid, so in place of the
+    // fireball's rim glow it is brightest where the line of sight passes square
+    // through it and thins to nothing at the silhouette. abs() because both
+    // sides of the cloud are drawn, and both glow; together they only saturate
+    // to white right at the nucleus. Each surge of the pulse swells the glow
+    // out toward the edge. How much cloud the eye looks through depends on its
+    // overall shape, not its surface ripples, so this takes the smooth normal:
+    // the displaced one would break the glow up into speckle at this size.
+    float facing = abs(dot(normalize(fs_ShapeNor), view));
+    float glow   = 0.75 * pow(facing, mix(1.6, 1.1, fs_Pulse));
 
-    // Compute final shaded color
-    out_Col = vec4(color * u_Color.rgb, u_Color.a);
+    // Where the glow thins out it also cools from white to the green-blue of
+    // the coma, so the head is a white core inside a coloured halo.
+    color *= mix(HALO, vec3(1.0), facing);
+
+    // Blended additively (see main.ts), so this adds light to the sky behind
+    // the comet rather than painting over it.
+    out_Col = vec4(color * glow * u_Color.rgb, 1.0);
 }

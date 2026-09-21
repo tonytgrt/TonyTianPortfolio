@@ -1,6 +1,5 @@
-import {mat4, vec4} from 'gl-matrix';
+import {mat4, vec3, vec4} from 'gl-matrix';
 import Drawable from './Drawable';
-import Camera from '../../Camera';
 import {gl} from '../../globals';
 import ShaderProgram from './ShaderProgram';
 
@@ -22,20 +21,18 @@ class OpenGLRenderer {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   }
 
-  render(camera: Camera, prog: ShaderProgram, drawables: Array<Drawable>) {
-    let model = mat4.create();
-    let viewProj = mat4.create();
+  // `viewProj` places and sizes the drawables on screen, `model` turns them,
+  // and `eye` is the world-space eye position the rim glow looks back toward.
+  render(viewProj: mat4, model: mat4, eye: vec3, prog: ShaderProgram,
+         drawables: Array<Drawable>) {
     // The fireball's fragment shader supplies its own fire gradient and treats
     // this as a tint, so a neutral white leaves that palette as authored.
     let color = vec4.fromValues(1, 1, 1, 1);
 
-    mat4.identity(model);
-    mat4.multiply(viewProj, camera.projectionMatrix, camera.viewMatrix);
     prog.setModelMatrix(model);
     prog.setViewProjMatrix(viewProj);
     prog.setGeometryColor(color);
-    // `controls.eye` is the live orbit position; `camera.position` is never updated.
-    prog.setCameraPos(camera.controls.eye);
+    prog.setCameraPos(eye);
 
     for (let drawable of drawables) {
       prog.draw(drawable);

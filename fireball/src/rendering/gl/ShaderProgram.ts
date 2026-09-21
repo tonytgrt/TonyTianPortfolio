@@ -4,14 +4,14 @@ import {gl} from '../../globals';
 
 var activeProgram: WebGLProgram = null;
 
-// The shape parameters the fireball's vertex shader reads. `controls` in main.ts
-// is the dat.GUI-backed object that satisfies this.
 // The procedural background's shape parameters, read by background-frag.glsl.
 export interface BackgroundParams {
   horizon: number;      // u_Horizon
   atmosphere: number;   // u_Atmosphere
 }
 
+// The shape parameters the fireball's vertex shader reads. `params` in main.ts
+// satisfies this.
 export interface FireballParams {
   displacement: number;   // u_LowFreqAmp
   lobeScale: number;      // u_LowFreqScale
@@ -70,6 +70,7 @@ class ShaderProgram {
   unifTaper: WebGLUniformLocation;
   unifBands: WebGLUniformLocation;
   unifCameraPos: WebGLUniformLocation;
+  unifCurvature: WebGLUniformLocation;
   unifDimensions: WebGLUniformLocation;
   unifHorizon: WebGLUniformLocation;
   unifAtmosphere: WebGLUniformLocation;
@@ -109,6 +110,7 @@ class ShaderProgram {
     this.unifTaper         = gl.getUniformLocation(this.prog, "u_Taper");
     this.unifBands         = gl.getUniformLocation(this.prog, "u_Bands");
     this.unifCameraPos     = gl.getUniformLocation(this.prog, "u_CameraPos");
+    this.unifCurvature     = gl.getUniformLocation(this.prog, "u_Curvature");
 
     this.unifDimensions    = gl.getUniformLocation(this.prog, "u_Dimensions");
     this.unifHorizon       = gl.getUniformLocation(this.prog, "u_Horizon");
@@ -202,6 +204,15 @@ class ShaderProgram {
     }
     if (this.unifBands !== -1) {
       gl.uniform1f(this.unifBands, p.bands);
+    }
+  }
+
+  // How sharply the comet is turning, per head radius, so the vertex shader can
+  // curve the tail along the path. Signed: positive turns counter-clockwise.
+  setCurvature(k: number) {
+    this.use();
+    if (this.unifCurvature !== -1) {
+      gl.uniform1f(this.unifCurvature, k);
     }
   }
 

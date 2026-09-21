@@ -6,11 +6,6 @@ import { fileURLToPath } from 'node:url';
 // `npm run build:fireball` (or `watch:fireball` while working on it).
 export default defineConfig({
   root: fileURLToPath(new URL('.', import.meta.url)),
-  // Some older CommonJS packages (e.g. 3d-view-controls) reference Node's
-  // `global` object, so alias it to the browser's `globalThis`.
-  define: {
-    global: 'globalThis',
-  },
   publicDir: false,
   build: {
     outDir: '../js',
@@ -20,7 +15,8 @@ export default defineConfig({
     rolldownOptions: {
       input: 'src/main.ts',
       output: {
-        // A fixed name, so the <script> tag in index.html never has to change.
+        // A fixed name, so the <script> tag in index.html only ever changes by
+        // the ?v= stamp that `npm run build` puts on it (scripts/stamp-assets.mjs).
         entryFileNames: 'fireball.js',
       },
     },

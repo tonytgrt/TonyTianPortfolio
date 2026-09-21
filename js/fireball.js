@@ -1,4 +1,647 @@
-var e=(e,t)=>()=>(t||(e((t={exports:{}}).exports,t),e=null),t.exports),t=typeof Float32Array<`u`?Float32Array:Array;function n(){var e=new t(16);return t!=Float32Array&&(e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[11]=0,e[12]=0,e[13]=0,e[14]=0),e[0]=1,e[5]=1,e[10]=1,e[15]=1,e}function r(e){return e[0]=1,e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[5]=1,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=0,e[13]=0,e[14]=0,e[15]=1,e}function i(e,t){if(e===t){var n=t[1],r=t[2],i=t[3],a=t[6],o=t[7],s=t[11];e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=n,e[6]=t[9],e[7]=t[13],e[8]=r,e[9]=a,e[11]=t[14],e[12]=i,e[13]=o,e[14]=s}else e[0]=t[0],e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=t[1],e[5]=t[5],e[6]=t[9],e[7]=t[13],e[8]=t[2],e[9]=t[6],e[10]=t[10],e[11]=t[14],e[12]=t[3],e[13]=t[7],e[14]=t[11],e[15]=t[15];return e}function a(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=t[4],s=t[5],c=t[6],l=t[7],u=t[8],d=t[9],f=t[10],p=t[11],m=t[12],h=t[13],g=t[14],_=t[15],v=n*s-r*o,y=n*c-i*o,b=n*l-a*o,x=r*c-i*s,S=r*l-a*s,C=i*l-a*c,w=u*h-d*m,T=u*g-f*m,E=u*_-p*m,D=d*g-f*h,O=d*_-p*h,k=f*_-p*g,A=v*k-y*O+b*D+x*E-S*T+C*w;return A?(A=1/A,e[0]=(s*k-c*O+l*D)*A,e[1]=(i*O-r*k-a*D)*A,e[2]=(h*C-g*S+_*x)*A,e[3]=(f*S-d*C-p*x)*A,e[4]=(c*E-o*k-l*T)*A,e[5]=(n*k-i*E+a*T)*A,e[6]=(g*b-m*C-_*y)*A,e[7]=(u*C-f*b+p*y)*A,e[8]=(o*O-s*E+l*w)*A,e[9]=(r*E-n*O-a*w)*A,e[10]=(m*S-h*b+_*v)*A,e[11]=(d*b-u*S-p*v)*A,e[12]=(s*T-o*D-c*w)*A,e[13]=(n*D-r*T+i*w)*A,e[14]=(h*y-m*x-g*v)*A,e[15]=(u*x-d*y+f*v)*A,e):null}function o(e,t,n){var r=t[0],i=t[1],a=t[2],o=t[3],s=t[4],c=t[5],l=t[6],u=t[7],d=t[8],f=t[9],p=t[10],m=t[11],h=t[12],g=t[13],_=t[14],v=t[15],y=n[0],b=n[1],x=n[2],S=n[3];return e[0]=y*r+b*s+x*d+S*h,e[1]=y*i+b*c+x*f+S*g,e[2]=y*a+b*l+x*p+S*_,e[3]=y*o+b*u+x*m+S*v,y=n[4],b=n[5],x=n[6],S=n[7],e[4]=y*r+b*s+x*d+S*h,e[5]=y*i+b*c+x*f+S*g,e[6]=y*a+b*l+x*p+S*_,e[7]=y*o+b*u+x*m+S*v,y=n[8],b=n[9],x=n[10],S=n[11],e[8]=y*r+b*s+x*d+S*h,e[9]=y*i+b*c+x*f+S*g,e[10]=y*a+b*l+x*p+S*_,e[11]=y*o+b*u+x*m+S*v,y=n[12],b=n[13],x=n[14],S=n[15],e[12]=y*r+b*s+x*d+S*h,e[13]=y*i+b*c+x*f+S*g,e[14]=y*a+b*l+x*p+S*_,e[15]=y*o+b*u+x*m+S*v,e}function s(){var e=new t(3);return t!=Float32Array&&(e[0]=0,e[1]=0,e[2]=0),e}function c(e,n,r){var i=new t(3);return i[0]=e,i[1]=n,i[2]=r,i}(function(){var e=s();return function(t,n,r,i,a,o){var s,c;for(n||=3,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2];return t}})();function l(){var e=new t(4);return t!=Float32Array&&(e[0]=0,e[1]=0,e[2]=0,e[3]=0),e}function u(e,n,r,i){var a=new t(4);return a[0]=e,a[1]=n,a[2]=r,a[3]=i,a}(function(){var e=l();return function(t,n,r,i,a,o){var s,c;for(n||=4,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],e[3]=t[s+3],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2],t[s+3]=e[3];return t}})();var d;function f(e){d=e}var p=class{constructor(){this.count=0,this.idxBound=!1,this.posBound=!1,this.norBound=!1}destory(){d.deleteBuffer(this.bufIdx),d.deleteBuffer(this.bufPos),d.deleteBuffer(this.bufNor)}generateIdx(){this.idxBound=!0,this.bufIdx=d.createBuffer()}generatePos(){this.posBound=!0,this.bufPos=d.createBuffer()}generateNor(){this.norBound=!0,this.bufNor=d.createBuffer()}bindIdx(){return this.idxBound&&d.bindBuffer(d.ELEMENT_ARRAY_BUFFER,this.bufIdx),this.idxBound}bindPos(){return this.posBound&&d.bindBuffer(d.ARRAY_BUFFER,this.bufPos),this.posBound}bindNor(){return this.norBound&&d.bindBuffer(d.ARRAY_BUFFER,this.bufNor),this.norBound}elemCount(){return this.count}drawMode(){return d.TRIANGLES}},m=class extends p{constructor(e){super(),this.center=u(e[0],e[1],e[2],1)}create(){this.indices=new Uint32Array([0,1,2,0,2,3]),this.normals=new Float32Array([0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0]),this.positions=new Float32Array([-1,-1,0,1,1,-1,0,1,1,1,0,1,-1,1,0,1]),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,d.bindBuffer(d.ELEMENT_ARRAY_BUFFER,this.bufIdx),d.bufferData(d.ELEMENT_ARRAY_BUFFER,this.indices,d.STATIC_DRAW),d.bindBuffer(d.ARRAY_BUFFER,this.bufNor),d.bufferData(d.ARRAY_BUFFER,this.normals,d.STATIC_DRAW),d.bindBuffer(d.ARRAY_BUFFER,this.bufPos),d.bufferData(d.ARRAY_BUFFER,this.positions,d.STATIC_DRAW),console.log(`Created square`)}},h=class{constructor(e){this.canvas=e}setClearColor(e,t,n,r){d.clearColor(e,t,n,r)}setSize(e,t){this.canvas.width=e,this.canvas.height=t}clear(){d.clear(d.COLOR_BUFFER_BIT|d.DEPTH_BUFFER_BIT)}render(e,t,i){let a=n(),s=n(),c=u(1,1,1,1);r(a),o(s,e.projectionMatrix,e.viewMatrix),t.setModelMatrix(a),t.setViewProjMatrix(s),t.setGeometryColor(c),t.setCameraPos(e.controls.eye);for(let e of i)t.draw(e)}},g=e(((e,t)=>{t.exports=globalThis.performance&&globalThis.performance.now?function(){return performance.now()}:Date.now||function(){return+new Date}})),_=e(((e,t)=>{function n(e,t,n,r,i,a){var o=6*i*i-6*i,s=3*i*i-4*i+1,c=-6*i*i+6*i,l=3*i*i-2*i;if(e.length){a||=Array(e.length);for(var u=e.length-1;u>=0;--u)a[u]=o*e[u]+s*t[u]+c*n[u]+l*r[u];return a}return o*e+s*t+c*n[u]+l*r}function r(e,t,n,r,i,a){var o=i-1,s=i*i,c=o*o,l=(1+2*i)*c,u=i*c,d=s*(3-2*i),f=s*o;if(e.length){a||=Array(e.length);for(var p=e.length-1;p>=0;--p)a[p]=l*e[p]+u*t[p]+d*n[p]+f*r[p];return a}return l*e+u*t+d*n+f*r}t.exports=r,t.exports.derivative=n})),v=e(((e,t)=>{function n(e,t,n,r,i){for(var a=i+1;r<=i;){var o=r+i>>>1,s=e[o];(n===void 0?s-t:n(s,t))>=0?(a=o,i=o-1):r=o+1}return a}function r(e,t,n,r,i){for(var a=i+1;r<=i;){var o=r+i>>>1,s=e[o];(n===void 0?s-t:n(s,t))>0?(a=o,i=o-1):r=o+1}return a}function i(e,t,n,r,i){for(var a=r-1;r<=i;){var o=r+i>>>1,s=e[o];(n===void 0?s-t:n(s,t))<0?(a=o,r=o+1):i=o-1}return a}function a(e,t,n,r,i){for(var a=r-1;r<=i;){var o=r+i>>>1,s=e[o];(n===void 0?s-t:n(s,t))<=0?(a=o,r=o+1):i=o-1}return a}function o(e,t,n,r,i){for(;r<=i;){var a=r+i>>>1,o=e[a],s=n===void 0?o-t:n(o,t);if(s===0)return a;s<=0?r=a+1:i=a-1}return-1}function s(e,t,n,r,i,a){return typeof n==`function`?a(e,t,n,r===void 0?0:r|0,i===void 0?e.length-1:i|0):a(e,t,void 0,n===void 0?0:n|0,r===void 0?e.length-1:r|0)}t.exports={ge:function(e,t,r,i,a){return s(e,t,r,i,a,n)},gt:function(e,t,n,i,a){return s(e,t,n,i,a,r)},lt:function(e,t,n,r,a){return s(e,t,n,r,a,i)},le:function(e,t,n,r,i){return s(e,t,n,r,i,a)},eq:function(e,t,n,r,i){return s(e,t,n,r,i,o)}}})),y=e(((e,t)=>{t.exports=c;var n=_(),r=v();function i(e,t,n){return Math.min(t,Math.max(e,n))}function a(e,t,n){this.dimension=e.length,this.bounds=[Array(this.dimension),Array(this.dimension)];for(var r=0;r<this.dimension;++r)this.bounds[0][r]=-1/0,this.bounds[1][r]=1/0;this._state=e.slice().reverse(),this._velocity=t.slice().reverse(),this._time=[n],this._scratch=[e.slice(),e.slice(),e.slice(),e.slice(),e.slice()]}var o=a.prototype;o.flush=function(e){var t=r.gt(this._time,e)-1;t<=0||(this._time.splice(0,t),this._state.splice(0,t*this.dimension),this._velocity.splice(0,t*this.dimension))},o.curve=function(e){var t=this._time,a=t.length,o=r.le(t,e),s=this._scratch[0],c=this._state,l=this._velocity,u=this.dimension,d=this.bounds;if(o<0)for(var f=u-1,p=0;p<u;++p,--f)s[p]=c[f];else if(o>=a-1)for(var f=c.length-1,m=e-t[a-1],p=0;p<u;++p,--f)s[p]=c[f]+m*l[f];else{for(var f=u*(o+1)-1,h=t[o],g=t[o+1]-h||1,_=this._scratch[1],v=this._scratch[2],y=this._scratch[3],b=this._scratch[4],x=!0,p=0;p<u;++p,--f)_[p]=c[f],y[p]=l[f]*g,v[p]=c[f+u],b[p]=l[f+u]*g,x=x&&_[p]===v[p]&&y[p]===b[p]&&y[p]===0;if(x)for(var p=0;p<u;++p)s[p]=_[p];else n(_,y,v,b,(e-h)/g,s)}for(var S=d[0],C=d[1],p=0;p<u;++p)s[p]=i(S[p],C[p],s[p]);return s},o.dcurve=function(e){var t=this._time,i=t.length,a=r.le(t,e),o=this._scratch[0],s=this._state,c=this._velocity,l=this.dimension;if(a>=i-1){var u=s.length-1;e-t[i-1];for(var d=0;d<l;++d,--u)o[d]=c[u]}else{for(var u=l*(a+1)-1,f=t[a],p=t[a+1]-f||1,m=this._scratch[1],h=this._scratch[2],g=this._scratch[3],_=this._scratch[4],v=!0,d=0;d<l;++d,--u)m[d]=s[u],g[d]=c[u]*p,h[d]=s[u+l],_[d]=c[u+l]*p,v=v&&m[d]===h[d]&&g[d]===_[d]&&g[d]===0;if(v)for(var d=0;d<l;++d)o[d]=0;else{n.derivative(m,g,h,_,(e-f)/p,o);for(var d=0;d<l;++d)o[d]/=p}}return o},o.lastT=function(){var e=this._time;return e[e.length-1]},o.stable=function(){for(var e=this._velocity,t=e.length,n=this.dimension-1;n>=0;--n)if(e[--t])return!1;return!0},o.jump=function(e){var t=this.lastT(),n=this.dimension;if(!(e<t||arguments.length!==n+1)){var r=this._state,a=this._velocity,o=r.length-this.dimension,s=this.bounds,c=s[0],l=s[1];this._time.push(t,e);for(var u=0;u<2;++u)for(var d=0;d<n;++d)r.push(r[o++]),a.push(0);this._time.push(e);for(var d=n;d>0;--d)r.push(i(c[d-1],l[d-1],arguments[d])),a.push(0)}},o.push=function(e){var t=this.lastT(),n=this.dimension;if(!(e<t||arguments.length!==n+1)){var r=this._state,a=this._velocity,o=r.length-this.dimension,s=e-t,c=this.bounds,l=c[0],u=c[1],d=s>1e-6?1/s:0;this._time.push(e);for(var f=n;f>0;--f){var p=i(l[f-1],u[f-1],arguments[f]);r.push(p),a.push((p-r[o++])*d)}}},o.set=function(e){var t=this.dimension;if(!(e<this.lastT()||arguments.length!==t+1)){var n=this._state,r=this._velocity,a=this.bounds,o=a[0],s=a[1];this._time.push(e);for(var c=t;c>0;--c)n.push(i(o[c-1],s[c-1],arguments[c])),r.push(0)}},o.move=function(e){var t=this.lastT(),n=this.dimension;if(!(e<=t||arguments.length!==n+1)){var r=this._state,a=this._velocity,o=r.length-this.dimension,s=this.bounds,c=s[0],l=s[1],u=e-t,d=u>1e-6?1/u:0;this._time.push(e);for(var f=n;f>0;--f){var p=arguments[f];r.push(i(c[f-1],l[f-1],r[o++]+p)),a.push(p*d)}}},o.idle=function(e){var t=this.lastT();if(!(e<t)){var n=this.dimension,r=this._state,a=this._velocity,o=r.length-n,s=this.bounds,c=s[0],l=s[1],u=e-t;this._time.push(e);for(var d=n-1;d>=0;--d)r.push(i(c[d],l[d],r[o]+u*a[o])),a.push(0),o+=1}};function s(e){for(var t=Array(e),n=0;n<e;++n)t[n]=0;return t}function c(e,t,n){switch(arguments.length){case 0:return new a([0],[0],0);case 1:if(typeof e==`number`){var r=s(e);return new a(r,r,0)}return new a(e,s(e.length),0);case 2:if(typeof t==`number`){var r=s(e.length);return new a(e,r,+t)}n=0;case 3:if(e.length!==t.length)throw Error(`state and velocity lengths must match`);return new a(e,t,n)}}})),b=e(((e,t)=>{t.exports=n;function n(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=t[4],s=t[5],c=t[6],l=t[7],u=t[8],d=t[9],f=t[10],p=t[11],m=t[12],h=t[13],g=t[14],_=t[15],v=n*s-r*o,y=n*c-i*o,b=n*l-a*o,x=r*c-i*s,S=r*l-a*s,C=i*l-a*c,w=u*h-d*m,T=u*g-f*m,E=u*_-p*m,D=d*g-f*h,O=d*_-p*h,k=f*_-p*g,A=v*k-y*O+b*D+x*E-S*T+C*w;return A?(A=1/A,e[0]=(s*k-c*O+l*D)*A,e[1]=(i*O-r*k-a*D)*A,e[2]=(h*C-g*S+_*x)*A,e[3]=(f*S-d*C-p*x)*A,e[4]=(c*E-o*k-l*T)*A,e[5]=(n*k-i*E+a*T)*A,e[6]=(g*b-m*C-_*y)*A,e[7]=(u*C-f*b+p*y)*A,e[8]=(o*O-s*E+l*w)*A,e[9]=(r*E-n*O-a*w)*A,e[10]=(m*S-h*b+_*v)*A,e[11]=(d*b-u*S-p*v)*A,e[12]=(s*T-o*D-c*w)*A,e[13]=(n*D-r*T+i*w)*A,e[14]=(h*y-m*x-g*v)*A,e[15]=(u*x-d*y+f*v)*A,e):null}})),x=e(((e,t)=>{t.exports=n;function n(e,t,n,r){var i=r[0],a=r[1],o=r[2],s=Math.sqrt(i*i+a*a+o*o),c,l,u,d,f,p,m,h,g,_,v,y,b,x,S,C,w,T,E,D,O,k,A,j;return Math.abs(s)<1e-6?null:(s=1/s,i*=s,a*=s,o*=s,c=Math.sin(n),l=Math.cos(n),u=1-l,d=t[0],f=t[1],p=t[2],m=t[3],h=t[4],g=t[5],_=t[6],v=t[7],y=t[8],b=t[9],x=t[10],S=t[11],C=i*i*u+l,w=a*i*u+o*c,T=o*i*u-a*c,E=i*a*u-o*c,D=a*a*u+l,O=o*a*u+i*c,k=i*o*u+a*c,A=a*o*u-i*c,j=o*o*u+l,e[0]=d*C+h*w+y*T,e[1]=f*C+g*w+b*T,e[2]=p*C+_*w+x*T,e[3]=m*C+v*w+S*T,e[4]=d*E+h*D+y*O,e[5]=f*E+g*D+b*O,e[6]=p*E+_*D+x*O,e[7]=m*E+v*D+S*O,e[8]=d*k+h*A+y*j,e[9]=f*k+g*A+b*j,e[10]=p*k+_*A+x*j,e[11]=m*k+v*A+S*j,t!==e&&(e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15]),e)}})),S=e(((e,t)=>{t.exports=n;function n(e,t,n){var r=t[0],i=t[1],a=t[2],o=n[0],s=n[1],c=n[2];return e[0]=i*c-a*s,e[1]=a*o-r*c,e[2]=r*s-i*o,e}})),C=e(((e,t)=>{t.exports=n;function n(e,t){var n=t[0],r=t[1],i=t[2],a=n*n+r*r+i*i;return a>0&&(a=1/Math.sqrt(a),e[0]=t[0]*a,e[1]=t[1]*a,e[2]=t[2]*a),e}})),w=e(((e,t)=>{t.exports=n;function n(e,t){return e[0]*t[0]+e[1]*t[1]+e[2]*t[2]}})),T=e(((e,t)=>{t.exports=m;var n=y(),r=b(),i=x(),a=S(),o=C(),s=w();function c(e,t,n){return Math.sqrt(e**2+t**2+n**2)}function l(e){return Math.min(1,Math.max(-1,e))}function u(e){var t=Math.abs(e[0]),n=Math.abs(e[1]),r=Math.abs(e[2]),i=[0,0,0];t>Math.max(n,r)?i[2]=1:n>Math.max(t,r)?i[0]=1:i[1]=1;for(var a=0,s=0,c=0;c<3;++c)a+=e[c]*e[c],s+=i[c]*e[c];for(var c=0;c<3;++c)i[c]-=s/a*e[c];return o(i,i),i}function d(e,t,r,i,a,o,s,c){this.center=n(r),this.up=n(i),this.right=n(a),this.radius=n([o]),this.angle=n([s,c]),this.angle.bounds=[[-1/0,-Math.PI/2],[1/0,Math.PI/2]],this.setDistanceLimits(e,t),this.computedCenter=this.center.curve(0),this.computedUp=this.up.curve(0),this.computedRight=this.right.curve(0),this.computedRadius=this.radius.curve(0),this.computedAngle=this.angle.curve(0),this.computedToward=[0,0,0],this.computedEye=[0,0,0],this.computedMatrix=Array(16);for(var l=0;l<16;++l)this.computedMatrix[l]=.5;this.recalcMatrix(0)}var f=d.prototype;f.setDistanceLimits=function(e,t){e=e>0?Math.log(e):-1/0,t=t>0?Math.log(t):1/0,t=Math.max(t,e),this.radius.bounds[0][0]=e,this.radius.bounds[1][0]=t},f.getDistanceLimits=function(e){var t=this.radius.bounds[0];return e?(e[0]=Math.exp(t[0][0]),e[1]=Math.exp(t[1][0]),e):[Math.exp(t[0][0]),Math.exp(t[1][0])]},f.recalcMatrix=function(e){this.center.curve(e),this.up.curve(e),this.right.curve(e),this.radius.curve(e),this.angle.curve(e);for(var t=this.computedUp,n=this.computedRight,r=0,i=0,s=0;s<3;++s)i+=t[s]*n[s],r+=t[s]*t[s];for(var l=Math.sqrt(r),u=0,s=0;s<3;++s)n[s]-=t[s]*i/r,u+=n[s]*n[s],t[s]/=l;for(var d=Math.sqrt(u),s=0;s<3;++s)n[s]/=d;var f=this.computedToward;a(f,t,n),o(f,f);for(var p=Math.exp(this.computedRadius[0]),m=this.computedAngle[0],h=this.computedAngle[1],g=Math.cos(m),_=Math.sin(m),v=Math.cos(h),y=Math.sin(h),b=this.computedCenter,x=g*v,S=_*v,C=y,w=-g*y,T=-_*y,E=v,D=this.computedEye,O=this.computedMatrix,s=0;s<3;++s){var k=x*n[s]+S*f[s]+C*t[s];O[4*s+1]=w*n[s]+T*f[s]+E*t[s],O[4*s+2]=k,O[4*s+3]=0}var A=O[1],j=O[5],M=O[9],N=O[2],P=O[6],F=O[10],I=j*F-M*P,L=M*N-A*F,R=A*P-j*N,z=c(I,L,R);I/=z,L/=z,R/=z,O[0]=I,O[4]=L,O[8]=R;for(var s=0;s<3;++s)D[s]=b[s]+O[2+4*s]*p;for(var s=0;s<3;++s){for(var u=0,B=0;B<3;++B)u+=O[s+4*B]*D[B];O[12+s]=-u}O[15]=1},f.getMatrix=function(e,t){this.recalcMatrix(e);var n=this.computedMatrix;if(t){for(var r=0;r<16;++r)t[r]=n[r];return t}return n};var p=[0,0,0];f.rotate=function(e,t,n,r){if(this.angle.move(e,t,n),r){this.recalcMatrix(e);var a=this.computedMatrix;p[0]=a[2],p[1]=a[6],p[2]=a[10];for(var o=this.computedUp,s=this.computedRight,c=this.computedToward,l=0;l<3;++l)a[4*l]=o[l],a[4*l+1]=s[l],a[4*l+2]=c[l];i(a,a,r,p);for(var l=0;l<3;++l)o[l]=a[4*l],s[l]=a[4*l+1];this.up.set(e,o[0],o[1],o[2]),this.right.set(e,s[0],s[1],s[2])}},f.pan=function(e,t,n,r){t||=0,n||=0,r||=0,this.recalcMatrix(e);var i=this.computedMatrix;Math.exp(this.computedRadius[0]);var a=i[1],o=i[5],s=i[9],l=c(a,o,s);a/=l,o/=l,s/=l;var u=i[0],d=i[4],f=i[8],p=u*a+d*o+f*s;u-=a*p,d-=o*p,f-=s*p;var m=c(u,d,f);u/=m,d/=m,f/=m;var h=u*t+a*n,g=d*t+o*n,_=f*t+s*n;this.center.move(e,h,g,_);var v=Math.exp(this.computedRadius[0]);v=Math.max(1e-4,v+r),this.radius.set(e,Math.log(v))},f.translate=function(e,t,n,r){this.center.move(e,t||0,n||0,r||0)},f.setMatrix=function(e,t,n,i){var a=1;typeof n==`number`&&(a=n|0),(a<0||a>3)&&(a=1);var o=(a+2)%3;(a+1)%3,t||=(this.recalcMatrix(e),this.computedMatrix);var s=t[a],u=t[a+4],d=t[a+8];if(i){var f=Math.abs(s),p=Math.abs(u),m=Math.abs(d),h=Math.max(f,p,m);f===h?(s=s<0?-1:1,u=d=0):m===h?(d=d<0?-1:1,s=u=0):(u=u<0?-1:1,s=d=0)}else{var g=c(s,u,d);s/=g,u/=g,d/=g}var _=t[o],v=t[o+4],y=t[o+8],b=_*s+v*u+y*d;_-=s*b,v-=u*b,y-=d*b;var x=c(_,v,y);_/=x,v/=x,y/=x;var S=u*y-d*v,C=d*_-s*y,w=s*v-u*_,T=c(S,C,w);S/=T,C/=T,w/=T,this.center.jump(e,W,G,K),this.radius.idle(e),this.up.jump(e,s,u,d),this.right.jump(e,_,v,y);var E,D;if(a===2){var O=t[1],k=t[5],A=t[9],j=O*_+k*v+A*y,M=O*S+k*C+A*w;E=I<0?-Math.PI/2:Math.PI/2,D=Math.atan2(M,j)}else{var N=t[2],P=t[6],F=t[10],I=N*s+P*u+F*d,L=N*_+P*v+F*y,R=N*S+P*C+F*w;E=Math.asin(l(I)),D=Math.atan2(R,L)}this.angle.jump(e,D,E),this.recalcMatrix(e);var z=t[2],B=t[6],V=t[10],H=this.computedMatrix;r(H,t);var U=H[15],W=H[12]/U,G=H[13]/U,K=H[14]/U,q=Math.exp(this.computedRadius[0]);this.center.jump(e,W-z*q,G-B*q,K-V*q)},f.lastT=function(){return Math.max(this.center.lastT(),this.up.lastT(),this.right.lastT(),this.radius.lastT(),this.angle.lastT())},f.idle=function(e){this.center.idle(e),this.up.idle(e),this.right.idle(e),this.radius.idle(e),this.angle.idle(e)},f.flush=function(e){this.center.flush(e),this.up.flush(e),this.right.flush(e),this.radius.flush(e),this.angle.flush(e)},f.setDistance=function(e,t){t>0&&this.radius.set(e,Math.log(t))},f.lookAt=function(e,t,n,r){this.recalcMatrix(e),t||=this.computedEye,n||=this.computedCenter,r||=this.computedUp;var i=r[0],a=r[1],o=r[2],s=c(i,a,o);if(!(s<1e-6)){i/=s,a/=s,o/=s;var u=t[0]-n[0],d=t[1]-n[1],f=t[2]-n[2],p=c(u,d,f);if(!(p<1e-6)){u/=p,d/=p,f/=p;var m=this.computedRight,h=m[0],g=m[1],_=m[2],v=i*h+a*g+o*_;h-=v*i,g-=v*a,_-=v*o;var y=c(h,g,_);if(!(y<.01&&(h=a*f-o*d,g=o*u-i*f,_=i*d-a*u,y=c(h,g,_),y<1e-6))){h/=y,g/=y,_/=y,this.up.set(e,i,a,o),this.right.set(e,h,g,_),this.center.set(e,n[0],n[1],n[2]),this.radius.set(e,Math.log(p));var b=a*_-o*g,x=o*h-i*_,S=i*g-a*h,C=c(b,x,S);b/=C,x/=C,S/=C;var w=i*u+a*d+o*f,T=h*u+g*d+_*f,E=b*u+x*d+S*f,D=Math.asin(l(w)),O=Math.atan2(E,T),k=this.angle._state,A=k[k.length-1],j=k[k.length-2];A%=2*Math.PI;var M=Math.abs(A+2*Math.PI-O),N=Math.abs(A-O),P=Math.abs(A-2*Math.PI-O);M<N&&(A+=2*Math.PI),P<N&&(A-=2*Math.PI),this.angle.jump(this.angle.lastT(),A,j),this.angle.set(e,O,D)}}}};function m(e){e||={};var t=e.center||[0,0,0],n=e.up||[0,1,0],r=e.right||u(n),i=e.radius||1,l=e.theta||0,f=e.phi||0;if(t=[].slice.call(t,0,3),n=[].slice.call(n,0,3),o(n,n),r=[].slice.call(r,0,3),o(r,r),`eye`in e){var p=e.eye,m=[p[0]-t[0],p[1]-t[1],p[2]-t[2]];a(r,m,n),c(r[0],r[1],r[2])<1e-6?r=u(n):o(r,r),i=c(m[0],m[1],m[2]);var h=s(n,m)/i,g=s(r,m)/i;f=Math.acos(h),l=Math.acos(g)}return i=Math.log(i),new d(e.zoomMin,e.zoomMax,t,n,r,i,l,f)}})),E=e(((e,t)=>{t.exports=n;function n(e){return e[0]=1,e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[5]=1,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=0,e[13]=0,e[14]=0,e[15]=1,e}})),D=e(((e,t)=>{var n=E();t.exports=r;function r(e,t,r,i){var a,o,s,c,l,u,d,f,p,m,h=t[0],g=t[1],_=t[2],v=i[0],y=i[1],b=i[2],x=r[0],S=r[1],C=r[2];return Math.abs(h-x)<1e-6&&Math.abs(g-S)<1e-6&&Math.abs(_-C)<1e-6?n(e):(d=h-x,f=g-S,p=_-C,m=1/Math.sqrt(d*d+f*f+p*p),d*=m,f*=m,p*=m,a=y*p-b*f,o=b*d-v*p,s=v*f-y*d,m=Math.sqrt(a*a+o*o+s*s),m?(m=1/m,a*=m,o*=m,s*=m):(a=0,o=0,s=0),c=f*s-p*o,l=p*a-d*s,u=d*o-f*a,m=Math.sqrt(c*c+l*l+u*u),m?(m=1/m,c*=m,l*=m,u*=m):(c=0,l=0,u=0),e[0]=a,e[1]=c,e[2]=d,e[3]=0,e[4]=o,e[5]=l,e[6]=f,e[7]=0,e[8]=s,e[9]=u,e[10]=p,e[11]=0,e[12]=-(a*h+o*g+s*_),e[13]=-(c*h+l*g+u*_),e[14]=-(d*h+f*g+p*_),e[15]=1,e)}})),O=e(((e,t)=>{t.exports=n;function n(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=n+n,s=r+r,c=i+i,l=n*o,u=r*o,d=r*s,f=i*o,p=i*s,m=i*c,h=a*o,g=a*s,_=a*c;return e[0]=1-d-m,e[1]=u+_,e[2]=f-g,e[3]=0,e[4]=u-_,e[5]=1-l-m,e[6]=p+h,e[7]=0,e[8]=f+g,e[9]=p-h,e[10]=1-l-d,e[11]=0,e[12]=0,e[13]=0,e[14]=0,e[15]=1,e}})),k=e(((e,t)=>{t.exports=n;function n(e,t,n,r,i,a,o,s,c,l){var u=t+a+l;if(d>0){var d=Math.sqrt(u+1);e[0]=.5*(o-c)/d,e[1]=.5*(s-r)/d,e[2]=.5*(n-a)/d,e[3]=.5*d}else{var f=Math.max(t,a,l),d=Math.sqrt(2*f-u+1);t>=f?(e[0]=.5*d,e[1]=.5*(i+n)/d,e[2]=.5*(s+r)/d,e[3]=.5*(o-c)/d):a>=f?(e[0]=.5*(n+i)/d,e[1]=.5*d,e[2]=.5*(c+o)/d,e[3]=.5*(s-r)/d):(e[0]=.5*(r+s)/d,e[1]=.5*(o+c)/d,e[2]=.5*d,e[3]=.5*(n-i)/d)}return e}})),A=e(((e,t)=>{t.exports=f;var n=y(),r=D(),i=O(),a=b(),o=k();function s(e,t,n){return Math.sqrt(e**2+t**2+n**2)}function c(e,t,n,r){return Math.sqrt(e**2+t**2+n**2+r**2)}function l(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=c(n,r,i,a);o>1e-6?(e[0]=n/o,e[1]=r/o,e[2]=i/o,e[3]=a/o):(e[0]=e[1]=e[2]=0,e[3]=1)}function u(e,t,r){this.radius=n([r]),this.center=n(t),this.rotation=n(e),this.computedRadius=this.radius.curve(0),this.computedCenter=this.center.curve(0),this.computedRotation=this.rotation.curve(0),this.computedUp=[.1,0,0],this.computedEye=[.1,0,0],this.computedMatrix=[.1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],this.recalcMatrix(0)}var d=u.prototype;d.lastT=function(){return Math.max(this.radius.lastT(),this.center.lastT(),this.rotation.lastT())},d.recalcMatrix=function(e){this.radius.curve(e),this.center.curve(e),this.rotation.curve(e);var t=this.computedRotation;l(t,t);var n=this.computedMatrix;i(n,t);var r=this.computedCenter,a=this.computedEye,o=this.computedUp,s=Math.exp(this.computedRadius[0]);a[0]=r[0]+s*n[2],a[1]=r[1]+s*n[6],a[2]=r[2]+s*n[10],o[0]=n[1],o[1]=n[5],o[2]=n[9];for(var c=0;c<3;++c){for(var u=0,d=0;d<3;++d)u+=n[c+4*d]*a[d];n[12+c]=-u}},d.getMatrix=function(e,t){this.recalcMatrix(e);var n=this.computedMatrix;if(t){for(var r=0;r<16;++r)t[r]=n[r];return t}return n},d.idle=function(e){this.center.idle(e),this.radius.idle(e),this.rotation.idle(e)},d.flush=function(e){this.center.flush(e),this.radius.flush(e),this.rotation.flush(e)},d.pan=function(e,t,n,r){t||=0,n||=0,r||=0,this.recalcMatrix(e);var i=this.computedMatrix,a=i[1],o=i[5],c=i[9],l=s(a,o,c);a/=l,o/=l,c/=l;var u=i[0],d=i[4],f=i[8],p=u*a+d*o+f*c;u-=a*p,d-=o*p,f-=c*p;var m=s(u,d,f);u/=m,d/=m,f/=m;var h=i[2],g=i[6],_=i[10],v=h*a+g*o+_*c,y=h*u+g*d+_*f;h-=v*a+y*u,g-=v*o+y*d,_-=v*c+y*f;var b=s(h,g,_);h/=b,g/=b,_/=b;var x=u*t+a*n,S=d*t+o*n,C=f*t+c*n;this.center.move(e,x,S,C);var w=Math.exp(this.computedRadius[0]);w=Math.max(1e-4,w+r),this.radius.set(e,Math.log(w))},d.rotate=function(e,t,n,r){this.recalcMatrix(e),t||=0,n||=0;var i=this.computedMatrix,a=i[0],o=i[4],l=i[8],u=i[1],d=i[5],f=i[9],p=i[2],m=i[6],h=i[10],g=t*a+n*u,_=t*o+n*d,v=t*l+n*f,y=-(m*v-h*_),b=-(h*g-p*v),x=-(p*_-m*g),S=Math.sqrt(Math.max(0,1-y**2-b**2-x**2)),C=c(y,b,x,S);C>1e-6?(y/=C,b/=C,x/=C,S/=C):(y=b=x=0,S=1);var w=this.computedRotation,T=w[0],E=w[1],D=w[2],O=w[3],k=T*S+O*y+E*x-D*b,A=E*S+O*b+D*y-T*x,j=D*S+O*x+T*b-E*y,M=O*S-T*y-E*b-D*x;if(r){y=p,b=m,x=h;var N=Math.sin(r)/s(y,b,x);y*=N,b*=N,x*=N,S=Math.cos(t),k=k*S+M*y+A*x-j*b,A=A*S+M*b+j*y-k*x,j=j*S+M*x+k*b-A*y,M=M*S-k*y-A*b-j*x}var P=c(k,A,j,M);P>1e-6?(k/=P,A/=P,j/=P,M/=P):(k=A=j=0,M=1),this.rotation.set(e,k,A,j,M)},d.lookAt=function(e,t,n,i){this.recalcMatrix(e),n||=this.computedCenter,t||=this.computedEye,i||=this.computedUp;var a=this.computedMatrix;r(a,t,n,i);var s=this.computedRotation;o(s,a[0],a[1],a[2],a[4],a[5],a[6],a[8],a[9],a[10]),l(s,s),this.rotation.set(e,s[0],s[1],s[2],s[3]);for(var c=0,u=0;u<3;++u)c+=(n[u]-t[u])**2;this.radius.set(e,.5*Math.log(Math.max(c,1e-6))),this.center.set(e,n[0],n[1],n[2])},d.translate=function(e,t,n,r){this.center.move(e,t||0,n||0,r||0)},d.setMatrix=function(e,t){var n=this.computedRotation;o(n,t[0],t[1],t[2],t[4],t[5],t[6],t[8],t[9],t[10]),l(n,n),this.rotation.set(e,n[0],n[1],n[2],n[3]);var r=this.computedMatrix;a(r,t);var i=r[15];if(Math.abs(i)>1e-6){var s=r[12]/i,c=r[13]/i,u=r[14]/i;this.recalcMatrix(e);var d=Math.exp(this.computedRadius[0]);this.center.set(e,s-r[2]*d,c-r[6]*d,u-r[10]*d),this.radius.idle(e)}else this.center.idle(e),this.radius.idle(e)},d.setDistance=function(e,t){t>0&&this.radius.set(e,Math.log(t))},d.setDistanceLimits=function(e,t){e=e>0?Math.log(e):-1/0,t=t>0?Math.log(t):1/0,t=Math.max(t,e),this.radius.bounds[0][0]=e,this.radius.bounds[1][0]=t},d.getDistanceLimits=function(e){var t=this.radius.bounds;return e?(e[0]=Math.exp(t[0][0]),e[1]=Math.exp(t[1][0]),e):[Math.exp(t[0][0]),Math.exp(t[1][0])]},d.toJSON=function(){return this.recalcMatrix(this.lastT()),{center:this.computedCenter.slice(),rotation:this.computedRotation.slice(),distance:Math.log(this.computedRadius[0]),zoomMin:this.radius.bounds[0][0],zoomMax:this.radius.bounds[1][0]}},d.fromJSON=function(e){var t=this.lastT(),n=e.center;n&&this.center.set(t,n[0],n[1],n[2]);var r=e.rotation;r&&this.rotation.set(t,r[0],r[1],r[2],r[3]);var i=e.distance;i&&i>0&&this.radius.set(t,Math.log(i)),this.setDistanceLimits(e.zoomMin,e.zoomMax)};function f(e){e||={};var t=e.center||[0,0,0],n=e.rotation||[0,0,0,1],r=e.radius||1;t=[].slice.call(t,0,3),n=[].slice.call(n,0,4),l(n,n);var i=new u(n,t,Math.log(r));return i.setDistanceLimits(e.zoomMin,e.zoomMax),(`eye`in e||`up`in e)&&i.lookAt(0,e.eye,e.center,e.up),i}})),j=e(((e,t)=>{t.exports=n;function n(e,t,n,r){var i=t[0],a=t[1],o=t[2];return e[0]=i+r*(n[0]-i),e[1]=a+r*(n[1]-a),e[2]=o+r*(n[2]-o),e}})),M=e(((e,t)=>{t.exports=n;function n(e,t,n){var r=n[0],i=n[1],a=n[2],o,s,c,l,u,d,f,p,m,h,g,_;return t===e?(e[12]=t[0]*r+t[4]*i+t[8]*a+t[12],e[13]=t[1]*r+t[5]*i+t[9]*a+t[13],e[14]=t[2]*r+t[6]*i+t[10]*a+t[14],e[15]=t[3]*r+t[7]*i+t[11]*a+t[15]):(o=t[0],s=t[1],c=t[2],l=t[3],u=t[4],d=t[5],f=t[6],p=t[7],m=t[8],h=t[9],g=t[10],_=t[11],e[0]=o,e[1]=s,e[2]=c,e[3]=l,e[4]=u,e[5]=d,e[6]=f,e[7]=p,e[8]=m,e[9]=h,e[10]=g,e[11]=_,e[12]=o*r+u*i+m*a+t[12],e[13]=s*r+d*i+h*a+t[13],e[14]=c*r+f*i+g*a+t[14],e[15]=l*r+p*i+_*a+t[15]),e}})),N=e(((e,t)=>{t.exports=n;function n(e,t,n){var r=t[0],i=t[1],a=t[2],o=t[3],s=t[4],c=t[5],l=t[6],u=t[7],d=t[8],f=t[9],p=t[10],m=t[11],h=t[12],g=t[13],_=t[14],v=t[15],y=n[0],b=n[1],x=n[2],S=n[3];return e[0]=y*r+b*s+x*d+S*h,e[1]=y*i+b*c+x*f+S*g,e[2]=y*a+b*l+x*p+S*_,e[3]=y*o+b*u+x*m+S*v,y=n[4],b=n[5],x=n[6],S=n[7],e[4]=y*r+b*s+x*d+S*h,e[5]=y*i+b*c+x*f+S*g,e[6]=y*a+b*l+x*p+S*_,e[7]=y*o+b*u+x*m+S*v,y=n[8],b=n[9],x=n[10],S=n[11],e[8]=y*r+b*s+x*d+S*h,e[9]=y*i+b*c+x*f+S*g,e[10]=y*a+b*l+x*p+S*_,e[11]=y*o+b*u+x*m+S*v,y=n[12],b=n[13],x=n[14],S=n[15],e[12]=y*r+b*s+x*d+S*h,e[13]=y*i+b*c+x*f+S*g,e[14]=y*a+b*l+x*p+S*_,e[15]=y*o+b*u+x*m+S*v,e}})),P=e(((e,t)=>{t.exports=n;function n(){var e=new Float32Array(16);return e[0]=1,e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[5]=1,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=0,e[13]=0,e[14]=0,e[15]=1,e}})),F=e(((e,t)=>{t.exports=n;function n(e,t,n){var r=n[0],i=n[1],a=n[2];return e[0]=t[0]*r,e[1]=t[1]*r,e[2]=t[2]*r,e[3]=t[3]*r,e[4]=t[4]*i,e[5]=t[5]*i,e[6]=t[6]*i,e[7]=t[7]*i,e[8]=t[8]*a,e[9]=t[9]*a,e[10]=t[10]*a,e[11]=t[11]*a,e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15],e}})),I=e(((e,t)=>{t.exports=n;function n(e,t,n){var r=t[0],i=t[1],a=t[2],o=t[3],s=r+r,c=i+i,l=a+a,u=r*s,d=r*c,f=r*l,p=i*c,m=i*l,h=a*l,g=o*s,_=o*c,v=o*l;return e[0]=1-(p+h),e[1]=d+v,e[2]=f-_,e[3]=0,e[4]=d-v,e[5]=1-(u+h),e[6]=m+g,e[7]=0,e[8]=f+_,e[9]=m-g,e[10]=1-(u+p),e[11]=0,e[12]=n[0],e[13]=n[1],e[14]=n[2],e[15]=1,e}})),L=e(((e,t)=>{var n={identity:E(),translate:M(),multiply:N(),create:P(),scale:F(),fromRotationTranslation:I()};n.create();var r=n.create();t.exports=function(e,t,i,a,o,s){return n.identity(e),n.fromRotationTranslation(e,s,t),e[3]=o[0],e[7]=o[1],e[11]=o[2],e[15]=o[3],n.identity(r),a[2]!==0&&(r[9]=a[2],n.multiply(e,e,r)),a[1]!==0&&(r[9]=0,r[8]=a[1],n.multiply(e,e,r)),a[0]!==0&&(r[8]=0,r[4]=a[0],n.multiply(e,e,r)),n.scale(e,e,i),e}})),R=e(((e,t)=>{t.exports=function(e,t){var n=t[15];if(n===0)return!1;for(var r=1/n,i=0;i<16;i++)e[i]=t[i]*r;return!0}})),z=e(((e,t)=>{t.exports=n;function n(e){var t=new Float32Array(16);return t[0]=e[0],t[1]=e[1],t[2]=e[2],t[3]=e[3],t[4]=e[4],t[5]=e[5],t[6]=e[6],t[7]=e[7],t[8]=e[8],t[9]=e[9],t[10]=e[10],t[11]=e[11],t[12]=e[12],t[13]=e[13],t[14]=e[14],t[15]=e[15],t}})),B=e(((e,t)=>{t.exports=n;function n(e){var t=e[0],n=e[1],r=e[2],i=e[3],a=e[4],o=e[5],s=e[6],c=e[7],l=e[8],u=e[9],d=e[10],f=e[11],p=e[12],m=e[13],h=e[14],g=e[15],_=t*o-n*a,v=t*s-r*a,y=t*c-i*a,b=n*s-r*o,x=n*c-i*o,S=r*c-i*s,C=l*m-u*p,w=l*h-d*p,T=l*g-f*p,E=u*h-d*m,D=u*g-f*m;return _*(d*g-f*h)-v*D+y*E+b*T-x*w+S*C}})),V=e(((e,t)=>{t.exports=n;function n(e,t){if(e===t){var n=t[1],r=t[2],i=t[3],a=t[6],o=t[7],s=t[11];e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=n,e[6]=t[9],e[7]=t[13],e[8]=r,e[9]=a,e[11]=t[14],e[12]=i,e[13]=o,e[14]=s}else e[0]=t[0],e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=t[1],e[5]=t[5],e[6]=t[9],e[7]=t[13],e[8]=t[2],e[9]=t[6],e[10]=t[10],e[11]=t[14],e[12]=t[3],e[13]=t[7],e[14]=t[11],e[15]=t[15];return e}})),H=e(((e,t)=>{t.exports=n;function n(e){var t=e[0],n=e[1],r=e[2];return Math.sqrt(t*t+n*n+r*r)}})),U=e(((e,t)=>{var n=R(),r=P(),i=z(),a=B(),o=b(),s=V(),c={length:H(),normalize:C(),dot:w(),cross:S()},l=r(),u=r(),d=[0,0,0,0],f=[[0,0,0],[0,0,0],[0,0,0]],p=[0,0,0];t.exports=function(e,t,r,_,v,y){if(t||=[0,0,0],r||=[0,0,0],_||=[0,0,0],v||=[0,0,0,1],y||=[0,0,0,1],!n(l,e)||(i(u,l),u[3]=0,u[7]=0,u[11]=0,u[15]=1,Math.abs(a(u)<1e-8)))return!1;var b=l[3],x=l[7],S=l[11],C=l[12],w=l[13],T=l[14],E=l[15];if(b!==0||x!==0||S!==0){if(d[0]=b,d[1]=x,d[2]=S,d[3]=E,!o(u,u))return!1;s(u,u),m(v,d,u)}else v[0]=v[1]=v[2]=0,v[3]=1;if(t[0]=C,t[1]=w,t[2]=T,h(f,l),r[0]=c.length(f[0]),c.normalize(f[0],f[0]),_[0]=c.dot(f[0],f[1]),g(f[1],f[1],f[0],1,-_[0]),r[1]=c.length(f[1]),c.normalize(f[1],f[1]),_[0]/=r[1],_[1]=c.dot(f[0],f[2]),g(f[2],f[2],f[0],1,-_[1]),_[2]=c.dot(f[1],f[2]),g(f[2],f[2],f[1],1,-_[2]),r[2]=c.length(f[2]),c.normalize(f[2],f[2]),_[1]/=r[2],_[2]/=r[2],c.cross(p,f[1],f[2]),c.dot(f[0],p)<0)for(var D=0;D<3;D++)r[D]*=-1,f[D][0]*=-1,f[D][1]*=-1,f[D][2]*=-1;return y[0]=.5*Math.sqrt(Math.max(1+f[0][0]-f[1][1]-f[2][2],0)),y[1]=.5*Math.sqrt(Math.max(1-f[0][0]+f[1][1]-f[2][2],0)),y[2]=.5*Math.sqrt(Math.max(1-f[0][0]-f[1][1]+f[2][2],0)),y[3]=.5*Math.sqrt(Math.max(1+f[0][0]+f[1][1]+f[2][2],0)),f[2][1]>f[1][2]&&(y[0]=-y[0]),f[0][2]>f[2][0]&&(y[1]=-y[1]),f[1][0]>f[0][1]&&(y[2]=-y[2]),!0};function m(e,t,n){var r=t[0],i=t[1],a=t[2],o=t[3];return e[0]=n[0]*r+n[4]*i+n[8]*a+n[12]*o,e[1]=n[1]*r+n[5]*i+n[9]*a+n[13]*o,e[2]=n[2]*r+n[6]*i+n[10]*a+n[14]*o,e[3]=n[3]*r+n[7]*i+n[11]*a+n[15]*o,e}function h(e,t){e[0][0]=t[0],e[0][1]=t[1],e[0][2]=t[2],e[1][0]=t[4],e[1][1]=t[5],e[1][2]=t[6],e[2][0]=t[8],e[2][1]=t[9],e[2][2]=t[10]}function g(e,t,n,r,i){e[0]=t[0]*r+n[0]*i,e[1]=t[1]*r+n[1]*i,e[2]=t[2]*r+n[2]*i}})),W=e(((e,t)=>{t.exports=n;function n(e,t,n,r){var i=t[0],a=t[1],o=t[2],s=t[3],c=n[0],l=n[1],u=n[2],d=n[3],f,p=i*c+a*l+o*u+s*d,m,h,g;return p<0&&(p=-p,c=-c,l=-l,u=-u,d=-d),1-p>1e-6?(f=Math.acos(p),m=Math.sin(f),h=Math.sin((1-r)*f)/m,g=Math.sin(r*f)/m):(h=1-r,g=r),e[0]=h*i+g*c,e[1]=h*a+g*l,e[2]=h*o+g*u,e[3]=h*s+g*d,e}})),G=e(((e,t)=>{t.exports=W()})),K=e(((e,t)=>{var n=j(),r=L(),i=U(),a=B(),o=G(),s=d(),c=d(),l=d();t.exports=u;function u(e,t,u,d){if(a(t)===0||a(u)===0)return!1;var f=i(t,s.translate,s.scale,s.skew,s.perspective,s.quaternion),p=i(u,c.translate,c.scale,c.skew,c.perspective,c.quaternion);return!f||!p?!1:(n(l.translate,s.translate,c.translate,d),n(l.skew,s.skew,c.skew,d),n(l.scale,s.scale,c.scale,d),n(l.perspective,s.perspective,c.perspective,d),o(l.quaternion,s.quaternion,c.quaternion,d),r(e,l.translate,l.scale,l.skew,l.perspective,l.quaternion),!0)}function d(){return{translate:f(),scale:f(1),skew:f(),perspective:p(),quaternion:p()}}function f(e){return[e||0,e||0,e||0]}function p(){return[0,0,0,1]}})),q=e(((e,t)=>{t.exports=n;function n(e,t,n){var r=Math.sin(n),i=Math.cos(n),a=t[4],o=t[5],s=t[6],c=t[7],l=t[8],u=t[9],d=t[10],f=t[11];return t!==e&&(e[0]=t[0],e[1]=t[1],e[2]=t[2],e[3]=t[3],e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15]),e[4]=a*i+l*r,e[5]=o*i+u*r,e[6]=s*i+d*r,e[7]=c*i+f*r,e[8]=l*i-a*r,e[9]=u*i-o*r,e[10]=d*i-s*r,e[11]=f*i-c*r,e}})),J=e(((e,t)=>{t.exports=n;function n(e,t,n){var r=Math.sin(n),i=Math.cos(n),a=t[0],o=t[1],s=t[2],c=t[3],l=t[8],u=t[9],d=t[10],f=t[11];return t!==e&&(e[4]=t[4],e[5]=t[5],e[6]=t[6],e[7]=t[7],e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15]),e[0]=a*i-l*r,e[1]=o*i-u*r,e[2]=s*i-d*r,e[3]=c*i-f*r,e[8]=a*r+l*i,e[9]=o*r+u*i,e[10]=s*r+d*i,e[11]=c*r+f*i,e}})),Y=e(((e,t)=>{t.exports=n;function n(e,t,n){var r=Math.sin(n),i=Math.cos(n),a=t[0],o=t[1],s=t[2],c=t[3],l=t[4],u=t[5],d=t[6],f=t[7];return t!==e&&(e[8]=t[8],e[9]=t[9],e[10]=t[10],e[11]=t[11],e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15]),e[0]=a*i+l*r,e[1]=o*i+u*r,e[2]=s*i+d*r,e[3]=c*i+f*r,e[4]=l*i-a*r,e[5]=u*i-o*r,e[6]=d*i-s*r,e[7]=f*i-c*r,e}})),X=e(((e,t)=>{var n=v(),r=K(),i=b(),a=q(),o=J(),s=Y(),c=D(),l=M();F();var u=C(),d=[0,0,0];t.exports=h;function f(e){this._components=e.slice(),this._time=[0],this.prevMatrix=e.slice(),this.nextMatrix=e.slice(),this.computedMatrix=e.slice(),this.computedInverse=e.slice(),this.computedEye=[0,0,0],this.computedUp=[0,0,0],this.computedCenter=[0,0,0],this.computedRadius=[0],this._limits=[-1/0,1/0]}var p=f.prototype;p.recalcMatrix=function(e){var t=this._time,a=n.le(t,e),o=this.computedMatrix;if(!(a<0)){var s=this._components;if(a===t.length-1)for(var c=16*a,l=0;l<16;++l)o[l]=s[c++];else{for(var d=t[a+1]-t[a],c=16*a,f=this.prevMatrix,p=!0,l=0;l<16;++l)f[l]=s[c++];for(var m=this.nextMatrix,l=0;l<16;++l)m[l]=s[c++],p&&=f[l]===m[l];if(d<1e-6||p)for(var l=0;l<16;++l)o[l]=f[l];else r(o,f,m,(e-t[a])/d)}var h=this.computedUp;h[0]=o[1],h[1]=o[5],h[2]=o[9],u(h,h);var g=this.computedInverse;i(g,o);var _=this.computedEye,v=g[15];_[0]=g[12]/v,_[1]=g[13]/v,_[2]=g[14]/v;for(var y=this.computedCenter,b=Math.exp(this.computedRadius[0]),l=0;l<3;++l)y[l]=_[l]-o[2+4*l]*b}},p.idle=function(e){if(!(e<this.lastT())){for(var t=this._components,n=t.length-16,r=0;r<16;++r)t.push(t[n++]);this._time.push(e)}},p.flush=function(e){var t=n.gt(this._time,e)-2;t<0||(this._time.splice(0,t),this._components.splice(0,16*t))},p.lastT=function(){return this._time[this._time.length-1]},p.lookAt=function(e,t,n,r){this.recalcMatrix(e),t||=this.computedEye,n||=d,r||=this.computedUp,this.setMatrix(e,c(this.computedMatrix,t,n,r));for(var i=0,a=0;a<3;++a)i+=(n[a]-t[a])**2;i=Math.log(Math.sqrt(i)),this.computedRadius[0]=i},p.rotate=function(e,t,n,r){this.recalcMatrix(e);var c=this.computedInverse;t&&o(c,c,t),n&&a(c,c,n),r&&s(c,c,r),this.setMatrix(e,i(this.computedMatrix,c))};var m=[0,0,0];p.pan=function(e,t,n,r){m[0]=-(t||0),m[1]=-(n||0),m[2]=-(r||0),this.recalcMatrix(e);var a=this.computedInverse;l(a,a,m),this.setMatrix(e,i(a,a))},p.translate=function(e,t,n,r){m[0]=t||0,m[1]=n||0,m[2]=r||0,this.recalcMatrix(e);var i=this.computedMatrix;l(i,i,m),this.setMatrix(e,i)},p.setMatrix=function(e,t){if(!(e<this.lastT())){this._time.push(e);for(var n=0;n<16;++n)this._components.push(t[n])}},p.setDistance=function(e,t){this.computedRadius[0]=t},p.setDistanceLimits=function(e,t){var n=this._limits;n[0]=e,n[1]=t},p.getDistanceLimits=function(e){var t=this._limits;return e?(e[0]=t[0],e[1]=t[1],e):t};function h(e){return e||={},new f(e.matrix||[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1])}})),Z=e(((e,t)=>{t.exports=s;var n=T(),r=A(),i=X();function a(e,t){this._controllerNames=Object.keys(e),this._controllerList=this._controllerNames.map(function(t){return e[t]}),this._mode=t,this._active=e[t],this._active||=(this._mode=`turntable`,e.turntable),this.modes=this._controllerNames,this.computedMatrix=this._active.computedMatrix,this.computedEye=this._active.computedEye,this.computedUp=this._active.computedUp,this.computedCenter=this._active.computedCenter,this.computedRadius=this._active.computedRadius}var o=a.prototype;o.flush=function(e){for(var t=this._controllerList,n=0;n<t.length;++n)t[n].flush(e)},o.idle=function(e){for(var t=this._controllerList,n=0;n<t.length;++n)t[n].idle(e)},o.lookAt=function(e,t,n,r){for(var i=this._controllerList,a=0;a<i.length;++a)i[a].lookAt(e,t,n,r)},o.rotate=function(e,t,n,r){for(var i=this._controllerList,a=0;a<i.length;++a)i[a].rotate(e,t,n,r)},o.pan=function(e,t,n,r){for(var i=this._controllerList,a=0;a<i.length;++a)i[a].pan(e,t,n,r)},o.translate=function(e,t,n,r){for(var i=this._controllerList,a=0;a<i.length;++a)i[a].translate(e,t,n,r)},o.setMatrix=function(e,t){for(var n=this._controllerList,r=0;r<n.length;++r)n[r].setMatrix(e,t)},o.setDistanceLimits=function(e,t){for(var n=this._controllerList,r=0;r<n.length;++r)n[r].setDistanceLimits(e,t)},o.setDistance=function(e,t){for(var n=this._controllerList,r=0;r<n.length;++r)n[r].setDistance(e,t)},o.recalcMatrix=function(e){this._active.recalcMatrix(e)},o.getDistance=function(e){return this._active.getDistance(e)},o.getDistanceLimits=function(e){return this._active.getDistanceLimits(e)},o.lastT=function(){return this._active.lastT()},o.setMode=function(e){if(e!==this._mode){var t=this._controllerNames.indexOf(e);if(!(t<0)){var n=this._active,r=this._controllerList[t],i=Math.max(n.lastT(),r.lastT());n.recalcMatrix(i),r.setMatrix(i,n.computedMatrix),this._active=r,this._mode=e,this.computedMatrix=this._active.computedMatrix,this.computedEye=this._active.computedEye,this.computedUp=this._active.computedUp,this.computedCenter=this._active.computedCenter,this.computedRadius=this._active.computedRadius}}},o.getMode=function(){return this._mode};function s(e){e||={};var t=e.eye||[0,0,1],o=e.center||[0,0,0],s=e.up||[0,1,0],c=e.distanceLimits||[0,1/0],l=e.mode||`turntable`,u=n(),d=r(),f=i();return u.setDistanceLimits(c[0],c[1]),u.lookAt(0,t,o,s),d.setDistanceLimits(c[0],c[1]),d.lookAt(0,t,o,s),f.setDistanceLimits(c[0],c[1]),f.lookAt(0,t,o,s),new a({turntable:u,orbit:d,matrix:f},l)}})),ee=e((e=>{function t(e){if(typeof e==`object`){if(`buttons`in e)return e.buttons;if(`which`in e){var t=e.which;if(t===2)return 4;if(t===3)return 2;if(t>0)return 1<<t-1}else if(`button`in e){var t=e.button;if(t===1)return 4;if(t===2)return 2;if(t>=0)return 1<<t}}return 0}e.buttons=t;function n(e){return e.target||e.srcElement||window}e.element=n;function r(e){if(typeof e==`object`){if(`offsetX`in e)return e.offsetX;var t=n(e).getBoundingClientRect();return e.clientX-t.left}return 0}e.x=r;function i(e){if(typeof e==`object`){if(`offsetY`in e)return e.offsetY;var t=n(e).getBoundingClientRect();return e.clientY-t.top}return 0}e.y=i})),te=e(((e,t)=>{t.exports=r;var n=ee();function r(e,t){t||(t=e,e=window);var r=0,i=0,a=0,o={shift:!1,alt:!1,control:!1,meta:!1},s=!1;function c(e){var t=!1;return`altKey`in e&&(t||=e.altKey!==o.alt,o.alt=!!e.altKey),`shiftKey`in e&&(t||=e.shiftKey!==o.shift,o.shift=!!e.shiftKey),`ctrlKey`in e&&(t||=e.ctrlKey!==o.control,o.control=!!e.ctrlKey),`metaKey`in e&&(t||=e.metaKey!==o.meta,o.meta=!!e.metaKey),t}function l(e,s){var l=n.x(s),u=n.y(s);`buttons`in s&&(e=s.buttons|0),(e!==r||l!==i||u!==a||c(s))&&(r=e|0,i=l||0,a=u||0,t&&t(r,i,a,o))}function u(e){l(0,e)}function d(){(r||i||a||o.shift||o.alt||o.meta||o.control)&&(i=a=0,r=0,o.shift=o.alt=o.control=o.meta=!1,t&&t(0,0,0,o))}function f(e){c(e)&&t&&t(r,i,a,o)}function p(e){n.buttons(e)===0?l(0,e):l(r,e)}function m(e){l(r|n.buttons(e),e)}function h(e){l(r&~n.buttons(e),e)}function g(){s||(s=!0,e.addEventListener(`mousemove`,p),e.addEventListener(`mousedown`,m),e.addEventListener(`mouseup`,h),e.addEventListener(`mouseleave`,u),e.addEventListener(`mouseenter`,u),e.addEventListener(`mouseout`,u),e.addEventListener(`mouseover`,u),e.addEventListener(`blur`,d),e.addEventListener(`keyup`,f),e.addEventListener(`keydown`,f),e.addEventListener(`keypress`,f),e!==window&&(window.addEventListener(`blur`,d),window.addEventListener(`keyup`,f),window.addEventListener(`keydown`,f),window.addEventListener(`keypress`,f)))}function _(){s&&(s=!1,e.removeEventListener(`mousemove`,p),e.removeEventListener(`mousedown`,m),e.removeEventListener(`mouseup`,h),e.removeEventListener(`mouseleave`,u),e.removeEventListener(`mouseenter`,u),e.removeEventListener(`mouseout`,u),e.removeEventListener(`mouseover`,u),e.removeEventListener(`blur`,d),e.removeEventListener(`keyup`,f),e.removeEventListener(`keydown`,f),e.removeEventListener(`keypress`,f),e!==window&&(window.removeEventListener(`blur`,d),window.removeEventListener(`keyup`,f),window.removeEventListener(`keydown`,f),window.removeEventListener(`keypress`,f)))}g();var v={element:e};return Object.defineProperties(v,{enabled:{get:function(){return s},set:function(e){e?g():_()},enumerable:!0},buttons:{get:function(){return r},enumerable:!0},x:{get:function(){return i},enumerable:!0},y:{get:function(){return a},enumerable:!0},mods:{get:function(){return o},enumerable:!0}}),v}})),ne=e(((e,t)=>{t.exports=function(e,t){return t||=[0,``],e=String(e),t[0]=parseFloat(e,10),t[1]=e.match(/[\d.\-\+]*\s*(.*)/)[1]||``,t}})),re=e(((e,t)=>{var n=ne();t.exports=o;var r=a(`in`,document.body);function i(e,t){var r=n(getComputedStyle(e).getPropertyValue(t));return r[0]*o(r[1],e)}function a(e,t){var n=document.createElement(`div`);n.style.height=`128`+e,t.appendChild(n);var r=i(n,`height`)/128;return t.removeChild(n),r}function o(e,t){if(!e)return null;switch(t||=document.body,e=(e+``||`px`).trim().toLowerCase(),(t===window||t===document)&&(t=document.body),e){case`%`:return t.clientHeight/100;case`ch`:case`ex`:return a(e,t);case`em`:return i(t,`font-size`);case`rem`:return i(document.body,`font-size`);case`vw`:return window.innerWidth/100;case`vh`:return window.innerHeight/100;case`vmin`:return Math.min(window.innerWidth,window.innerHeight)/100;case`vmax`:return Math.max(window.innerWidth,window.innerHeight)/100;case`in`:return r;case`cm`:return r/2.54;case`mm`:return r/25.4;case`pt`:return r/72;case`pc`:return r/6;case`px`:return 1}var s=n(e);if(!isNaN(s[0])&&s[1]){var c=o(s[1],t);return typeof c==`number`?s[0]*c:null}return null}})),ie=e(((e,t)=>{var n=re();t.exports=r;function r(e,t,r){typeof e==`function`&&(r=!!t,t=e,e=window);var i=n(`ex`,e),a=function(e){r&&e.preventDefault();var n=e.deltaX||0,a=e.deltaY||0,o=e.deltaZ||0,s=e.deltaMode,c=1;switch(s){case 1:c=i;break;case 2:c=window.innerHeight}if(n*=c,a*=c,o*=c,n||a||o)return t(n,a,o,e)};return e.addEventListener(`wheel`,a),a}})),ae=e(((e,t)=>{var n={left:0,top:0};t.exports=r;function r(e,t,n){t=t||e.currentTarget||e.srcElement,Array.isArray(n)||(n=[0,0]);var r=e.clientX||0,a=e.clientY||0,o=i(t);return n[0]=r-o.left,n[1]=a-o.top,n}function i(e){return e===window||e===document||e===document.body?n:e.getBoundingClientRect()}})),oe=e(((e,t)=>{t.exports=!0})),se=e(((e,t)=>{var n=oe();function r(){var e=!1;try{var t=Object.defineProperty({},"passive",{get:function(){e=!0}});window.addEventListener(`test`,null,t),window.removeEventListener(`test`,null,t)}catch{e=!1}return e}t.exports=n&&r()}));e(((e,t)=>{t.exports=c;var n=g(),r=Z(),i=te(),a=ie(),o=ae(),s=se();function c(e,t){e||=document.body,t||={};var c=[.01,1/0];`distanceLimits`in t&&(c[0]=t.distanceLimits[0],c[1]=t.distanceLimits[1]),`zoomMin`in t&&(c[0]=t.zoomMin),`zoomMax`in t&&(c[1]=t.zoomMax);var l=r({center:t.center||[0,0,0],up:t.up||[0,1,0],eye:t.eye||[0,0,10],mode:t.mode||`orbit`,distanceLimits:c}),u=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],d=0,f=e.clientWidth,p=e.clientHeight,m={view:l,element:e,delay:t.delay||16,rotateSpeed:t.rotateSpeed||1,zoomSpeed:t.zoomSpeed||1,translateSpeed:t.translateSpeed||1,flipX:!!t.flipX,flipY:!!t.flipY,modes:l.modes,tick:function(){var t=n(),r=this.delay;l.idle(t-r),l.flush(t-(100+r*2));var i=t-2*r;l.recalcMatrix(i);for(var a=!0,o=l.computedMatrix,s=0;s<16;++s)a&&=u[s]===o[s],u[s]=o[s];var c=e.clientWidth===f&&e.clientHeight===p;return f=e.clientWidth,p=e.clientHeight,a?!c:(d=Math.exp(l.computedRadius[0]),!0)},lookAt:function(e,t,n){l.lookAt(l.lastT(),e,t,n)},rotate:function(e,t,n){l.rotate(l.lastT(),e,t,n)},pan:function(e,t,n){l.pan(l.lastT(),e,t,n)},translate:function(e,t,n){l.translate(l.lastT(),e,t,n)}};Object.defineProperties(m,{matrix:{get:function(){return l.computedMatrix},set:function(e){return l.setMatrix(l.lastT(),e),l.computedMatrix},enumerable:!0},mode:{get:function(){return l.getMode()},set:function(e){return l.setMode(e),l.getMode()},enumerable:!0},center:{get:function(){return l.computedCenter},set:function(e){return l.lookAt(l.lastT(),e),l.computedCenter},enumerable:!0},eye:{get:function(){return l.computedEye},set:function(e){return l.lookAt(l.lastT(),null,e),l.computedEye},enumerable:!0},up:{get:function(){return l.computedUp},set:function(e){return l.lookAt(l.lastT(),null,null,e),l.computedUp},enumerable:!0},distance:{get:function(){return d},set:function(e){return l.setDistance(l.lastT(),e),e},enumerable:!0},distanceLimits:{get:function(){return l.getDistanceLimits(c)},set:function(e){return l.setDistanceLimits(e),e},enumerable:!0}}),e.addEventListener(`contextmenu`,function(e){return e.preventDefault(),!1});var h=0,g=0,_={shift:!1,control:!1,alt:!1,meta:!1};i(e,v),e.addEventListener(`touchstart`,function(t){var n=o(t.changedTouches[0],e);v(0,n[0],n[1],_),v(1,n[0],n[1],_),t.preventDefault()},s?{passive:!1}:!1),e.addEventListener(`touchmove`,function(t){var n=o(t.changedTouches[0],e);v(1,n[0],n[1],_),t.preventDefault()},s?{passive:!1}:!1),e.addEventListener(`touchend`,function(t){o(t.changedTouches[0],e),v(0,h,g,_),t.preventDefault()},s?{passive:!1}:!1);function v(t,r,i,a){var o=1/e.clientHeight,s=o*(r-h),c=o*(i-g),u=m.flipX?1:-1,f=m.flipY?1:-1,p=Math.PI*m.rotateSpeed,v=n();if(t&1)a.shift?l.rotate(v,0,0,-s*p):l.rotate(v,u*p*s,-f*p*c,0);else if(t&2)l.pan(v,-m.translateSpeed*s*d,m.translateSpeed*c*d,0);else if(t&4){var y=m.zoomSpeed*c/window.innerHeight*(v-l.lastT())*50;l.pan(v,0,0,d*(Math.exp(y)-1))}h=r,g=i,_=a}return a(e,function(e,t,r){var i=m.flipX?1:-1,a=m.flipY?1:-1,o=n();if(Math.abs(e)>Math.abs(t))l.rotate(o,0,0,-e*i*Math.PI*m.rotateSpeed/window.innerWidth);else{var s=m.zoomSpeed*a*t/window.innerHeight*(o-l.lastT())/100;l.pan(o,0,0,d*(Math.exp(s)-1))}},!0),m}}))();var Q=null,$=class{constructor(e,t){if(this.shader=d.createShader(e),d.shaderSource(this.shader,t),d.compileShader(this.shader),!d.getShaderParameter(this.shader,d.COMPILE_STATUS))throw d.getShaderInfoLog(this.shader)}},ce=class{constructor(e){this.prog=d.createProgram();for(let t of e)d.attachShader(this.prog,t.shader);if(d.linkProgram(this.prog),!d.getProgramParameter(this.prog,d.LINK_STATUS))throw d.getProgramInfoLog(this.prog);this.attrPos=d.getAttribLocation(this.prog,`vs_Pos`),this.attrNor=d.getAttribLocation(this.prog,`vs_Nor`),this.attrCol=d.getAttribLocation(this.prog,`vs_Col`),this.unifModel=d.getUniformLocation(this.prog,`u_Model`),this.unifModelInvTr=d.getUniformLocation(this.prog,`u_ModelInvTr`),this.unifViewProj=d.getUniformLocation(this.prog,`u_ViewProj`),this.unifColor=d.getUniformLocation(this.prog,`u_Color`),this.unifTime=d.getUniformLocation(this.prog,`u_Time`),this.unifLowFreqAmp=d.getUniformLocation(this.prog,`u_LowFreqAmp`),this.unifLowFreqScale=d.getUniformLocation(this.prog,`u_LowFreqScale`),this.unifFbmAmp=d.getUniformLocation(this.prog,`u_FbmAmp`),this.unifFbmScale=d.getUniformLocation(this.prog,`u_FbmScale`),this.unifOctaves=d.getUniformLocation(this.prog,`u_Octaves`),this.unifRoilSpeed=d.getUniformLocation(this.prog,`u_RoilSpeed`),this.unifPulsePeriod=d.getUniformLocation(this.prog,`u_PulsePeriod`),this.unifPulseStrength=d.getUniformLocation(this.prog,`u_PulseStrength`),this.unifHeat=d.getUniformLocation(this.prog,`u_Heat`),this.unifFlow=d.getUniformLocation(this.prog,`u_Flow`),this.unifBandBlend=d.getUniformLocation(this.prog,`u_BandBlend`),this.unifFlameHeight=d.getUniformLocation(this.prog,`u_FlameHeight`),this.unifTaper=d.getUniformLocation(this.prog,`u_Taper`),this.unifBands=d.getUniformLocation(this.prog,`u_Bands`),this.unifCameraPos=d.getUniformLocation(this.prog,`u_CameraPos`),this.unifDimensions=d.getUniformLocation(this.prog,`u_Dimensions`),this.unifHorizon=d.getUniformLocation(this.prog,`u_Horizon`),this.unifAtmosphere=d.getUniformLocation(this.prog,`u_Atmosphere`)}use(){Q!==this.prog&&(d.useProgram(this.prog),Q=this.prog)}setModelMatrix(e){if(this.use(),this.unifModel!==-1&&d.uniformMatrix4fv(this.unifModel,!1,e),this.unifModelInvTr!==-1){let t=n();i(t,e),a(t,t),d.uniformMatrix4fv(this.unifModelInvTr,!1,t)}}setViewProjMatrix(e){this.use(),this.unifViewProj!==-1&&d.uniformMatrix4fv(this.unifViewProj,!1,e)}setGeometryColor(e){this.use(),this.unifColor!==-1&&d.uniform4fv(this.unifColor,e)}setTime(e){this.use(),this.unifTime!==-1&&d.uniform1f(this.unifTime,e)}setFireballParams(e){this.use(),this.unifLowFreqAmp!==-1&&d.uniform1f(this.unifLowFreqAmp,e.displacement),this.unifLowFreqScale!==-1&&d.uniform1f(this.unifLowFreqScale,e.lobeScale),this.unifFbmAmp!==-1&&d.uniform1f(this.unifFbmAmp,e.detail),this.unifFbmScale!==-1&&d.uniform1f(this.unifFbmScale,e.detailScale),this.unifOctaves!==-1&&d.uniform1i(this.unifOctaves,e.octaves),this.unifRoilSpeed!==-1&&d.uniform1f(this.unifRoilSpeed,e.roilSpeed),this.unifPulsePeriod!==-1&&d.uniform1f(this.unifPulsePeriod,e.pulsePeriod),this.unifPulseStrength!==-1&&d.uniform1f(this.unifPulseStrength,e.pulseStrength),this.unifHeat!==-1&&d.uniform1f(this.unifHeat,e.heat),this.unifFlow!==-1&&d.uniform1f(this.unifFlow,e.flow),this.unifBandBlend!==-1&&d.uniform1f(this.unifBandBlend,e.bandBlend),this.unifFlameHeight!==-1&&d.uniform1f(this.unifFlameHeight,e.flameHeight),this.unifTaper!==-1&&d.uniform1f(this.unifTaper,e.taper),this.unifBands!==-1&&d.uniform1f(this.unifBands,e.bands)}setCameraPos(e){this.use(),this.unifCameraPos!==-1&&d.uniform3fv(this.unifCameraPos,e)}setDimensions(e,t){this.use(),this.unifDimensions!==-1&&d.uniform2f(this.unifDimensions,e,t)}setBackgroundParams(e){this.use(),this.unifHorizon!==-1&&d.uniform1f(this.unifHorizon,e.horizon),this.unifAtmosphere!==-1&&d.uniform1f(this.unifAtmosphere,e.atmosphere)}draw(e){this.use(),this.attrPos!=-1&&e.bindPos()&&(d.enableVertexAttribArray(this.attrPos),d.vertexAttribPointer(this.attrPos,4,d.FLOAT,!1,0,0)),this.attrNor!=-1&&e.bindNor()&&(d.enableVertexAttribArray(this.attrNor),d.vertexAttribPointer(this.attrNor,4,d.FLOAT,!1,0,0)),e.bindIdx(),d.drawElements(e.drawMode(),e.elemCount(),d.UNSIGNED_INT,0),this.attrPos!=-1&&d.disableVertexAttribArray(this.attrPos),this.attrNor!=-1&&d.disableVertexAttribArray(this.attrNor)}},le=`#version 300 es
+var e=typeof Float32Array<`u`?Float32Array:Array;function t(){var t=new e(16);return e!=Float32Array&&(t[1]=0,t[2]=0,t[3]=0,t[4]=0,t[6]=0,t[7]=0,t[8]=0,t[9]=0,t[11]=0,t[12]=0,t[13]=0,t[14]=0),t[0]=1,t[5]=1,t[10]=1,t[15]=1,t}function n(e,t){if(e===t){var n=t[1],r=t[2],i=t[3],a=t[6],o=t[7],s=t[11];e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=n,e[6]=t[9],e[7]=t[13],e[8]=r,e[9]=a,e[11]=t[14],e[12]=i,e[13]=o,e[14]=s}else e[0]=t[0],e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=t[1],e[5]=t[5],e[6]=t[9],e[7]=t[13],e[8]=t[2],e[9]=t[6],e[10]=t[10],e[11]=t[14],e[12]=t[3],e[13]=t[7],e[14]=t[11],e[15]=t[15];return e}function r(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=t[4],s=t[5],c=t[6],l=t[7],u=t[8],d=t[9],f=t[10],p=t[11],m=t[12],h=t[13],g=t[14],_=t[15],v=n*s-r*o,y=n*c-i*o,b=n*l-a*o,x=r*c-i*s,S=r*l-a*s,C=i*l-a*c,w=u*h-d*m,T=u*g-f*m,E=u*_-p*m,D=d*g-f*h,O=d*_-p*h,k=f*_-p*g,A=v*k-y*O+b*D+x*E-S*T+C*w;return A?(A=1/A,e[0]=(s*k-c*O+l*D)*A,e[1]=(i*O-r*k-a*D)*A,e[2]=(h*C-g*S+_*x)*A,e[3]=(f*S-d*C-p*x)*A,e[4]=(c*E-o*k-l*T)*A,e[5]=(n*k-i*E+a*T)*A,e[6]=(g*b-m*C-_*y)*A,e[7]=(u*C-f*b+p*y)*A,e[8]=(o*O-s*E+l*w)*A,e[9]=(r*E-n*O-a*w)*A,e[10]=(m*S-h*b+_*v)*A,e[11]=(d*b-u*S-p*v)*A,e[12]=(s*T-o*D-c*w)*A,e[13]=(n*D-r*T+i*w)*A,e[14]=(h*y-m*x-g*v)*A,e[15]=(u*x-d*y+f*v)*A,e):null}function i(e,t,n){var r=n[0],i=n[1],a=n[2];return e[0]=t[0]*r,e[1]=t[1]*r,e[2]=t[2]*r,e[3]=t[3]*r,e[4]=t[4]*i,e[5]=t[5]*i,e[6]=t[6]*i,e[7]=t[7]*i,e[8]=t[8]*a,e[9]=t[9]*a,e[10]=t[10]*a,e[11]=t[11]*a,e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15],e}function a(e,t){return e[0]=1,e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[5]=1,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=t[0],e[13]=t[1],e[14]=t[2],e[15]=1,e}function o(e,t){var n=Math.sin(t),r=Math.cos(t);return e[0]=r,e[1]=n,e[2]=0,e[3]=0,e[4]=-n,e[5]=r,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=0,e[13]=0,e[14]=0,e[15]=1,e}function s(){var t=new e(3);return e!=Float32Array&&(t[0]=0,t[1]=0,t[2]=0),t}function c(t,n,r){var i=new e(3);return i[0]=t,i[1]=n,i[2]=r,i}(function(){var e=s();return function(t,n,r,i,a,o){var s,c;for(n||=3,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2];return t}})();function l(){var t=new e(4);return e!=Float32Array&&(t[0]=0,t[1]=0,t[2]=0,t[3]=0),t}function u(t,n,r,i){var a=new e(4);return a[0]=t,a[1]=n,a[2]=r,a[3]=i,a}function d(e,t,n){return e[0]=t[0]+n[0],e[1]=t[1]+n[1],e[2]=t[2]+n[2],e[3]=t[3]+n[3],e}function f(e,t,n,r){return e[0]=t[0]+n[0]*r,e[1]=t[1]+n[1]*r,e[2]=t[2]+n[2]*r,e[3]=t[3]+n[3]*r,e}function p(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=n*n+r*r+i*i+a*a;return o>0&&(o=1/Math.sqrt(o)),e[0]=n*o,e[1]=r*o,e[2]=i*o,e[3]=a*o,e}(function(){var e=l();return function(t,n,r,i,a,o){var s,c;for(n||=4,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],e[3]=t[s+3],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2],t[s+3]=e[3];return t}})();var m;function h(e){m=e}var g=class{constructor(){this.count=0,this.idxBound=!1,this.posBound=!1,this.norBound=!1}destory(){m.deleteBuffer(this.bufIdx),m.deleteBuffer(this.bufPos),m.deleteBuffer(this.bufNor)}generateIdx(){this.idxBound=!0,this.bufIdx=m.createBuffer()}generatePos(){this.posBound=!0,this.bufPos=m.createBuffer()}generateNor(){this.norBound=!0,this.bufNor=m.createBuffer()}bindIdx(){return this.idxBound&&m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),this.idxBound}bindPos(){return this.posBound&&m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),this.posBound}bindNor(){return this.norBound&&m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),this.norBound}elemCount(){return this.count}drawMode(){return m.TRIANGLES}},_=class extends g{constructor(e,t,n){super(),this.radius=t,this.subdivisions=n,this.center=u(e[0],e[1],e[2],1)}create(){let e=.5257311121191336,t=.8506508083520399,n=20*4**this.subdivisions,r=10*4**this.subdivisions+2,i=new ArrayBuffer(n*3*Uint32Array.BYTES_PER_ELEMENT+r*4*Float32Array.BYTES_PER_ELEMENT+r*4*Float32Array.BYTES_PER_ELEMENT),a=new ArrayBuffer(n*3*Uint32Array.BYTES_PER_ELEMENT),o=[i,a],s=0,c=n*3*Uint32Array.BYTES_PER_ELEMENT,l=c,u=c+r*4*Float32Array.BYTES_PER_ELEMENT,h=Array(20),g=[];for(let e=0;e<20;++e)h[e]=new Uint32Array(o[s],0+e*3*Uint32Array.BYTES_PER_ELEMENT,3);let _=Array(12);for(let e=0;e<12;++e)_[e]=new Float32Array(i,c+e*4*Float32Array.BYTES_PER_ELEMENT,4);_[0].set([-.5257311121191336,0,t,0]),_[1].set([e,0,t,0]),_[2].set([-.5257311121191336,0,-.8506508083520399,0]),_[3].set([e,0,-.8506508083520399,0]),_[4].set([0,t,e,0]),_[5].set([0,t,-.5257311121191336,0]),_[6].set([0,-.8506508083520399,e,0]),_[7].set([0,-.8506508083520399,-.5257311121191336,0]),_[8].set([t,e,0,0]),_[9].set([-.8506508083520399,e,0,0]),_[10].set([t,-.5257311121191336,0,0]),_[11].set([-.8506508083520399,-.5257311121191336,0,0]),h[0].set([0,4,1]),h[1].set([0,9,4]),h[2].set([9,5,4]),h[3].set([4,5,8]),h[4].set([4,8,1]),h[5].set([8,10,1]),h[6].set([8,3,10]),h[7].set([5,3,8]),h[8].set([5,2,3]),h[9].set([2,7,3]),h[10].set([7,10,3]),h[11].set([7,6,10]),h[12].set([7,11,6]),h[13].set([11,0,6]),h[14].set([0,1,6]),h[15].set([6,1,10]),h[16].set([9,0,11]),h[17].set([9,11,2]),h[18].set([9,2,5]),h[19].set([7,2,11]);for(let e=0;e<this.subdivisions;++e){s=1-s,g.length=h.length*4;let e=0,t=new Map;function n(e,n){let r=[e,n].sort().join(`_`);if(!t.has(r)){let a=new Float32Array(i,c+_.length*4*Float32Array.BYTES_PER_ELEMENT,4);d(a,_[e],_[n]),p(a,a),t.set(r,_.length),_.push(a)}return t.get(r)}for(let t=0;t<h.length;++t){let r=h[t][0],i=h[t][1],a=h[t][2],c=n(r,i),l=n(i,a),u=n(a,r),d=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),f=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),p=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),m=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3);g.length,d.set([r,c,u]),f.set([c,l,u]),p.set([c,i,l]),m.set([u,l,a])}let r=h;h=g,g=r}if(s===1){let e=new Uint32Array(i,0,3*h.length),t=new Uint32Array(a,0,3*h.length);e.set(t)}for(let e=0;e<_.length;++e)f(new Float32Array(i,u+e*4*Float32Array.BYTES_PER_ELEMENT,4),this.center,_[e],this.radius);this.buffer=i,this.indices=new Uint32Array(this.buffer,0,h.length*3),this.normals=new Float32Array(this.buffer,l,_.length*4),this.positions=new Float32Array(this.buffer,u,_.length*4),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),m.bufferData(m.ELEMENT_ARRAY_BUFFER,this.indices,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),m.bufferData(m.ARRAY_BUFFER,this.normals,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),m.bufferData(m.ARRAY_BUFFER,this.positions,m.STATIC_DRAW),console.log(`Created icosphere with ${_.length} vertices`)}},v=class extends g{constructor(e){super(),this.center=u(e[0],e[1],e[2],1)}create(){this.indices=new Uint32Array([0,1,2,0,2,3]),this.normals=new Float32Array([0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0]),this.positions=new Float32Array([-1,-1,0,1,1,-1,0,1,1,1,0,1,-1,1,0,1]),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),m.bufferData(m.ELEMENT_ARRAY_BUFFER,this.indices,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),m.bufferData(m.ARRAY_BUFFER,this.normals,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),m.bufferData(m.ARRAY_BUFFER,this.positions,m.STATIC_DRAW),console.log(`Created square`)}},y=class{constructor(e){this.canvas=e}setClearColor(e,t,n,r){m.clearColor(e,t,n,r)}setSize(e,t){this.canvas.width=e,this.canvas.height=t}clear(){m.clear(m.COLOR_BUFFER_BIT|m.DEPTH_BUFFER_BIT)}render(e,t,n,r,i){let a=u(1,1,1,1);r.setModelMatrix(t),r.setViewProjMatrix(e),r.setGeometryColor(a),r.setCameraPos(n);for(let e of i)r.draw(e)}},b=70,x=.5,S=3.4,C=.16,w=1/120,T=class{constructor(){this.x=0,this.y=0,this.vx=0,this.vy=0,this.speed=0,this.curvature=0,this.anchorX=0,this.anchorY=0,this.anchorVx=0,this.anchorVy=0}reset(e,t){this.anchorX=e,this.anchorY=t,this.anchorVx=0,this.anchorVy=0}update(e,t,n,r){let i=0,a=0;for(let r=n;r>0;r-=w){let n=Math.min(r,w);i=49*(e-this.anchorX)-14*this.anchorVx,a=49*(t-this.anchorY)-14*this.anchorVy,this.anchorVx+=i*n,this.anchorVy+=a*n,this.anchorX+=this.anchorVx*n,this.anchorY+=this.anchorVy*n}let o=b,s=x,c=o*Math.sqrt(1-s*s),l=2*Math.PI/S,u=l*r,d=u;for(let e=0;e<5;++e)d-=(d-s*Math.sin(d)-u)/(1-s*Math.cos(d));let f=Math.cos(d),p=Math.sin(d),m=o*(f-s),h=c*p,g=l/(1-s*f),_=-70*p*g,v=c*f*g,y=Math.hypot(m,h),T=-(l*l*o*o*o)/(y*y*y),E=T*m,D=T*h,O=C*r,k=Math.cos(O),A=Math.sin(O),j=k*m-A*h,M=A*m+k*h,N=k*_-A*v-C*M,P=A*_+k*v+C*j,F=k*E-A*D,I=A*E+k*D;this.x=this.anchorX+j,this.y=this.anchorY+M,this.vx=this.anchorVx+N,this.vy=this.anchorVy+P;let L=i+F,R=a+I;this.speed=Math.hypot(this.vx,this.vy),this.curvature=this.speed>.001?(this.vx*R-this.vy*L)/(this.speed*this.speed*this.speed):0}},E=null,D=class{constructor(e,t){if(this.shader=m.createShader(e),m.shaderSource(this.shader,t),m.compileShader(this.shader),!m.getShaderParameter(this.shader,m.COMPILE_STATUS))throw m.getShaderInfoLog(this.shader)}},O=class{constructor(e){this.prog=m.createProgram();for(let t of e)m.attachShader(this.prog,t.shader);if(m.linkProgram(this.prog),!m.getProgramParameter(this.prog,m.LINK_STATUS))throw m.getProgramInfoLog(this.prog);this.attrPos=m.getAttribLocation(this.prog,`vs_Pos`),this.attrNor=m.getAttribLocation(this.prog,`vs_Nor`),this.attrCol=m.getAttribLocation(this.prog,`vs_Col`),this.unifModel=m.getUniformLocation(this.prog,`u_Model`),this.unifModelInvTr=m.getUniformLocation(this.prog,`u_ModelInvTr`),this.unifViewProj=m.getUniformLocation(this.prog,`u_ViewProj`),this.unifColor=m.getUniformLocation(this.prog,`u_Color`),this.unifTime=m.getUniformLocation(this.prog,`u_Time`),this.unifLowFreqAmp=m.getUniformLocation(this.prog,`u_LowFreqAmp`),this.unifLowFreqScale=m.getUniformLocation(this.prog,`u_LowFreqScale`),this.unifFbmAmp=m.getUniformLocation(this.prog,`u_FbmAmp`),this.unifFbmScale=m.getUniformLocation(this.prog,`u_FbmScale`),this.unifOctaves=m.getUniformLocation(this.prog,`u_Octaves`),this.unifRoilSpeed=m.getUniformLocation(this.prog,`u_RoilSpeed`),this.unifPulsePeriod=m.getUniformLocation(this.prog,`u_PulsePeriod`),this.unifPulseStrength=m.getUniformLocation(this.prog,`u_PulseStrength`),this.unifHeat=m.getUniformLocation(this.prog,`u_Heat`),this.unifFlow=m.getUniformLocation(this.prog,`u_Flow`),this.unifBandBlend=m.getUniformLocation(this.prog,`u_BandBlend`),this.unifFlameHeight=m.getUniformLocation(this.prog,`u_FlameHeight`),this.unifTaper=m.getUniformLocation(this.prog,`u_Taper`),this.unifBands=m.getUniformLocation(this.prog,`u_Bands`),this.unifCameraPos=m.getUniformLocation(this.prog,`u_CameraPos`),this.unifCurvature=m.getUniformLocation(this.prog,`u_Curvature`),this.unifDimensions=m.getUniformLocation(this.prog,`u_Dimensions`),this.unifHorizon=m.getUniformLocation(this.prog,`u_Horizon`),this.unifAtmosphere=m.getUniformLocation(this.prog,`u_Atmosphere`)}use(){E!==this.prog&&(m.useProgram(this.prog),E=this.prog)}setModelMatrix(e){if(this.use(),this.unifModel!==-1&&m.uniformMatrix4fv(this.unifModel,!1,e),this.unifModelInvTr!==-1){let i=t();n(i,e),r(i,i),m.uniformMatrix4fv(this.unifModelInvTr,!1,i)}}setViewProjMatrix(e){this.use(),this.unifViewProj!==-1&&m.uniformMatrix4fv(this.unifViewProj,!1,e)}setGeometryColor(e){this.use(),this.unifColor!==-1&&m.uniform4fv(this.unifColor,e)}setTime(e){this.use(),this.unifTime!==-1&&m.uniform1f(this.unifTime,e)}setFireballParams(e){this.use(),this.unifLowFreqAmp!==-1&&m.uniform1f(this.unifLowFreqAmp,e.displacement),this.unifLowFreqScale!==-1&&m.uniform1f(this.unifLowFreqScale,e.lobeScale),this.unifFbmAmp!==-1&&m.uniform1f(this.unifFbmAmp,e.detail),this.unifFbmScale!==-1&&m.uniform1f(this.unifFbmScale,e.detailScale),this.unifOctaves!==-1&&m.uniform1i(this.unifOctaves,e.octaves),this.unifRoilSpeed!==-1&&m.uniform1f(this.unifRoilSpeed,e.roilSpeed),this.unifPulsePeriod!==-1&&m.uniform1f(this.unifPulsePeriod,e.pulsePeriod),this.unifPulseStrength!==-1&&m.uniform1f(this.unifPulseStrength,e.pulseStrength),this.unifHeat!==-1&&m.uniform1f(this.unifHeat,e.heat),this.unifFlow!==-1&&m.uniform1f(this.unifFlow,e.flow),this.unifBandBlend!==-1&&m.uniform1f(this.unifBandBlend,e.bandBlend),this.unifFlameHeight!==-1&&m.uniform1f(this.unifFlameHeight,e.flameHeight),this.unifTaper!==-1&&m.uniform1f(this.unifTaper,e.taper),this.unifBands!==-1&&m.uniform1f(this.unifBands,e.bands)}setCurvature(e){this.use(),this.unifCurvature!==-1&&m.uniform1f(this.unifCurvature,e)}setCameraPos(e){this.use(),this.unifCameraPos!==-1&&m.uniform3fv(this.unifCameraPos,e)}setDimensions(e,t){this.use(),this.unifDimensions!==-1&&m.uniform2f(this.unifDimensions,e,t)}setBackgroundParams(e){this.use(),this.unifHorizon!==-1&&m.uniform1f(this.unifHorizon,e.horizon),this.unifAtmosphere!==-1&&m.uniform1f(this.unifAtmosphere,e.atmosphere)}draw(e){this.use(),this.attrPos!=-1&&e.bindPos()&&(m.enableVertexAttribArray(this.attrPos),m.vertexAttribPointer(this.attrPos,4,m.FLOAT,!1,0,0)),this.attrNor!=-1&&e.bindNor()&&(m.enableVertexAttribArray(this.attrNor),m.vertexAttribPointer(this.attrNor,4,m.FLOAT,!1,0,0)),e.bindIdx(),m.drawElements(e.drawMode(),e.elemCount(),m.UNSIGNED_INT,0),this.attrPos!=-1&&m.disableVertexAttribArray(this.attrPos),this.attrNor!=-1&&m.disableVertexAttribArray(this.attrNor)}},k=`#version 300 es
+
+//This is a vertex shader. While it is called a "shader" due to outdated conventions, this file
+//is used to apply matrix transformations to the arrays of vertex data passed to it.
+//Since this code is run on your GPU, each vertex is transformed simultaneously.
+//If it were run on your CPU, each vertex would have to be processed in a FOR loop, one at a time.
+//This simultaneous transformation allows your program to run much faster, especially when rendering
+//geometry with millions of vertices.
+
+uniform mat4 u_Model;       // The matrix that defines the transformation of the
+                            // object we're rendering. In this assignment,
+                            // this will be the result of traversing your scene graph.
+
+uniform mat4 u_ModelInvTr;  // The inverse transpose of the model matrix.
+                            // This allows us to transform the object's normals properly
+                            // if the object has been non-uniformly scaled.
+
+uniform mat4 u_ViewProj;    // The matrix that defines the camera's transformation.
+                            // We've written a static matrix for you to use for HW2,
+                            // but in HW3 you'll have to generate one yourself
+
+uniform float u_Time;       // Seconds elapsed since the program started. Drives every
+                            // animated term below so the fireball roils continuously.
+
+in vec4 vs_Pos;             // The array of vertex positions passed to the shader
+
+in vec4 vs_Nor;             // The array of vertex normals passed to the shader
+
+in vec4 vs_Col;             // The array of vertex colors passed to the shader.
+
+out vec4 fs_Nor;            // The array of normals that has been transformed by u_ModelInvTr. This is implicitly passed to the fragment shader.
+out vec4 fs_LightVec;       // The direction in which our virtual light lies, relative to each vertex. This is implicitly passed to the fragment shader.
+out vec4 fs_Col;            // The color of each vertex. This is implicitly passed to the fragment shader.
+
+out float fs_Disp;          // Total displacement applied to this vertex, remapped to roughly [0, 1].
+                            // The fragment shader uses this to drive the fireball's color gradient.
+out float fs_Fbm;           // Just the high-frequency FBM layer, for finer color detail.
+out float fs_Height;        // 0 at the root of the flame, 1 at the crown. The fragment shader's
+                            // gradient runs along this: white-hot base, charred tip.
+out float fs_Pulse;         // [0, 1] phase of the explosion cycle, so the fragment shader can
+                            // flash the color in step with the geometry's swell.
+out vec4 fs_Pos;            // The displaced world-space position, used for the view vector and
+                            // for varying the flicker across the surface.
+out vec3 fs_LocalPos;       // The same point before u_Model turns the comet to face its direction
+                            // of travel, so the color can stream along the tail wherever it points.
+out vec3 fs_ShapeNor;       // The undisplaced sphere's normal, turned by u_Model. Smooth where
+                            // fs_Nor carries every ripple, for the comet's glow falloff.
+
+const vec4 lightPos = vec4(5, 5, 3, 1); //The position of our virtual light, which is used to compute the shading of
+                                        //the geometry in the fragment shader.
+
+// ---------------------------------------------------------------------------
+// Tunable art direction, set from \`params\` in main.ts. The flame height and
+// taper are re-set every frame from the comet's speed.
+// ---------------------------------------------------------------------------
+uniform float u_LowFreqAmp;    // high amplitude, low frequency: the overall blobby silhouette
+uniform float u_LowFreqScale;  // spatial frequency of the sinusoidal lobes
+uniform float u_FbmAmp;        // low amplitude, high frequency: the crusty surface detail
+uniform float u_FbmScale;      // spatial frequency of the FBM
+uniform int   u_Octaves;       // how many FBM octaves are summed
+uniform float u_RoilSpeed;     // how quickly the surface churns
+uniform float u_PulsePeriod;   // seconds per "breath"/explosion cycle
+uniform float u_PulseStrength; // 0 holds the ball steady, 1 is the full swell
+uniform float u_FlameHeight;   // how far the sphere is stretched vertically into a flame
+uniform float u_Taper;         // how far the crown is drawn in relative to the root
+uniform float u_Curvature;     // signed curvature of the comet's path, per head radius
+
+const int   MAX_OCTAVES = 8;    // hard bound so the FBM loop always terminates
+const float MIN_TAPER   = 0.05; // keeps the crown from collapsing to zero width
+
+// The offset's theoretical maximum is far larger than what its terms ever reach
+// together: sampled over the sphere, offset/maxOffset only spans a narrow slice
+// of [0, 1], which would leave the fragment shader's mottling stuck on one flat
+// value. This expands that measured spread. Measured to hold across the sliders.
+const float DISP_SPREAD = 2.6;
+const float PULSE_MIN   = 0.85; // displacement multiplier at rest
+const float PULSE_MAX   = 1.35; // displacement multiplier at the peak of a burst
+
+// ---------------------------------------------------------------------------
+// Toolbox functions 
+// ---------------------------------------------------------------------------
+
+// 1) Perlin's bias: pushes t toward 0 or 1 without changing its [0,1] range.
+float bias(float b, float t)
+{
+    return pow(t, log(b) / log(0.5));
+}
+
+// 2) Perlin's gain: reshapes contrast around 0.5. Above 0.5 it pushes values
+//    away from the middle, sharpening them; below 0.5 it pulls them toward it.
+//    0.5 is the identity.
+float gain(float g, float t)
+{
+    return (t < 0.5) ? bias(1.0 - g, 2.0 * t) * 0.5
+                     : 1.0 - bias(1.0 - g, 2.0 - 2.0 * t) * 0.5;
+}
+
+// 3) Sawtooth wave: a value that ramps 0 -> 1 once per period. Used as the
+//    "time since the last explosion" clock so the animation loops cleanly.
+float sawtooth(float x, float period)
+{
+    return fract(x / period);
+}
+
+// 4) Exponential impulse: a fast attack / slow decay spike in [0,1]. Combined
+//    with the sawtooth it gives the fireball a repeating outward burst.
+float expImpulse(float x, float k)
+{
+    float h = k * x;
+    return h * exp(1.0 - h);
+}
+
+// 5) Smootherstep (Perlin's quintic ease): C2-continuous ease-in/ease-out.
+float smootherstep(float a, float b, float t)
+{
+    t = clamp((t - a) / (b - a), 0.0, 1.0);
+    return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
+}
+
+// ---------------------------------------------------------------------------
+// 3D value noise + fractal Brownian motion
+// ---------------------------------------------------------------------------
+
+float hash31(vec3 p)
+{
+    p = fract(p * vec3(0.1031, 0.1030, 0.0973));
+    p += dot(p, p.yxz + 33.33);
+    return fract((p.x + p.y) * p.z);
+}
+
+// Value noise: hash the 8 lattice corners and trilinearly interpolate them
+// using a quintic falloff so the result has continuous derivatives.
+float valueNoise(vec3 p)
+{
+    vec3 i = floor(p);
+    vec3 f = fract(p);
+    vec3 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
+
+    float n000 = hash31(i + vec3(0.0, 0.0, 0.0));
+    float n100 = hash31(i + vec3(1.0, 0.0, 0.0));
+    float n010 = hash31(i + vec3(0.0, 1.0, 0.0));
+    float n110 = hash31(i + vec3(1.0, 1.0, 0.0));
+    float n001 = hash31(i + vec3(0.0, 0.0, 1.0));
+    float n101 = hash31(i + vec3(1.0, 0.0, 1.0));
+    float n011 = hash31(i + vec3(0.0, 1.0, 1.0));
+    float n111 = hash31(i + vec3(1.0, 1.0, 1.0));
+
+    return mix(mix(mix(n000, n100, u.x), mix(n010, n110, u.x), u.y),
+               mix(mix(n001, n101, u.x), mix(n011, n111, u.x), u.y),
+               u.z);
+}
+
+// Fractal Brownian motion: summed octaves of noise at doubling frequency and
+// halving amplitude. Returns roughly [0, 1].
+float fbm(vec3 p)
+{
+    float sum  = 0.0;
+    float amp  = 0.5;
+    float freq = 1.0;
+    float norm = 0.0;
+
+
+    for (int i = 0; i < MAX_OCTAVES; ++i)
+    {
+        if (i >= u_Octaves) break;
+
+        sum  += amp * valueNoise(p * freq + float(i) * 17.3);
+        norm += amp;
+        amp  *= 0.5;
+        freq *= 2.0;
+    }
+
+    return norm > 0.0 ? sum / norm : 0.5;
+}
+
+// ---------------------------------------------------------------------------
+// Displacement
+// ---------------------------------------------------------------------------
+
+// Low-frequency, high-amplitude term: f(x, y, z) = h.
+// A product of three sinusoids at incommensurate frequencies gives large,
+// slowly-tumbling lobes that break up the sphere's silhouette, plus a vertical
+// ripple that reads as heat rising through the ball.
+float lowFrequencyHeight(vec3 p, float t)
+{
+    vec3 q = p * u_LowFreqScale;
+
+    float lobes  = sin(1.5 * q.x + 0.90 * t)
+                 * sin(1.9 * q.y - 0.70 * t + 1.7)
+                 * sin(1.3 * q.z + 0.55 * t + 3.1);
+
+    float ripple = sin(2.4 * q.y + 1.60 * t);
+
+    // A slower, fatter wave keeps the ball from ever looking perfectly round.
+    float swell  = sin(0.9 * q.x - 0.4 * t) * cos(1.1 * q.z + 0.6 * t);
+
+    return 0.62 * lobes + 0.20 * ripple + 0.18 * swell;
+}
+
+// Looping "explosion" clock, normalized to [0, 1]: 0 at rest, 1 at the peak of
+// a burst. The geometry swells with it and the fragment shader flashes with it.
+float pulsePhase(float t)
+{
+    // Ramps 0 -> 1 once per period. max() keeps the period away from 0, which
+    // would make the sawtooth NaN.
+    float cycle = sawtooth(t, max(0.01, u_PulsePeriod));
+
+    // Fading the impulse out over the tail of the cycle guarantees it is back
+    // at exactly 0 when the sawtooth wraps, so the loop has no visible pop.
+    float burst = expImpulse(cycle, 6.0) * (1.0 - smootherstep(0.75, 1.0, cycle));
+
+    return smootherstep(0.0, 1.0, burst);
+}
+
+// ---------------------------------------------------------------------------
+// Flame shape
+//
+// Fire does not bulge in every direction the way a liquid blob does, so the
+// sphere is first bent into a teardrop and then displaced along +Y only. The
+// root of a flame is anchored and smooth; everything that moves, moves upward.
+//
+// On the portfolio this flame is a comet: +Y is its tail, and u_Model turns it
+// so the tail trails behind the direction of travel.
+// ---------------------------------------------------------------------------
+
+// Normalized position along the flame: 0 at the root, 1 at the crown.
+float flameParam(vec3 dir)
+{
+    return 0.5 * (dir.y + 1.0);
+}
+
+// Bend the unit sphere into a comet: a round head at the root, drawn in toward
+// the crown, and stretched out into the tail. This is the static silhouette the
+// displacement is then layered on top of.
+vec3 flameShape(vec3 dir, float radius)
+{
+    float u = flameParam(dir);
+
+    // Easing the taper in above the waist keeps the root a full round dome and
+    // pulls the width in only over the upper half.
+    float taper = mix(1.0, max(MIN_TAPER, 1.0 - u_Taper), smootherstep(0.20, 1.0, u));
+
+    // Only the upper half is stretched, so the head stays round however long the
+    // tail gets. The stretch eases in from the equator, where it and its slope
+    // are both still 1, so head and tail meet without a crease.
+    float stretch = mix(1.0, u_FlameHeight, smootherstep(0.5, 0.9, u));
+
+    return radius * vec3(dir.x * taper, dir.y * stretch, dir.z * taper);
+}
+
+// Curve the tail sideways so it follows the path the comet has just travelled
+// rather than sticking straight out of a turn. Over a short stretch a curve of
+// curvature k falls away from its tangent by k s^2 / 2 at distance s along it.
+// Only the tail (+Y) bends; the head stays where it is.
+vec3 bendTail(vec3 p)
+{
+    float s = max(p.y, 0.0);
+    return vec3(p.x + 0.5 * u_Curvature * s * s, p.y, p.z);
+}
+
+// The displacement, which runs along +Y and nothing else. Writes the raw noise
+// layers out through \`outSway\` / \`outDetail\` for the fragment shader's mottling.
+vec3 flameOffset(vec3 dir, float radius, float t, out float outSway, out float outDetail)
+{
+    float u    = flameParam(dir);
+    vec3  base = flameShape(dir, radius);
+
+    float envelope = mix(PULSE_MIN, PULSE_MAX, pulsePhase(t));
+
+    // At strength 0 the envelope flattens to 1.0 and the flame stops surging.
+    float pulse = mix(1.0, envelope, u_PulseStrength);
+
+    // The root is anchored and the crown is free, so the whole field is scaled
+    // by height. This is what keeps the base a clean dome while the top frays.
+    float rise = smootherstep(0.05, 0.95, u);
+
+    outSway = lowFrequencyHeight(base, t);
+
+    // Marching the sample point downward through the noise field makes the
+    // detail appear to stream up the flame, the way real fire does.
+    vec3  noisePos = base * u_FbmScale + vec3(0.0, -u_RoilSpeed * t, 0.0);
+    float raw      = fbm(noisePos);
+
+    // Gain below 0.5 softens the noise into rounded masses; bias then pulls the
+    // midtones down so what survives reads as licks rather than lumps.
+    outDetail = bias(0.42, gain(0.38, raw));
+
+    // Flames reach upward, never down, so the tongues are a strictly positive
+    // term confined to the crown. Sharpening it hard is what separates them into
+    // distinct licks instead of one rolling bulge.
+    float licks = bias(0.28, outDetail) * smootherstep(0.45, 1.0, u);
+
+    float h = u_LowFreqAmp * outSway * rise
+            + u_FbmAmp * (outDetail * 2.0 - 1.0) * rise
+            + u_FbmAmp * 3.0 * licks;
+
+    return vec3(0.0, h * pulse * radius, 0.0);
+}
+
+// Where a point in direction \`dir\` ends up. Used for the neighbour samples the
+// recomputed normal is differenced from.
+vec3 flamePoint(vec3 dir, float radius, float t)
+{
+    float sway, detail;
+    return bendTail(flameShape(dir, radius) + flameOffset(dir, radius, t, sway, detail));
+}
+
+void main()
+{
+    fs_Col = vs_Col;                         // Pass the vertex colors to the fragment shader for interpolation
+
+    // The icosphere is centered at the origin, so the surface normal is simply
+    // the normalized position, and the radius is its length.
+    vec3  dir    = normalize(vec3(vs_Nor));
+    float radius = length(vec3(vs_Pos));
+
+    float sway, detail;
+    vec3  offset    = flameOffset(dir, radius, u_Time, sway, detail);
+    vec3  unbent    = flameShape(dir, radius) + offset;
+    vec3  displaced = bendTail(unbent);
+
+    // Hand the displacement to the fragment shader, remapped to ~[0, 1], so the
+    // color stays correlated with the geometry.
+    // max() guards the case where both amplitude sliders are dialed to 0.
+    float maxOffset = max(1e-4, (u_LowFreqAmp + u_FbmAmp) * PULSE_MAX * radius);
+    fs_Disp  = clamp(0.5 + 0.5 * DISP_SPREAD * offset.y / maxOffset, 0.0, 1.0);
+    fs_Fbm   = detail;
+    fs_Pulse = u_PulseStrength * pulsePhase(u_Time);
+
+    // How far up the flame this vertex sits, which is what drives the fragment
+    // shader's gradient: hottest at the root, charred at the crown. The head runs
+    // from -radius and the tail out to radius * u_FlameHeight.
+    fs_Height = clamp((unbent.y + radius) / max(1e-4, radius * (1.0 + u_FlameHeight)), 0.0, 1.0);
+
+    // Recompute the normal by finite differencing across the displaced surface.
+    // Without this the lighting still reads as a smooth sphere and none of the
+    // displacement is visible in the shading.
+    vec3 up        = abs(dir.y) < 0.99 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0);
+    vec3 tangent   = normalize(cross(up, dir));
+    vec3 bitangent = cross(dir, tangent);
+
+    // Roughly the edge length of the icosphere at the default tesselation, so
+    // the difference tracks features the mesh can actually resolve.
+    const float eps = 0.02;
+    vec3 pt = flamePoint(normalize(dir + tangent   * eps), radius, u_Time);
+    vec3 pb = flamePoint(normalize(dir + bitangent * eps), radius, u_Time);
+    vec3 displacedNor = normalize(cross(pt - displaced, pb - displaced));
+
+    mat3 invTranspose = mat3(u_ModelInvTr);
+    fs_ShapeNor = invTranspose * dir;
+    fs_Nor = vec4(invTranspose * displacedNor, 0);          // Pass the vertex normals to the fragment shader for interpolation.
+                                                            // Transform the geometry's normals by the inverse transpose of the
+                                                            // model matrix. This is necessary to ensure the normals remain
+                                                            // perpendicular to the surface after the surface is transformed by
+                                                            // the model matrix.
+
+
+    vec4 modelposition = u_Model * vec4(displaced, 1.0);   // Temporarily store the transformed vertex positions for use below
+
+    fs_Pos = modelposition;                  // The fragment shader needs the world-space position for
+                                             // its view vector and for the spatial flicker phase
+    fs_LocalPos = displaced;
+
+    fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies
+
+    gl_Position = u_ViewProj * modelposition;// gl_Position is a built-in variable of OpenGL which is
+                                             // used to render the final positions of the geometry's vertices
+}
+`,A=`#version 300 es
+
+// This is a fragment shader. If you've opened this file first, please
+// open and read lambert.vert.glsl before reading on.
+// Unlike the vertex shader, the fragment shader actually does compute
+// the shading of geometry. For every pixel in your program's output
+// screen, the fragment shader is run for every bit of geometry that
+// particular pixel overlaps. By implicitly interpolating the position
+// data passed into the fragment shader by the vertex shader, the fragment shader
+// can compute what color to apply to its pixel based on things like vertex
+// position, light position, and vertex color.
+precision highp float;
+
+uniform vec4 u_Color;      // The color with which to render this instance of geometry.
+                           // Here it tints the whole gradient, so a neutral white
+                           // leaves the palette exactly as authored.
+
+uniform float u_Time;      // Seconds elapsed since the program started. Same clock the
+                           // vertex shader displaces with, so color and geometry stay in step.
+
+uniform vec3 u_CameraPos;  // World-space eye position, for the grazing-angle rim glow.
+
+uniform float u_Heat;      // 0.5 leaves the gradient alone; higher pushes more of the
+                           // surface toward the hot end, lower cools it down.
+
+uniform float u_Flow;      // How strongly the flowing noise warps the color gradient.
+
+uniform float u_Bands;     // Number of quantized color bands. Below 2 the gradient stays
+                           // smooth; higher values give the painted, cel-shaded look.
+
+uniform float u_BandBlend; // How much of each band's width is spent crossing into the
+                           // next: 0 gives hard cel edges, 1 an unbroken gradient.
+
+// Shared with the vertex shader, so the color streams upward at the same rate
+// the geometry churns at.
+uniform float u_RoilSpeed;
+
+// These are the interpolated values out of the rasterizer, so you can't know
+// their specific values without knowing the vertices that contributed to them
+in vec4 fs_Nor;
+in vec4 fs_LightVec;
+in vec4 fs_Col;
+
+in float fs_Disp;          // The vertex shader's total displacement, remapped to [0, 1].
+                           // This is what ties the color gradient to the geometry.
+in float fs_Fbm;           // Just the high-frequency FBM layer, for finer mottling.
+in float fs_Height;        // 0 at the root of the flame, 1 at the crown.
+in float fs_Pulse;         // [0, 1] phase of the explosion cycle.
+in vec4 fs_Pos;            // Displaced world-space position of this fragment.
+in vec3 fs_LocalPos;       // The same point in the comet's own frame, tail along +Y.
+in vec3 fs_ShapeNor;       // Normal of the smooth shape under the displacement.
+
+out vec4 out_Col; // This is the final output color that you will see on your
+                  // screen for the pixel that is currently being processed.
+
+// ---------------------------------------------------------------------------
+// Comet palette. On the portfolio the flame is a comet, so where the fireball
+// ran from a charred crown to a white-hot root, this runs from the end of the
+// tail to the nucleus; fs_Disp still picks the stop, so crests read bright and
+// crevices dim. It is drawn additively, so black here is not dark but clear:
+// the tail thins away into the sky instead of ending in a hard edge.
+// ---------------------------------------------------------------------------
+// Brightest at the nucleus and dimming out along the tail. The coma round the
+// head carries the faint green of a real comet's gas, and the tail the blue of
+// its ion tail. Stop placement is the fireball's: the pale end owns a wide
+// slice at the head, the dark end a narrow one at the tip.
+const vec3 VOID    = vec3(0.00, 0.00, 0.00); // the tip, gone into the sky
+const vec3 WISP    = vec3(0.03, 0.06, 0.22); // the tail's last faint reach
+const vec3 DEEP    = vec3(0.08, 0.20, 0.62); // deep blue of the far tail
+const vec3 ION     = vec3(0.20, 0.52, 1.00); // the body of the tail
+const vec3 CYAN    = vec3(0.45, 0.85, 1.00);
+const vec3 COMA    = vec3(0.72, 1.00, 0.90); // the green-tinged glow round the head
+const vec3 NUCLEUS = vec3(1.00, 1.00, 1.00); // white at the head
+const vec3 HALO    = vec3(0.40, 0.90, 0.85); // tint of the thin outer edge of the glow
+
+// ---------------------------------------------------------------------------
+// Toolbox functions (see the Toolbox Functions slides). GLSL has no include
+// mechanism, so the ones shared with the vertex shader are repeated here.
+// ---------------------------------------------------------------------------
+
+// 1) Perlin's bias: pushes t toward 0 or 1 without leaving the [0,1] range.
+float bias(float b, float t)
+{
+    return pow(t, log(b) / log(0.5));
+}
+
+// 2) Perlin's gain: reshapes contrast around 0.5. Above 0.5 it pushes values
+//    away from the middle, sharpening them; below 0.5 it pulls them toward it.
+//    0.5 is the identity.
+float gain(float g, float t)
+{
+    return (t < 0.5) ? bias(1.0 - g, 2.0 * t) * 0.5
+                     : 1.0 - bias(1.0 - g, 2.0 - 2.0 * t) * 0.5;
+}
+
+// 3) Smootherstep (Perlin's quintic ease): C2-continuous ease-in/ease-out. Used
+//    to blend between palette stops so no band edge is visible.
+float smootherstep(float a, float b, float t)
+{
+    t = clamp((t - a) / (b - a), 0.0, 1.0);
+    return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
+}
+
+// 4) Cubic pulse: a smooth bump of width w centered on c, zero everywhere else.
+//    Targets a narrow slice of the gradient without touching the rest of it.
+float cubicPulse(float c, float w, float x)
+{
+    x = abs(x - c);
+    if (x > w) {
+        return 0.0;
+    }
+    x /= w;
+    return 1.0 - x * x * (3.0 - 2.0 * x);
+}
+
+// ---------------------------------------------------------------------------
+// Per-pixel noise. The vertex shader has its own copy; GLSL has no include
+// mechanism, and this has to be evaluated per fragment rather than interpolated
+// from the vertices, or the color boundaries could only ever be straight lines
+// between one vertex and the next.
+// ---------------------------------------------------------------------------
+
+// Both fixed rather than slider-driven. The octave count keeps the per-pixel
+// cost constant, and the scale is in object units rather than a multiple of
+// u_FbmScale, so pushing the geometry's detail up does not shatter the color
+// into speckle - the two are separate art-direction decisions.
+const int   COLOR_OCTAVES = 3;
+const float COLOR_SCALE   = 1.5;
+
+float hash31(vec3 p)
+{
+    p = fract(p * vec3(0.1031, 0.1030, 0.0973));
+    p += dot(p, p.yxz + 33.33);
+    return fract((p.x + p.y) * p.z);
+}
+
+float valueNoise(vec3 p)
+{
+    vec3 i = floor(p);
+    vec3 f = fract(p);
+    vec3 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
+
+    float n000 = hash31(i + vec3(0.0, 0.0, 0.0));
+    float n100 = hash31(i + vec3(1.0, 0.0, 0.0));
+    float n010 = hash31(i + vec3(0.0, 1.0, 0.0));
+    float n110 = hash31(i + vec3(1.0, 1.0, 0.0));
+    float n001 = hash31(i + vec3(0.0, 0.0, 1.0));
+    float n101 = hash31(i + vec3(1.0, 0.0, 1.0));
+    float n011 = hash31(i + vec3(0.0, 1.0, 1.0));
+    float n111 = hash31(i + vec3(1.0, 1.0, 1.0));
+
+    return mix(mix(mix(n000, n100, u.x), mix(n010, n110, u.x), u.y),
+               mix(mix(n001, n101, u.x), mix(n011, n111, u.x), u.y),
+               u.z);
+}
+
+float fbm(vec3 p)
+{
+    float sum = 0.0, amp = 0.5, freq = 1.0, norm = 0.0;
+    for (int i = 0; i < COLOR_OCTAVES; ++i)
+    {
+        sum  += amp * valueNoise(p * freq + float(i) * 17.3);
+        norm += amp;
+        amp  *= 0.5;
+        freq *= 2.0;
+    }
+    return sum / norm;
+}
+
+// Quantize x into \`bands\` steps, crossing between them over a \`blend\` fraction
+// of each step instead of snapping. blend near 0 gives hard cel edges, blend of
+// 1 gives back a continuous ramp. Monotone and continuous at every boundary.
+float posterize(float x, float bands, float blend)
+{
+    if (bands < 2.0) {
+        return x;
+    }
+    float scaled = x * bands;
+    float cell   = floor(scaled);
+    float f      = fract(scaled);
+    float w      = clamp(blend, 0.002, 1.0) * 0.5;
+    return (cell + smootherstep(0.5 - w, 0.5 + w, f)) / bands;
+}
+
+// Walk up the palette, easing between each pair of stops. Layering the mixes
+// this way keeps the ramp continuous while letting each band own its own slice.
+vec3 cometRamp(float t)
+{
+    t = clamp(t, 0.0, 1.0);
+
+    vec3 c = VOID;
+    c = mix(c, WISP,    smootherstep(0.00, 0.13, t));
+    c = mix(c, DEEP,    smootherstep(0.09, 0.27, t));
+    c = mix(c, ION,     smootherstep(0.22, 0.44, t));
+    c = mix(c, CYAN,    smootherstep(0.40, 0.60, t));
+    c = mix(c, COMA,    smootherstep(0.56, 0.74, t));
+    c = mix(c, NUCLEUS, smootherstep(0.72, 0.88, t));
+    return c;
+}
+
+void main()
+{
+    vec3 nor  = normalize(vec3(fs_Nor));
+    vec3 lgt  = normalize(vec3(fs_LightVec));
+    vec3 view = normalize(u_CameraPos - vec3(fs_Pos));
+
+    // Flowing noise, sampled per pixel in the comet's own frame and marched
+    // downward through the field so it streams up the flame, out along the tail
+    // whichever way the comet is facing.
+    vec3  flowPos = fs_LocalPos * COLOR_SCALE
+                  + vec3(0.0, -u_RoilSpeed * u_Time, 0.0);
+    float flow    = fbm(flowPos);
+
+    // The dominant term is position along the flame: brightest at the root,
+    // which is the comet's head, and fading on the way up until the crown, the
+    // end of its tail, is gone. Gain above 0.5 drives the two ends apart, which
+    // widens the white nucleus and lets the tail's tip fade out sooner.
+    float heat = gain(0.68, 1.0 - fs_Height);
+
+    // Warp that gradient with the flowing noise. Displacing the coordinate
+    // rather than the color is what makes whole tongues of one band push up into
+    // the next, the way the boundaries in real fire wander and reconnect.
+    heat += u_Flow * (flow - 0.5) * 2.0;
+
+    // Stay correlated with the vertex shader's displacement: a tongue that has
+    // pushed further up has travelled further from the fuel, so it reads cooler
+    // than the body it came from.
+    heat -= 0.24 * (fs_Disp - 0.5);
+
+    // Fold in the fine FBM layer on its own, which mottles the flame at a finer
+    // scale than the low-frequency sway reaches.
+    heat *= mix(0.84, 1.12, fs_Fbm);
+
+    // The surge cycle flashes the whole flame hotter as it swells.
+    heat += 0.16 * fs_Pulse;
+
+    // Finally the heat slider biases the whole ramp hotter or cooler.
+    heat = bias(clamp(u_Heat, 0.05, 0.95), clamp(heat, 0.0, 1.0));
+
+    // Quantize into bands for the painted look of stylized fire. The warp above
+    // has already bent the boundaries into organic shapes, so this only decides
+    // how hard the steps between them read.
+    heat = posterize(heat, u_Bands, u_BandBlend);
+
+    vec3 color = cometRamp(heat);
+
+    // Fire is emissive, so the Lambert term barely registers - just enough to
+    // keep the form readable. It never drives the unlit side toward black.
+    float diffuseTerm = max(dot(nor, lgt), 0.0);
+    color *= mix(0.92, 1.10, diffuseTerm);
+
+    // Dust: a narrow slice of the noise, showing only out along the tail, where
+    // a few flecks catch the light.
+    float dust = cubicPulse(0.86, 0.06, fs_Fbm) * smootherstep(0.55, 1.0, fs_Height);
+    color += CYAN * dust * 0.8;
+
+    // A comet is a glowing cloud rather than a solid, so in place of the
+    // fireball's rim glow it is brightest where the line of sight passes square
+    // through it and thins to nothing at the silhouette. abs() because both
+    // sides of the cloud are drawn, and both glow; together they only saturate
+    // to white right at the nucleus. Each surge of the pulse swells the glow
+    // out toward the edge. How much cloud the eye looks through depends on its
+    // overall shape, not its surface ripples, so this takes the smooth normal:
+    // the displaced one would break the glow up into speckle at this size.
+    float facing = abs(dot(normalize(fs_ShapeNor), view));
+    float glow   = 0.75 * pow(facing, mix(1.6, 1.1, fs_Pulse));
+
+    // Where the glow thins out it also cools from white to the green-blue of
+    // the coma, so the head is a white core inside a coloured halo.
+    color *= mix(HALO, vec3(1.0), facing);
+
+    // Blended additively (see main.ts), so this adds light to the sky behind
+    // the comet rather than painting over it.
+    out_Col = vec4(color * glow * u_Color.rgb, 1.0);
+}
+`,j=`#version 300 es
 
 // The background is drawn as a single full-screen quad. The Square's vertices
 // are already in normalized device coordinates, so they go straight to
@@ -18,7 +661,7 @@ void main()
     // pins this quad to the screen while the camera orbits the flame.
     gl_Position = vs_Pos;
 }
-`,ue=`#version 300 es
+`,M=`#version 300 es
 
 // Procedural background: an Earth-sized sphere filling the lower part of the
 // frame, its atmosphere fading up into starfield. Nothing here is textured or
@@ -215,4 +858,4 @@ void main()
 
     out_Col = vec4(color, 1.0);
 }
-`,de=1.5,fe={tesselations:5,displacement:.18,lobeScale:1.2,detail:.37,detailScale:6,octaves:5,roilSpeed:1.1,pulsePeriod:4.7,pulseStrength:.59,heat:.5,flow:.42,bandBlend:.79,flameHeight:1.5,taper:.12,bands:12,horizon:-.3,atmosphere:.028};function pe(){let e=document.getElementById(`hero-canvas`);if(!e)return;let t=e.getContext(`webgl2`);if(!t)return;f(t);let n=new m(c(0,0,0));n.create();let r=new h(e);r.setClearColor(.004,.006,.014,1);let i=new ce([new $(t.VERTEX_SHADER,le),new $(t.FRAGMENT_SHADER,ue)]);function a(){let t=Math.min(window.devicePixelRatio||1,de),n=Math.max(1,Math.round(e.clientWidth*t)),i=Math.max(1,Math.round(e.clientHeight*t));(e.width!==n||e.height!==i)&&r.setSize(n,i)}let o=performance.now(),s=0;function l(){a();let c=(performance.now()-o)*.001;t.viewport(0,0,e.width,e.height),r.clear(),t.disable(t.DEPTH_TEST),i.setTime(c),i.setDimensions(e.width,e.height),i.setBackgroundParams(fe),i.draw(n),s=requestAnimationFrame(l)}new IntersectionObserver(e=>{let t=e[e.length-1].isIntersecting;t&&!s?s=requestAnimationFrame(l):!t&&s&&(cancelAnimationFrame(s),s=0)}).observe(e)}pe();
+`,N=1.5,P=16,F=6.5,I=.75,L=290,R=.3,z=.5,B=c(0,0,100),V={tesselations:5,displacement:.18,lobeScale:1.2,detail:.37,detailScale:6,octaves:5,roilSpeed:1.1,pulsePeriod:4.7,pulseStrength:.59,heat:.5,flow:.42,bandBlend:.79,flameHeight:1.5,taper:.12,bands:0,horizon:-.3,atmosphere:.028};function H(e){let t=new O([new D(e.VERTEX_SHADER,k),new D(e.FRAGMENT_SHADER,A)]),n=new _(c(0,0,0),1,V.tesselations);return n.create(),{lambert:t,icosphere:n}}function U(){let e=document.getElementById(`hero-canvas`);if(!e)return;let n=e.getContext(`webgl2`);if(!n)return;h(n);let r=new v(c(0,0,0));r.create();let s=new y(e);s.setClearColor(.004,.006,.014,1);let l=new O([new D(n.VERTEX_SHADER,j),new D(n.FRAGMENT_SHADER,M)]),u=H(n),d=new T,f={...V},p=t(),m=t(),g=0,_=0,b=!1,x=-1;window.addEventListener(`pointermove`,e=>{e.pointerType===`mouse`&&(g=e.clientX,_=e.clientY,b=!0)},{passive:!0});function S(){let t=Math.min(window.devicePixelRatio||1,N),n=Math.max(1,Math.round(e.clientWidth*t)),r=Math.max(1,Math.round(e.clientHeight*t));(e.width!==n||e.height!==r)&&s.setSize(n,r)}let C=performance.now(),w=0,E=0;function k(){S();let t=(performance.now()-C)*.001,c=Math.min(t-w,.1);w=t,n.viewport(0,0,e.width,e.height),s.clear(),n.disable(n.DEPTH_TEST),l.setTime(t),l.setDimensions(e.width,e.height),l.setBackgroundParams(V),l.draw(r);let h=e.getBoundingClientRect();if(u&&b&&h.width>=1&&h.height>=1){let e=g-h.left,r=h.bottom-_;x<0&&(d.reset(e,r),x=t),d.update(e,r,c,t);let l=1-Math.exp(-d.speed/L);f.flameHeight=V.flameHeight+(F-V.flameHeight)*l,f.taper=V.taper+(I-V.taper)*l;let v=Math.min(1,(t-x)/z),y=P*v*v*(3-2*v);a(p,[2*d.x/h.width-1,2*d.y/h.height-1,0]),i(p,p,[2*y/h.width,2*y/h.height,-.1]),o(m,Math.atan2(d.vx,-d.vy));let b=Math.max(-.3,Math.min(R,d.curvature*P));n.enable(n.BLEND),n.blendFunc(n.ONE,n.ONE),u.lambert.setTime(t),u.lambert.setFireballParams(f),u.lambert.setCurvature(b),s.render(p,m,B,u.lambert,[u.icosphere]),n.disable(n.BLEND)}E=requestAnimationFrame(k)}new IntersectionObserver(e=>{let t=e[e.length-1].isIntersecting;t&&!E?E=requestAnimationFrame(k):!t&&E&&(cancelAnimationFrame(E),E=0)}).observe(e)}U();

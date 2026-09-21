@@ -9,12 +9,12 @@
       "compress:css": "sass sass/main.scss css/style.css --style=compressed --no-source-map",
       "build:fireball": "tsc --noEmit -p fireball && vite build --config fireball/vite.config.mts",
       "watch:fireball": "vite build --watch --config fireball/vite.config.mts",
-      "build": "npm run compress:css && npm run prefix:css && npm run build:fireball"
+      "stamp": "node scripts/stamp-assets.mjs",
+      "build": "npm run compress:css && npm run prefix:css && npm run build:fireball && npm run stamp"
     },
     "author": "",
     "license": "GPL-3.0",
     "dependencies": {
-      "3d-view-controls": "^2.2.2",
       "gl-matrix": "^3.4.3"
     },
     "devDependencies": {
