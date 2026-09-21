@@ -22,7 +22,8 @@ uniform float u_CloudZoom;   // Magnification of the cloud layer. It is nearer t
 uniform float u_Spin;        // How far the planet has turned, in radians.
 uniform float u_CloudDrift;  // How far the clouds have drifted through their noise.
 uniform float u_Fog;         // 0 to 1: the white-out of dropping through the cloud deck.
-uniform float u_Fade;        // 0 to 1: the blend into the page's own background colour.
+uniform float u_Inside;      // 0 to 1: the blend into the clouds the content page sits in.
+uniform float u_Scroll;      // How far the page has scrolled, in screen heights.
 
 in vec2 fs_Pos;
 
@@ -51,7 +52,6 @@ const vec3 LAND          = vec3(0.115, 0.120, 0.105);
 const vec3 CLOUD         = vec3(0.920, 0.940, 0.970);
 const vec3 SKY           = vec3(0.350, 0.620, 1.000); // atmospheric scattering tint
 const vec3 FOG           = vec3(0.955, 0.965, 0.980); // inside the cloud deck
-const vec3 PAGE          = vec3(250.0 / 255.0);       // the content page's background, rgb(250, 250, 250)
 
 // The stars and the sun are far beyond the planet, so while the camera pans
 // they slide by at only this fraction of its speed.
@@ -157,13 +157,10 @@ float starField(vec2 p)
     return mag * twinkle * smoothstep(0.07, 0.0, length(f - pos));
 }
 
-void main()
+// The landing: space, the planet, and the fall into its clouds. `screen` is
+// the aspect-corrected screen position.
+vec3 landing(vec2 screen)
 {
-    // Aspect-correct screen coordinates: y stays in [-1, 1] and x widens with
-    // the canvas, so the planet stays circular at any window shape.
-    vec2 screen = fs_Pos;
-    screen.x *= u_Dimensions.x / max(1.0, u_Dimensions.y);
-
     // The scene is tilted so the limb runs diagonally across the frame, which
     // puts the planet's centre below and a little to the right of the screen.
     // The camera pans toward that point, then zooms in about the middle.
@@ -271,9 +268,75 @@ void main()
     float fog   = clamp(u_Fog * 2.2 - 1.2 + 0.5 * cloudCover + 0.6 * wisps, 0.0, 1.0);
     color = mix(color, FOG, fog);
 
-    // Then settle on the page's own background, exactly, so the content
-    // section below carries on from the canvas with no visible seam.
-    color = mix(color, PAGE, u_Fade);
+    return color;
+}
+
+// ---------------------------------------------------------------------------
+// Inside the clouds: where the landing comes out, and the backdrop to the
+// content page from then on. Banks of cloud at three depths drift with the
+// wind and slide past as the page scrolls, the nearer ones faster, over a pale
+// sky. It stays bright throughout, since the page's text sits on top of it.
+// ---------------------------------------------------------------------------
+
+const vec3 SKY_HIGH    = vec3(0.74, 0.85, 0.97); // the sky above, seen through the gaps
+const vec3 SKY_LOW     = vec3(0.90, 0.94, 0.99);
+const vec3 CLOUD_SHADE = vec3(0.83, 0.87, 0.94); // the shadowed undersides of the banks
+const vec3 CLOUD_LIT   = vec3(1.00, 1.00, 1.00);
+
+const float WIND = 0.03;  // screen heights a second the nearest bank drifts
+
+// Density of one bank at `screen`. `depth` runs from 0 for the farthest to 1
+// for the nearest: nearer banks are larger, drift faster, and scroll past
+// faster, though even the nearest at only half the page's own speed.
+float cloudBank(vec2 screen, float depth, float seed)
+{
+    vec2 drift = vec2(u_Time * WIND, u_Scroll * 2.0) * mix(0.2, 1.0, depth) * 0.5;
+    vec2 p     = (screen - drift) * mix(1.8, 0.8, depth);
+    return fbm(vec3(p, seed + u_Time * 0.015), 4.0);
+}
+
+vec3 insideClouds(vec2 screen)
+{
+    vec3 color = mix(SKY_LOW, SKY_HIGH, smoothstep(-1.0, 1.0, screen.y));
+
+    // Far to near, each bank laid over the ones behind it.
+    for (int i = 0; i < 3; ++i)
+    {
+        float depth   = float(i) * 0.5;
+        float seed    = float(i) * 13.1;
+        float density = cloudBank(screen, depth, seed);
+        float cover   = smoothstep(0.44, 0.60, density);
+
+        // Lit from above: where the bank thins out going up, its top catches
+        // the sun, and where it thickens, that is its shadowed underside.
+        float above = cloudBank(screen + vec2(0.0, 0.06), depth, seed);
+        float lit   = clamp(0.5 + (density - above) * 4.0, 0.0, 1.0);
+        vec3  bank  = mix(CLOUD_SHADE, CLOUD_LIT, lit);
+
+        // The farther banks are paler and thinner, fading into the sky.
+        bank  = mix(bank, color, (1.0 - depth) * 0.35);
+        color = mix(color, bank, cover * mix(0.55, 0.9, depth));
+    }
+
+    return color;
+}
+
+void main()
+{
+    // Aspect-correct screen coordinates: y stays in [-1, 1] and x widens with
+    // the canvas, so the planet stays circular at any window shape.
+    vec2 screen = fs_Pos;
+    screen.x *= u_Dimensions.x / max(1.0, u_Dimensions.y);
+
+    // Each scene is only worked out while it can be seen, so the content page
+    // pays for its clouds alone and the landing for nothing extra.
+    vec3 color = FOG;
+    if (u_Inside < 1.0) {
+        color = landing(screen);
+    }
+    if (u_Inside > 0.0) {
+        color = mix(color, insideClouds(screen), u_Inside);
+    }
 
     out_Col = vec4(color, 1.0);
 }

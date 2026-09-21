@@ -7,7 +7,7 @@
     <title>Tony Yiding Tian's Portfolio</title>
     <meta name="description" content="Portfolio of Tony Yiding Tian - Computer Graphics & Game Technology Engineer specializing in GPU programming, real-time rendering, and high-performance computing at University of Pennsylvania" />
 
-    <link rel="stylesheet" href="css/style.css?v=b817086d" />
+    <link rel="stylesheet" href="css/style.css?v=9c648c0b" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@
               </a>
             </li>
             <li class="header__link-wrapper">
-              <a href="./index.html#contact" class="header__link"> Contact </a>
+              <a href="mailto:tonytg@engineering.upenn.edu" class="header__link"> Contact </a>
             </li>
             <li class="header__link-wrapper">
                 <a href="https://raw.githubusercontent.com/tonytgrt/TonyTianResume/master/resume_cg.pdf" class="header__link" target="_blank"> Resume </a>
@@ -79,7 +79,7 @@
             </li>
 
             <li class="header__sm-menu-link">
-              <a href="./index.html#contact"> Contact </a>
+              <a href="mailto:tonytg@engineering.upenn.edu"> Contact </a>
             </li>
 
             <li class="header__sm-menu-link">
@@ -89,10 +89,10 @@
         </div>
       </div>
     </header>
+    <div class="backdrop" aria-hidden="true">
+      <canvas id="backdrop-canvas" class="backdrop__canvas"></canvas>
+    </div>
     <section class="home-hero">
-      <div class="home-hero__stage">
-        <canvas id="hero-canvas" class="home-hero__canvas" aria-hidden="true"></canvas>
-      </div>
       <div class="home-hero__intro">
         <div class="home-hero__content">
           <h1 class="heading-primary">Tony Tian</h1>
@@ -163,7 +163,7 @@
                 Feel free to <strong>contact</strong> me for opportunities or collaboration!
               </p>
             </div>
-            <a href="./#contact" class="btn btn--med btn--theme dynamicBgClr"
+            <a href="mailto:tonytg@engineering.upenn.edu" class="btn btn--med btn--theme dynamicBgClr"
               >Contact</a
             >
           </div>
@@ -354,57 +354,6 @@
           </div> -->
       </div>
     </section>
-    <section id="contact" class="contact sec-pad dynamicBg">
-      <div class="main-container">
-        <h2 class="heading heading-sec heading-sec__mb-med">
-          <span class="heading-sec__main heading-sec__main--lt">Contact</span>
-          <span class="heading-sec__sub heading-sec__sub--lt">
-            Feel free to reach out for internship opportunities, collaboration, or just to say hi!
-          </span>
-        </h2>
-        <div class="contact__form-container">
-          <form action="#" class="contact__form">
-            <div class="contact__form-field">
-              <label class="contact__form-label" for="name">Name</label>
-              <input
-                required
-                placeholder="Enter Your Name"
-                type="text"
-                class="contact__form-input"
-                name="name"
-                id="name"
-              />
-            </div>
-            <div class="contact__form-field">
-              <label class="contact__form-label" for="email">Email</label>
-              <input
-                required
-                placeholder="Enter Your Email"
-                type="text"
-                class="contact__form-input"
-                name="email"
-                id="email"
-              />
-            </div>
-            <div class="contact__form-field">
-              <label class="contact__form-label" for="message">Message</label>
-              <textarea
-                required
-                cols="30"
-                rows="10"
-                class="contact__form-input"
-                placeholder="Enter Your Message"
-                name="message"
-                id="message"
-              ></textarea>
-            </div>
-            <button type="submit" class="btn btn--theme contact__btn">
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
     <footer class="main-footer">
       <div class="main-container">
         <div class="main-footer__upper">
@@ -447,7 +396,7 @@
       </div>
     </footer>
 
-    <script src="./index.js?v=8fcc5610"></script>
-    <script type="module" src="./js/fireball.js?v=c5cdf4f7"></script>
+    <script src="./index.js?v=341f2def"></script>
+    <script type="module" src="./js/fireball.js?v=795d8c7b"></script>
   </body>
 </html>

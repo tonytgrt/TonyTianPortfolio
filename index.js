@@ -39,17 +39,17 @@ headerLogoConatiner.addEventListener('click', () => {
 
 
 // ---
-// The home page's hero is a tall track the space scene stays pinned in while
-// the landing plays. The header and the social links are kept out of the scene
-// and shown once the track ends and the content takes over.
+// The home page's hero is a tall track of scroll the landing plays out over,
+// in front of the fixed backdrop. The header and the social links are kept out
+// of the scene and shown once the track ends and the content takes over.
 const hero = document.querySelector('.home-hero')
+const backdrop = document.querySelector('.backdrop')
 
-if (hero) {
-  const heroStage = hero.querySelector('.home-hero__stage')
+if (hero && backdrop) {
   const updateLanded = () => {
     const landed =
       hero.getBoundingClientRect().bottom <=
-      heroStage.getBoundingClientRect().height + 1
+      backdrop.getBoundingClientRect().height + 1
     document.body.classList.toggle('landed', landed)
   }
   window.addEventListener('scroll', updateLanded, { passive: true })

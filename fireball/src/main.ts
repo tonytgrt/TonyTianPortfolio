@@ -24,6 +24,11 @@ const SHOW_FIREBALL = true;
 // a backdrop that is mostly soft noise, so the pixel ratio is capped.
 const MAX_PIXEL_RATIO = 1.5;
 
+// Once the landing is over, the clouds behind the content are drawn at less
+// than one pixel per CSS pixel. They are soft through and through, so nothing
+// is lost, and they are on screen for as long as the visitor reads.
+const CLOUDS_PIXEL_RATIO = 0.75;
+
 // How fast the planet turns and its clouds drift, as seen from where the
 // landing starts. Both are divided by the zoom as the camera falls, so the
 // ground doesn't race past once it is magnified.
@@ -101,12 +106,12 @@ function createFireball(gl: WebGL2RenderingContext): Fireball {
 }
 
 function main() {
-  const canvas = <HTMLCanvasElement> document.getElementById('hero-canvas');
+  const canvas = <HTMLCanvasElement> document.getElementById('backdrop-canvas');
   if (!canvas) {
     return;
   }
   const gl = canvas.getContext('webgl2');
-  // Without WebGL 2 the hero just keeps its plain CSS background.
+  // Without WebGL 2 the page just keeps its plain CSS backgrounds.
   if (!gl) {
     return;
   }
@@ -148,10 +153,9 @@ function main() {
     }
   }, {passive: true});
 
-  // Match the drawing buffer to the canvas's CSS size. Checked every frame, so
-  // a resize or a change of pixel ratio comes out right.
-  function resize() {
-    const ratio = Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO);
+  // Match the drawing buffer to the canvas's CSS size at `ratio` pixels per CSS
+  // pixel. Checked every frame, so a resize or a change of ratio comes out right.
+  function resize(ratio: number) {
     const width = Math.max(1, Math.round(canvas.clientWidth * ratio));
     const height = Math.max(1, Math.round(canvas.clientHeight * ratio));
     if (canvas.width === width && canvas.height === height) {
@@ -160,38 +164,38 @@ function main() {
     renderer.setSize(width, height);
   }
 
-  // The hero is a tall track the canvas stays pinned in while the visitor
-  // scrolls through it, and how far through it they are drives the landing.
-  const hero = canvas.closest<HTMLElement>('.home-hero') || canvas;
+  // The hero is a tall track of scroll the landing plays out over; the canvas
+  // itself is fixed behind the whole page.
+  const hero = document.querySelector<HTMLElement>('.home-hero');
   const view: BackgroundView = {
-    pan: 0, zoom: 1, cloudZoom: 1, spin: 0, cloudDrift: 0, fog: 0, fade: 0,
+    pan: 0, zoom: 1, cloudZoom: 1, spin: 0, cloudDrift: 0, fog: 0, inside: 0, scroll: 0,
   };
   let progress = -1;
 
   const startTime = performance.now();
   let lastTime = 0;
-  let frame = 0;
+  let drawn = false;
 
   // This function will be called every frame
   function tick() {
-    resize();
     // Seconds since the program started, passed to the shaders so their
     // displacement and color animate over time.
     const time = (performance.now() - startTime) * 0.001;
-    // Capped, so a frame after the loop has been paused doesn't fling the comet.
+    // Capped, so a frame after a hidden tab comes back doesn't fling the comet.
     const dt = Math.min(time - lastTime, 0.1);
     lastTime = time;
-    gl.viewport(0, 0, canvas.width, canvas.height);
-    renderer.clear();
 
-    // 0 at the top of the page, 1 where the content takes over. The canvas is
-    // pinned the whole way, so the distance scrolled through is the hero's
-    // height less the canvas's. The first frame starts where the page already
-    // is, so a reload halfway down doesn't replay the landing.
-    const heroRect = hero.getBoundingClientRect();
+    // 0 at the top of the page, 1 where the content takes over: the distance
+    // scrolled through is the hero's height less the screen's. The first frame
+    // starts where the page already is, so a reload halfway down doesn't
+    // replay the landing. Without a hero there is no landing, only the clouds.
     const rect = canvas.getBoundingClientRect();
-    const travel = heroRect.height - rect.height;
-    const target = travel > 0 ? Math.min(1, Math.max(0, -heroRect.top / travel)) : 0;
+    let target = 1;
+    if (hero) {
+      const heroRect = hero.getBoundingClientRect();
+      const travel = heroRect.height - rect.height;
+      target = travel > 0 ? Math.min(1, Math.max(0, -heroRect.top / travel)) : 0;
+    }
     progress = progress < 0
       ? target
       : progress + (target - progress) * (1 - Math.exp(-dt * SCROLL_SMOOTHING));
@@ -201,9 +205,16 @@ function main() {
     view.zoom = descent.zoom;
     view.cloudZoom = descent.cloudZoom;
     view.fog = descent.fog;
-    view.fade = descent.fade;
+    view.inside = descent.inside;
+    view.scroll = window.scrollY / Math.max(1, rect.height);
     view.spin += dt * SPIN_RATE / descent.zoom;
     view.cloudDrift += dt * CLOUD_DRIFT_RATE / descent.cloudZoom;
+
+    resize(descent.inside >= 1
+      ? CLOUDS_PIXEL_RATIO
+      : Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO));
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    renderer.clear();
 
     // The background is a screen-space quad drawn before anything else. With
     // the depth test off it neither tests nor writes depth, so it can never
@@ -258,23 +269,21 @@ function main() {
       gl.disable(gl.BLEND);
     }
 
-    // Tell the browser to call `tick` again whenever it renders a new frame
-    frame = requestAnimationFrame(tick);
+    // With a frame drawn, the canvas can take over as the page's background:
+    // the stylesheet clears the sections' own backgrounds under this class.
+    // Not before, or they would clear onto a blank canvas for a frame.
+    if (!drawn) {
+      document.documentElement.classList.add('webgl');
+      drawn = true;
+    }
+
+    // Tell the browser to call `tick` again whenever it renders a new frame.
+    // The canvas is always on screen now, so this runs for as long as the page
+    // is open, and the browser pauses it on its own in a background tab.
+    requestAnimationFrame(tick);
   }
 
-  // Only animate while the hero is on screen. Once the visitor scrolls down to
-  // the rest of the page there is nothing to see, so the loop stops entirely.
-  // Time keeps running from `startTime`, so the scene picks up where it would be.
-  const observer = new IntersectionObserver((entries) => {
-    const visible = entries[entries.length - 1].isIntersecting;
-    if (visible && !frame) {
-      frame = requestAnimationFrame(tick);
-    } else if (!visible && frame) {
-      cancelAnimationFrame(frame);
-      frame = 0;
-    }
-  });
-  observer.observe(canvas);
+  requestAnimationFrame(tick);
 }
 
 main();

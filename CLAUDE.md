@@ -55,13 +55,16 @@ project, TypeScript + GLSL): a procedural planet with a comet circling the mouse
 cursor. Vite builds it into `js/fireball.js` (`npm run build:fireball`, or
 `npm run watch:fireball` while working on it).
 
-The home page's hero is a tall scroll track with the canvas pinned in it.
-Scrolling through it plays a landing: the camera pans to the planet, falls
-through the clouds and whites out into the About section. The timeline is in
-`fireball/src/Descent.ts`, and the track's length (`$heroTravel`) and how far
-About overlaps its end (`$heroOverlap`) are in `sass/pages/_home.scss`. The
-header and the social links are hidden until the landing ends: `index.js` adds
-`landed` to the body.
+The canvas is fixed behind the whole home page (`.backdrop`). The hero is a
+tall scroll track in front of it; scrolling through it plays a landing: the
+camera pans to the planet, falls through the clouds and comes out inside them,
+and those clouds stay as the background to all the content below. The timeline
+is in `fireball/src/Descent.ts`, and the track's length (`$heroTravel`) and how
+far About overlaps its end (`$heroOverlap`) are in `sass/pages/_home.scss`.
+Sections over the canvas must stay transparent: they clear their backgrounds
+under the `webgl` class, which `main.ts` sets once the first frame is drawn, so
+without WebGL they keep plain ones. The header and the social links are hidden
+until the landing ends: `index.js` adds `landed` to the body.
 
 ### Cache busting
 The site sits behind Cloudflare, which caches CSS, JS and images for hours.
@@ -87,11 +90,10 @@ without one and the build fills it in.
 - SVG: `assets/svg/` (hamburger menu icons)
 - Project mockups should be optimized and cropped to minimize file size
 
-### Contact Form
-The contact form in `index.html` has a placeholder `action="#"`. To enable form submission, integrate with:
-- Formspree.io (recommended in README)
-- Netlify Forms (if hosted on Netlify)
-- Or another form handling service
+### Contact
+There is no contact section or form. Every "Contact" link, in the header menus
+of all pages and the About section's button, is
+`mailto:tonytg@engineering.upenn.edu`.
 
 ## Deployment Notes
 

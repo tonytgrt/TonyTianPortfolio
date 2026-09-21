@@ -10,39 +10,23 @@ $heroOverlap: 50vh;
 
 .home-hero {
   color: #fff;
-  // The WebGL scene in __canvas is the real background. This is its deep-space
-  // colour, so there is no flash before the first frame, and it is what stays
-  // behind the text if the browser has no WebGL 2.
+  // The .backdrop canvas behind the page draws the real background once WebGL
+  // is running (the `webgl` class). Until then, and for good without WebGL 2,
+  // this is the scene's deep-space colour behind the white text.
   background: rgb(1, 2, 4);
 
-  // A tall track: the stage stays pinned to the screen while the visitor
-  // scrolls through it, and how far they have got drives the landing.
+  .webgl & {
+    background: transparent;
+  }
+
+  // A tall track of scroll for the landing to play out over, while the
+  // backdrop stays fixed to the screen.
   height: calc(100vh + #{$heroTravel});
   margin-bottom: -$heroOverlap;
   position: relative;
 
-  &__stage {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    z-index: 0;
-  }
-
-  // Drawn by js/fireball.js (source in fireball/). It ignores the mouse so it
-  // never gets in the way of the page.
-  &__canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    pointer-events: none;
-  }
-
   // The name and the scroll hint, over the first screen only. They scroll away
-  // as normal while the stage stays put, as the camera starts to pan.
+  // as normal while the backdrop stays put, as the camera starts to pan.
   &__intro {
     position: absolute;
     top: 0;
@@ -83,12 +67,16 @@ $heroOverlap: 50vh;
 }
 
 .about {
-  // Above the hero's pinned stage, which it slides up over. Its top starts
-  // clear and fades into its colour, which is also where the landing ends, so
-  // the white-out and the page meet without an edge.
+  // Above the end of the hero, which it slides up over. With WebGL the clouds
+  // behind the page show through it; without, its top fades from clear into
+  // its own colour, so it still meets the dark hero without an edge.
   position: relative;
   z-index: 1;
   background: linear-gradient(rgba(250, 250, 250, 0), rgb(250, 250, 250) $heroOverlap);
+
+  .webgl & {
+    background: transparent;
+  }
   &__content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -195,111 +183,6 @@ $heroOverlap: 50vh;
           }
         }
       }
-    }
-  }
-}
-
-.contact {
-  background: linear-gradient(
-      to right,
-      rgba($themeClrPrimary, 0.8),
-      rgba($themeClrPrimary, 0.8)
-    ),
-    url(../../assets/svg/common-bg.svg);
-  background-size: cover;
-  background-position: center;
-
-  &__form-container {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background: rgba(#fff, 2);
-    padding: 4rem;
-    margin-top: 6rem;
-    max-width: 80rem;
-    text-align: right;
-    width: 95%;
-    border-radius: $commonBorderRadius;
-
-    margin: 5rem auto 0 auto;
-    @include respond(phone) {
-      padding: 3rem;
-    }
-  }
-  &__form-field {
-    margin-bottom: 4rem;
-    @include respond(phone) {
-      margin-bottom: 3rem;
-    }
-  }
-  &__form-label {
-    color: #666;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    display: block;
-    text-align: left;
-  }
-  &__form-input {
-    color: #333;
-    padding: 2rem;
-    width: 100%;
-    border: 1px solid rgb(235, 235, 235);
-    font-size: 1.6rem;
-    letter-spacing: 0px;
-    background: rgba(rgb(240, 240, 240), 1);
-    border-radius: $commonBorderRadius;
-    font-weight: 600;
-    /* Code for Modern Browsers */
-    &::placeholder {
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-
-    /* Code for WebKit, Blink, Edge */
-    &::-webkit-input-placeholder {
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-
-    /* Code for Internet Explorer 10-11 */
-    &:-ms-input-placeholder {
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-
-    /* Code for Microsoft Edge */
-    &::-ms-input-placeholder {
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-
-    /* Code for Mozilla Firefox 4 to 18 */
-    &:-moz-placeholder {
-      opacity: 1;
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-
-    /* Code for Mozilla Firefox 19+ */
-    &::-moz-placeholder {
-      opacity: 1;
-      color: #999;
-      font-weight: 600;
-      font-size: 1.6rem;
-    }
-  }
-  &__btn {
-    width: 30%;
-
-    padding: 2rem 4rem;
-    font-size: 1.6rem;
-    @include respond(phone) {
-      width: 100%;
     }
   }
 }

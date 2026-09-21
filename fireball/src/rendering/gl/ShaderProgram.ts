@@ -18,7 +18,8 @@ export interface BackgroundView {
   spin: number;         // u_Spin
   cloudDrift: number;   // u_CloudDrift
   fog: number;          // u_Fog
-  fade: number;         // u_Fade
+  inside: number;       // u_Inside
+  scroll: number;       // u_Scroll
 }
 
 // The shape parameters the fireball's vertex shader reads. `params` in main.ts
@@ -91,7 +92,8 @@ class ShaderProgram {
   unifSpin: WebGLUniformLocation;
   unifCloudDrift: WebGLUniformLocation;
   unifFog: WebGLUniformLocation;
-  unifFade: WebGLUniformLocation;
+  unifInside: WebGLUniformLocation;
+  unifScroll: WebGLUniformLocation;
 
   constructor(shaders: Array<Shader>) {
     this.prog = gl.createProgram();
@@ -140,7 +142,8 @@ class ShaderProgram {
     this.unifSpin          = gl.getUniformLocation(this.prog, "u_Spin");
     this.unifCloudDrift    = gl.getUniformLocation(this.prog, "u_CloudDrift");
     this.unifFog           = gl.getUniformLocation(this.prog, "u_Fog");
-    this.unifFade          = gl.getUniformLocation(this.prog, "u_Fade");
+    this.unifInside        = gl.getUniformLocation(this.prog, "u_Inside");
+    this.unifScroll        = gl.getUniformLocation(this.prog, "u_Scroll");
   }
 
   use() {
@@ -289,8 +292,11 @@ class ShaderProgram {
     if (this.unifFog !== -1) {
       gl.uniform1f(this.unifFog, v.fog);
     }
-    if (this.unifFade !== -1) {
-      gl.uniform1f(this.unifFade, v.fade);
+    if (this.unifInside !== -1) {
+      gl.uniform1f(this.unifInside, v.inside);
+    }
+    if (this.unifScroll !== -1) {
+      gl.uniform1f(this.unifScroll, v.scroll);
     }
   }
 
