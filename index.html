@@ -7,7 +7,7 @@
     <title>Tony Yiding Tian's Portfolio</title>
     <meta name="description" content="Portfolio of Tony Yiding Tian - Computer Graphics & Game Technology Engineer specializing in GPU programming, real-time rendering, and high-performance computing at University of Pennsylvania" />
 
-    <link rel="stylesheet" href="css/style.css?v=2" />
+    <link rel="stylesheet" href="css/style.css?v=3" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -90,11 +90,12 @@
       </div>
     </header>
     <section class="home-hero">
+      <canvas id="hero-canvas" class="home-hero__canvas" aria-hidden="true"></canvas>
       <div class="home-hero__content">
-        <h1 class="heading-primary">Hi! I'm Tony Yiding Tian</h1>
+        <h1 class="heading-primary">Hi! I'm Tony</h1>
         <div class="home-hero__info">
           <p class="text-primary">
-            A Computer Graphics Engineer specializing in GPU programming, real-time rendering, and high-performance computing
+            Computer Graphics & Computer Engineering @ UPenn
           </p>
         </div>
         <div class="home-hero__cta">
@@ -139,7 +140,7 @@
             <h3 class="about__content-title">Get to know me!</h3>
             <div class="about__content-details">
               <p class="about__content-details-para">
-                I'm <strong>Tony Yiding Tian</strong>, a third year undergraduate 
+                I'm <strong>Tony</strong>, a third year undergraduate 
                 student at the <strong>University of Pennsylvania</strong>. I am pursuing a 
                 Bachelor's in <strong> Computer Engineering </strong>, and submatriculated into accelerated 
                 Master's in <strong>Computer Graphics and Game Technology</strong>, both degrees expected in May 2027. I specialize in 
@@ -147,7 +148,7 @@
                 <strong>high-performance computing</strong>.
               </p>
               <p class="about__content-details-para">
-                I'm actively seeking <strong>Summer 2026 internship opportunities</strong> in 
+                I'm actively seeking <strong>2027 new grad full-time positions</strong> in 
                 computer graphics, rendering engineering, and software engineering. My experience 
                 spans from developing <strong>CUDA path tracers</strong> with 
                 advanced optimization techniques achieving up to 160× performance improvements, 
@@ -303,7 +304,7 @@
               >
             </div>
           </div>
-          <div class="projects__row">
+          <!-- <div class="projects__row">
             <div class="projects__row-img-cont">
               <img
                 src="./assets/png/pennos.png"
@@ -345,8 +346,8 @@
                 target="_blank"
                 >Project Website</a
               >
-            </div>
-          </div>
+            </div> 
+          </div> -->
       </div>
     </section>
     <section id="contact" class="contact sec-pad dynamicBg">
@@ -443,5 +444,6 @@
     </footer>
 
     <script src="./index.js"></script>
+    <script type="module" src="./js/fireball.js?v=1"></script>
   </body>
 </html>
