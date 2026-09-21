@@ -36,3 +36,23 @@ const headerLogoConatiner = document.querySelector('.header__logo-container')
 headerLogoConatiner.addEventListener('click', () => {
   location.href = 'index.html'
 })
+
+
+// ---
+// The home page's hero is a tall track the space scene stays pinned in while
+// the landing plays. The header and the social links are kept out of the scene
+// and shown once the track ends and the content takes over.
+const hero = document.querySelector('.home-hero')
+
+if (hero) {
+  const heroStage = hero.querySelector('.home-hero__stage')
+  const updateLanded = () => {
+    const landed =
+      hero.getBoundingClientRect().bottom <=
+      heroStage.getBoundingClientRect().height + 1
+    document.body.classList.toggle('landed', landed)
+  }
+  window.addEventListener('scroll', updateLanded, { passive: true })
+  window.addEventListener('resize', updateLanded)
+  updateLanded()
+}

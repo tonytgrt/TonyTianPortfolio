@@ -1,0 +1,46 @@
+// The social links, pinned to the left edge of the screen. The icons are
+// white, so the bar carries the hero's deep-space colour to keep them visible
+// over the light content sections.
+.socials {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  z-index: 900;
+  transform: translateY(-50%);
+  background: rgba(1, 2, 4, 0.85);
+  border: 2px solid #eee;
+  transition: transform .4s, opacity .4s, visibility .4s;
+
+  @include respond(tab-port) {
+    display: none;
+  }
+
+  &__item {
+    width: 5rem;
+  }
+
+  &__link {
+    width: 100%;
+    display: block;
+    padding: 1.2rem;
+    border-bottom: 2px solid #eee;
+    transition: background .3s;
+
+    &:hover {
+      background: rgba(#fff, .1);
+    }
+  }
+
+  &__icon {
+    width: 100%;
+    display: block;
+  }
+}
+
+// On the home page the links stay out of the space scene and slide in once the
+// landing hands over to the content (index.js adds `landed` to the body).
+.has-hero:not(.landed) .socials {
+  transform: translate(-100%, -50%);
+  opacity: 0;
+  visibility: hidden;
+}

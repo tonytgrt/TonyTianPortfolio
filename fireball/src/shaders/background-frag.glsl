@@ -6,10 +6,23 @@
 // screen, shaded as a sphere and surfaced with noise.
 precision highp float;
 
-uniform float u_Time;        // Seconds since start, for cloud drift and star twinkle.
+uniform float u_Time;        // Seconds since start, for star twinkle.
 uniform vec2  u_Dimensions;  // Canvas size in pixels, used only for the aspect ratio.
 uniform float u_Horizon;     // Screen height at which the limb crosses the centre line.
 uniform float u_Atmosphere;  // Thickness of the atmospheric halo, as a fraction of the radius.
+
+// The scroll-driven landing, set from Descent.ts. At the top of the page they
+// leave the scene exactly as the standalone project drew it: no pan, both zooms
+// 1, no fog, no fade.
+uniform float u_Pan;         // 0 at rest, 1 once the camera looks straight at the planet's centre.
+uniform float u_Zoom;        // Magnification of the ground, about the middle of the screen.
+uniform float u_CloudZoom;   // Magnification of the cloud layer. It is nearer the camera, so it
+                             // grows faster than the ground: the parallax that makes the zoom
+                             // read as a fall rather than a picture being enlarged.
+uniform float u_Spin;        // How far the planet has turned, in radians.
+uniform float u_CloudDrift;  // How far the clouds have drifted through their noise.
+uniform float u_Fog;         // 0 to 1: the white-out of dropping through the cloud deck.
+uniform float u_Fade;        // 0 to 1: the blend into the page's own background colour.
 
 in vec2 fs_Pos;
 
@@ -37,6 +50,16 @@ const vec3 OCEAN_SHALLOW = vec3(0.034, 0.125, 0.305);
 const vec3 LAND          = vec3(0.115, 0.120, 0.105);
 const vec3 CLOUD         = vec3(0.920, 0.940, 0.970);
 const vec3 SKY           = vec3(0.350, 0.620, 1.000); // atmospheric scattering tint
+const vec3 FOG           = vec3(0.955, 0.965, 0.980); // inside the cloud deck
+const vec3 PAGE          = vec3(250.0 / 255.0);       // the content page's background, rgb(250, 250, 250)
+
+// The stars and the sun are far beyond the planet, so while the camera pans
+// they slide by at only this fraction of its speed.
+const float SKY_PARALLAX = 0.2;
+
+// Zooming in adds octaves of noise so the surface keeps its detail; this caps
+// how many, since by the deepest zoom the fog covers everything anyway.
+const int MAX_OCTAVES = 11;
 
 // ---------------------------------------------------------------------------
 // Noise. GLSL has no include mechanism, so this is the same value-noise
@@ -77,18 +100,39 @@ float valueNoise(vec3 p)
                u.z);
 }
 
-float fbm(vec3 p, int octaves)
+// The octave count is fractional: the last octave fades in by its fraction, so
+// detail grows smoothly with the zoom instead of popping in an octave at a time.
+float fbm(vec3 p, float octaves)
 {
     float sum = 0.0, amp = 0.5, freq = 1.0, norm = 0.0;
-    for (int i = 0; i < 6; ++i)
+    for (int i = 0; i < MAX_OCTAVES; ++i)
     {
-        if (i >= octaves) break;
-        sum  += amp * valueNoise(p * freq + float(i) * 17.3);
-        norm += amp;
+        float weight = clamp(octaves - float(i), 0.0, 1.0);
+        if (weight <= 0.0) break;
+        sum  += weight * amp * valueNoise(p * freq + float(i) * 17.3);
+        norm += weight * amp;
         amp  *= 0.5;
         freq *= 2.0;
     }
     return sum / norm;
+}
+
+vec2 rotate2(vec2 v, float a)
+{
+    float c = cos(a), s = sin(a);
+    return vec2(v.x * c - v.y * s, v.x * s + v.y * c);
+}
+
+// The point on the planet under a scene position, as a unit normal: the sphere
+// reconstructed from the disc coordinate, then turned about the pole by the
+// planet's spin. `toward` is measured from the planet's centre.
+vec3 surfacePoint(vec2 toward)
+{
+    vec2  uv = toward / EARTH_RADIUS;
+    float z  = sqrt(max(0.0, 1.0 - min(1.0, dot(uv, uv))));
+    vec3  n  = vec3(uv, z);
+    float ca = cos(u_Spin), sa = sin(u_Spin);
+    return vec3(n.x * ca + n.z * sa, n.y, -n.x * sa + n.z * ca);
 }
 
 // One star per grid cell at most, placed at a hashed position inside it. Most
@@ -117,25 +161,30 @@ void main()
 {
     // Aspect-correct screen coordinates: y stays in [-1, 1] and x widens with
     // the canvas, so the planet stays circular at any window shape.
-    vec2 p = fs_Pos;
-    p.x *= u_Dimensions.x / max(1.0, u_Dimensions.y);
+    vec2 screen = fs_Pos;
+    screen.x *= u_Dimensions.x / max(1.0, u_Dimensions.y);
 
-    // Tilt the scene so the limb runs diagonally across the frame.
-    float ct = cos(TILT), st = sin(TILT);
-    vec2  q  = vec2(p.x * ct - p.y * st, p.x * st + p.y * ct);
+    // The scene is tilted so the limb runs diagonally across the frame, which
+    // puts the planet's centre below and a little to the right of the screen.
+    // The camera pans toward that point, then zooms in about the middle.
+    vec2 center = vec2(0.0, u_Horizon - EARTH_RADIUS);
+    vec2 look   = rotate2(center, -TILT) * u_Pan;
+    vec2 p      = look + screen / u_Zoom;
+    vec2 q      = rotate2(p, TILT);
 
-    vec2  center = vec2(0.0, u_Horizon - EARTH_RADIUS);
     vec2  toward = q - center;
     float dist   = length(toward);
     float t      = dist / EARTH_RADIUS;   // exactly 1.0 on the limb
 
     // ---- space ------------------------------------------------------------
+    // Too far away to zoom, and panning past at a fraction of the speed.
+    vec2 sky   = screen + look * SKY_PARALLAX;
     vec3 color = SPACE;
-    color += vec3(1.0, 0.97, 0.93) * starField(q * 28.0);
+    color += vec3(1.0, 0.97, 0.93) * starField(rotate2(sky, TILT) * 28.0);
 
     // A distant sun just off the top-right corner. It is the same direction
     // that lights the planet, so the whole frame agrees on where the light is.
-    float sunDist = length(p - vec2(1.35, 0.78));
+    float sunDist = length(sky - vec2(1.35, 0.78));
     color += vec3(1.0, 0.95, 0.88) * 0.16 / (1.0 + 26.0 * sunDist * sunDist);
 
     // ---- atmosphere -------------------------------------------------------
@@ -158,21 +207,32 @@ void main()
     float z  = sqrt(max(0.0, 1.0 - min(1.0, dot(uv, uv))));
     vec3  n  = vec3(uv, z);
 
-    // Turn the lookup slowly about the pole so the planet rotates under us.
-    float a  = u_Time * 0.012;
-    float ca = cos(a), sa = sin(a);
-    vec3  sp = vec3(n.x * ca + n.z * sa, n.y, -n.x * sa + n.z * ca);
+    // The lookup turns slowly about the pole so the planet rotates under us.
+    vec3 sp = surfacePoint(toward);
 
-    float continents = fbm(sp * 1.8, 4);
+    // Every doubling of the zoom gets another octave, so the coastlines keep
+    // their detail all the way down.
+    float continents = fbm(sp * 1.8, 4.0 + log2(u_Zoom));
     vec3  surface    = mix(OCEAN_DEEP, OCEAN_SHALLOW, smoothstep(0.30, 0.56, continents));
     surface = mix(surface, LAND, smoothstep(0.54, 0.62, continents));
 
     // Clouds are a second, finer field drifting at its own rate, so they slide
     // over the continents instead of being locked to them. Two layers at
-    // different scales keep the banks from reading as one blurry blob.
-    vec3  cloudPos = sp * 6.5 + vec3(0.0, 0.0, u_Time * 0.02);
-    float clouds   = fbm(cloudPos, 5) * 0.72 + fbm(cloudPos * 2.7, 4) * 0.28;
-    surface = mix(surface, CLOUD, smoothstep(0.47, 0.66, clouds) * 0.88);
+    // different scales keep the banks from reading as one blurry blob. They
+    // sit nearer the camera than the ground, so they are looked up through
+    // their own, faster zoom.
+    vec2  cloudToward = rotate2(look + screen / u_CloudZoom, TILT) - center;
+    vec3  cloudPos    = surfacePoint(cloudToward) * 6.5 + vec3(0.0, 0.0, u_CloudDrift);
+    float cloudDetail = log2(u_CloudZoom);
+    float clouds      = fbm(cloudPos, 5.0 + cloudDetail) * 0.72
+                      + fbm(cloudPos * 2.7, 4.0 + cloudDetail) * 0.28;
+    // Nearing the deck, the clouds thicken: they spread out from the banks into
+    // the gaps until they close over entirely, so the camera flies into them
+    // rather than just watching the picture turn white. Measured in doublings
+    // of the cloud zoom, which is how the approach to the deck feels.
+    float approach   = clamp((log2(u_CloudZoom) - 2.0) / 4.5, 0.0, 1.0);
+    float cloudCover = smoothstep(0.47, 0.66, clouds + 0.3 * approach);
+    surface = mix(surface, CLOUD, cloudCover * 0.88);
 
     // Wrapped diffuse. A hard terminator would put half the disc in shadow; the
     // reference is lit from over the shoulder with the night side out of frame.
@@ -185,6 +245,15 @@ void main()
     // looking straight down, so the last sliver of the disc washes out to blue.
     surface = mix(surface, SKY * 1.3, smoothstep(0.88, 1.0, t) * 0.8 * light);
 
+    // Falling into the atmosphere puts more and more air between the camera and
+    // the ground, so the view hazes over to a lighter blue on the way down.
+    float haze = clamp(log2(u_Zoom) / 4.0, 0.0, 1.0);
+    surface = mix(surface, SKY * 0.75, haze * 0.35);
+
+    // And the nearer the cloud tops, the more they read as the brilliant white
+    // they are in full sun, rather than the dimmed grey of a distant view.
+    surface = mix(surface, FOG, cloudCover * approach * 0.6);
+
     // ---- composite --------------------------------------------------------
     // fwidth gives the edge a one-pixel blend at any resolution, so the limb
     // does not alias into a staircase.
@@ -192,6 +261,19 @@ void main()
     float disc = smoothstep(1.0 + aa, 1.0 - aa, t);
 
     color = mix(color, surface, disc);
+
+    // ---- landing ----------------------------------------------------------
+    // Dropping into the cloud deck. The white-out comes in through wisps of it
+    // that swell and slide out past the edges of the screen as the camera
+    // falls, and through the banks already in view before the gaps between
+    // them, so it billows in rather than washing over evenly.
+    float wisps = fbm(vec3(screen * 2.5 / sqrt(u_CloudZoom), 3.7), 4.0);
+    float fog   = clamp(u_Fog * 2.2 - 1.2 + 0.5 * cloudCover + 0.6 * wisps, 0.0, 1.0);
+    color = mix(color, FOG, fog);
+
+    // Then settle on the page's own background, exactly, so the content
+    // section below carries on from the canvas with no visible seam.
+    color = mix(color, PAGE, u_Fade);
 
     out_Col = vec4(color, 1.0);
 }

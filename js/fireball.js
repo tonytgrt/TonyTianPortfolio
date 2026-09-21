@@ -1,4 +1,4 @@
-var e=typeof Float32Array<`u`?Float32Array:Array;function t(){var t=new e(16);return e!=Float32Array&&(t[1]=0,t[2]=0,t[3]=0,t[4]=0,t[6]=0,t[7]=0,t[8]=0,t[9]=0,t[11]=0,t[12]=0,t[13]=0,t[14]=0),t[0]=1,t[5]=1,t[10]=1,t[15]=1,t}function n(e,t){if(e===t){var n=t[1],r=t[2],i=t[3],a=t[6],o=t[7],s=t[11];e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=n,e[6]=t[9],e[7]=t[13],e[8]=r,e[9]=a,e[11]=t[14],e[12]=i,e[13]=o,e[14]=s}else e[0]=t[0],e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=t[1],e[5]=t[5],e[6]=t[9],e[7]=t[13],e[8]=t[2],e[9]=t[6],e[10]=t[10],e[11]=t[14],e[12]=t[3],e[13]=t[7],e[14]=t[11],e[15]=t[15];return e}function r(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=t[4],s=t[5],c=t[6],l=t[7],u=t[8],d=t[9],f=t[10],p=t[11],m=t[12],h=t[13],g=t[14],_=t[15],v=n*s-r*o,y=n*c-i*o,b=n*l-a*o,x=r*c-i*s,S=r*l-a*s,C=i*l-a*c,w=u*h-d*m,T=u*g-f*m,E=u*_-p*m,D=d*g-f*h,O=d*_-p*h,k=f*_-p*g,A=v*k-y*O+b*D+x*E-S*T+C*w;return A?(A=1/A,e[0]=(s*k-c*O+l*D)*A,e[1]=(i*O-r*k-a*D)*A,e[2]=(h*C-g*S+_*x)*A,e[3]=(f*S-d*C-p*x)*A,e[4]=(c*E-o*k-l*T)*A,e[5]=(n*k-i*E+a*T)*A,e[6]=(g*b-m*C-_*y)*A,e[7]=(u*C-f*b+p*y)*A,e[8]=(o*O-s*E+l*w)*A,e[9]=(r*E-n*O-a*w)*A,e[10]=(m*S-h*b+_*v)*A,e[11]=(d*b-u*S-p*v)*A,e[12]=(s*T-o*D-c*w)*A,e[13]=(n*D-r*T+i*w)*A,e[14]=(h*y-m*x-g*v)*A,e[15]=(u*x-d*y+f*v)*A,e):null}function i(e,t,n){var r=n[0],i=n[1],a=n[2];return e[0]=t[0]*r,e[1]=t[1]*r,e[2]=t[2]*r,e[3]=t[3]*r,e[4]=t[4]*i,e[5]=t[5]*i,e[6]=t[6]*i,e[7]=t[7]*i,e[8]=t[8]*a,e[9]=t[9]*a,e[10]=t[10]*a,e[11]=t[11]*a,e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15],e}function a(e,t){return e[0]=1,e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[5]=1,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=t[0],e[13]=t[1],e[14]=t[2],e[15]=1,e}function o(e,t){var n=Math.sin(t),r=Math.cos(t);return e[0]=r,e[1]=n,e[2]=0,e[3]=0,e[4]=-n,e[5]=r,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=0,e[13]=0,e[14]=0,e[15]=1,e}function s(){var t=new e(3);return e!=Float32Array&&(t[0]=0,t[1]=0,t[2]=0),t}function c(t,n,r){var i=new e(3);return i[0]=t,i[1]=n,i[2]=r,i}(function(){var e=s();return function(t,n,r,i,a,o){var s,c;for(n||=3,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2];return t}})();function l(){var t=new e(4);return e!=Float32Array&&(t[0]=0,t[1]=0,t[2]=0,t[3]=0),t}function u(t,n,r,i){var a=new e(4);return a[0]=t,a[1]=n,a[2]=r,a[3]=i,a}function d(e,t,n){return e[0]=t[0]+n[0],e[1]=t[1]+n[1],e[2]=t[2]+n[2],e[3]=t[3]+n[3],e}function f(e,t,n,r){return e[0]=t[0]+n[0]*r,e[1]=t[1]+n[1]*r,e[2]=t[2]+n[2]*r,e[3]=t[3]+n[3]*r,e}function p(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=n*n+r*r+i*i+a*a;return o>0&&(o=1/Math.sqrt(o)),e[0]=n*o,e[1]=r*o,e[2]=i*o,e[3]=a*o,e}(function(){var e=l();return function(t,n,r,i,a,o){var s,c;for(n||=4,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],e[3]=t[s+3],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2],t[s+3]=e[3];return t}})();var m;function h(e){m=e}var g=class{constructor(){this.count=0,this.idxBound=!1,this.posBound=!1,this.norBound=!1}destory(){m.deleteBuffer(this.bufIdx),m.deleteBuffer(this.bufPos),m.deleteBuffer(this.bufNor)}generateIdx(){this.idxBound=!0,this.bufIdx=m.createBuffer()}generatePos(){this.posBound=!0,this.bufPos=m.createBuffer()}generateNor(){this.norBound=!0,this.bufNor=m.createBuffer()}bindIdx(){return this.idxBound&&m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),this.idxBound}bindPos(){return this.posBound&&m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),this.posBound}bindNor(){return this.norBound&&m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),this.norBound}elemCount(){return this.count}drawMode(){return m.TRIANGLES}},_=class extends g{constructor(e,t,n){super(),this.radius=t,this.subdivisions=n,this.center=u(e[0],e[1],e[2],1)}create(){let e=.5257311121191336,t=.8506508083520399,n=20*4**this.subdivisions,r=10*4**this.subdivisions+2,i=new ArrayBuffer(n*3*Uint32Array.BYTES_PER_ELEMENT+r*4*Float32Array.BYTES_PER_ELEMENT+r*4*Float32Array.BYTES_PER_ELEMENT),a=new ArrayBuffer(n*3*Uint32Array.BYTES_PER_ELEMENT),o=[i,a],s=0,c=n*3*Uint32Array.BYTES_PER_ELEMENT,l=c,u=c+r*4*Float32Array.BYTES_PER_ELEMENT,h=Array(20),g=[];for(let e=0;e<20;++e)h[e]=new Uint32Array(o[s],0+e*3*Uint32Array.BYTES_PER_ELEMENT,3);let _=Array(12);for(let e=0;e<12;++e)_[e]=new Float32Array(i,c+e*4*Float32Array.BYTES_PER_ELEMENT,4);_[0].set([-.5257311121191336,0,t,0]),_[1].set([e,0,t,0]),_[2].set([-.5257311121191336,0,-.8506508083520399,0]),_[3].set([e,0,-.8506508083520399,0]),_[4].set([0,t,e,0]),_[5].set([0,t,-.5257311121191336,0]),_[6].set([0,-.8506508083520399,e,0]),_[7].set([0,-.8506508083520399,-.5257311121191336,0]),_[8].set([t,e,0,0]),_[9].set([-.8506508083520399,e,0,0]),_[10].set([t,-.5257311121191336,0,0]),_[11].set([-.8506508083520399,-.5257311121191336,0,0]),h[0].set([0,4,1]),h[1].set([0,9,4]),h[2].set([9,5,4]),h[3].set([4,5,8]),h[4].set([4,8,1]),h[5].set([8,10,1]),h[6].set([8,3,10]),h[7].set([5,3,8]),h[8].set([5,2,3]),h[9].set([2,7,3]),h[10].set([7,10,3]),h[11].set([7,6,10]),h[12].set([7,11,6]),h[13].set([11,0,6]),h[14].set([0,1,6]),h[15].set([6,1,10]),h[16].set([9,0,11]),h[17].set([9,11,2]),h[18].set([9,2,5]),h[19].set([7,2,11]);for(let e=0;e<this.subdivisions;++e){s=1-s,g.length=h.length*4;let e=0,t=new Map;function n(e,n){let r=[e,n].sort().join(`_`);if(!t.has(r)){let a=new Float32Array(i,c+_.length*4*Float32Array.BYTES_PER_ELEMENT,4);d(a,_[e],_[n]),p(a,a),t.set(r,_.length),_.push(a)}return t.get(r)}for(let t=0;t<h.length;++t){let r=h[t][0],i=h[t][1],a=h[t][2],c=n(r,i),l=n(i,a),u=n(a,r),d=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),f=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),p=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),m=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3);g.length,d.set([r,c,u]),f.set([c,l,u]),p.set([c,i,l]),m.set([u,l,a])}let r=h;h=g,g=r}if(s===1){let e=new Uint32Array(i,0,3*h.length),t=new Uint32Array(a,0,3*h.length);e.set(t)}for(let e=0;e<_.length;++e)f(new Float32Array(i,u+e*4*Float32Array.BYTES_PER_ELEMENT,4),this.center,_[e],this.radius);this.buffer=i,this.indices=new Uint32Array(this.buffer,0,h.length*3),this.normals=new Float32Array(this.buffer,l,_.length*4),this.positions=new Float32Array(this.buffer,u,_.length*4),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),m.bufferData(m.ELEMENT_ARRAY_BUFFER,this.indices,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),m.bufferData(m.ARRAY_BUFFER,this.normals,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),m.bufferData(m.ARRAY_BUFFER,this.positions,m.STATIC_DRAW),console.log(`Created icosphere with ${_.length} vertices`)}},v=class extends g{constructor(e){super(),this.center=u(e[0],e[1],e[2],1)}create(){this.indices=new Uint32Array([0,1,2,0,2,3]),this.normals=new Float32Array([0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0]),this.positions=new Float32Array([-1,-1,0,1,1,-1,0,1,1,1,0,1,-1,1,0,1]),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),m.bufferData(m.ELEMENT_ARRAY_BUFFER,this.indices,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),m.bufferData(m.ARRAY_BUFFER,this.normals,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),m.bufferData(m.ARRAY_BUFFER,this.positions,m.STATIC_DRAW),console.log(`Created square`)}},y=class{constructor(e){this.canvas=e}setClearColor(e,t,n,r){m.clearColor(e,t,n,r)}setSize(e,t){this.canvas.width=e,this.canvas.height=t}clear(){m.clear(m.COLOR_BUFFER_BIT|m.DEPTH_BUFFER_BIT)}render(e,t,n,r,i){let a=u(1,1,1,1);r.setModelMatrix(t),r.setViewProjMatrix(e),r.setGeometryColor(a),r.setCameraPos(n);for(let e of i)r.draw(e)}},b=70,x=.5,S=3.4,C=.16,w=1/120,T=class{constructor(){this.x=0,this.y=0,this.vx=0,this.vy=0,this.speed=0,this.curvature=0,this.anchorX=0,this.anchorY=0,this.anchorVx=0,this.anchorVy=0}reset(e,t){this.anchorX=e,this.anchorY=t,this.anchorVx=0,this.anchorVy=0}update(e,t,n,r){let i=0,a=0;for(let r=n;r>0;r-=w){let n=Math.min(r,w);i=49*(e-this.anchorX)-14*this.anchorVx,a=49*(t-this.anchorY)-14*this.anchorVy,this.anchorVx+=i*n,this.anchorVy+=a*n,this.anchorX+=this.anchorVx*n,this.anchorY+=this.anchorVy*n}let o=b,s=x,c=o*Math.sqrt(1-s*s),l=2*Math.PI/S,u=l*r,d=u;for(let e=0;e<5;++e)d-=(d-s*Math.sin(d)-u)/(1-s*Math.cos(d));let f=Math.cos(d),p=Math.sin(d),m=o*(f-s),h=c*p,g=l/(1-s*f),_=-70*p*g,v=c*f*g,y=Math.hypot(m,h),T=-(l*l*o*o*o)/(y*y*y),E=T*m,D=T*h,O=C*r,k=Math.cos(O),A=Math.sin(O),j=k*m-A*h,M=A*m+k*h,N=k*_-A*v-C*M,P=A*_+k*v+C*j,F=k*E-A*D,I=A*E+k*D;this.x=this.anchorX+j,this.y=this.anchorY+M,this.vx=this.anchorVx+N,this.vy=this.anchorVy+P;let L=i+F,R=a+I;this.speed=Math.hypot(this.vx,this.vy),this.curvature=this.speed>.001?(this.vx*R-this.vy*L)/(this.speed*this.speed*this.speed):0}},E=null,D=class{constructor(e,t){if(this.shader=m.createShader(e),m.shaderSource(this.shader,t),m.compileShader(this.shader),!m.getShaderParameter(this.shader,m.COMPILE_STATUS))throw m.getShaderInfoLog(this.shader)}},O=class{constructor(e){this.prog=m.createProgram();for(let t of e)m.attachShader(this.prog,t.shader);if(m.linkProgram(this.prog),!m.getProgramParameter(this.prog,m.LINK_STATUS))throw m.getProgramInfoLog(this.prog);this.attrPos=m.getAttribLocation(this.prog,`vs_Pos`),this.attrNor=m.getAttribLocation(this.prog,`vs_Nor`),this.attrCol=m.getAttribLocation(this.prog,`vs_Col`),this.unifModel=m.getUniformLocation(this.prog,`u_Model`),this.unifModelInvTr=m.getUniformLocation(this.prog,`u_ModelInvTr`),this.unifViewProj=m.getUniformLocation(this.prog,`u_ViewProj`),this.unifColor=m.getUniformLocation(this.prog,`u_Color`),this.unifTime=m.getUniformLocation(this.prog,`u_Time`),this.unifLowFreqAmp=m.getUniformLocation(this.prog,`u_LowFreqAmp`),this.unifLowFreqScale=m.getUniformLocation(this.prog,`u_LowFreqScale`),this.unifFbmAmp=m.getUniformLocation(this.prog,`u_FbmAmp`),this.unifFbmScale=m.getUniformLocation(this.prog,`u_FbmScale`),this.unifOctaves=m.getUniformLocation(this.prog,`u_Octaves`),this.unifRoilSpeed=m.getUniformLocation(this.prog,`u_RoilSpeed`),this.unifPulsePeriod=m.getUniformLocation(this.prog,`u_PulsePeriod`),this.unifPulseStrength=m.getUniformLocation(this.prog,`u_PulseStrength`),this.unifHeat=m.getUniformLocation(this.prog,`u_Heat`),this.unifFlow=m.getUniformLocation(this.prog,`u_Flow`),this.unifBandBlend=m.getUniformLocation(this.prog,`u_BandBlend`),this.unifFlameHeight=m.getUniformLocation(this.prog,`u_FlameHeight`),this.unifTaper=m.getUniformLocation(this.prog,`u_Taper`),this.unifBands=m.getUniformLocation(this.prog,`u_Bands`),this.unifCameraPos=m.getUniformLocation(this.prog,`u_CameraPos`),this.unifCurvature=m.getUniformLocation(this.prog,`u_Curvature`),this.unifDimensions=m.getUniformLocation(this.prog,`u_Dimensions`),this.unifHorizon=m.getUniformLocation(this.prog,`u_Horizon`),this.unifAtmosphere=m.getUniformLocation(this.prog,`u_Atmosphere`)}use(){E!==this.prog&&(m.useProgram(this.prog),E=this.prog)}setModelMatrix(e){if(this.use(),this.unifModel!==-1&&m.uniformMatrix4fv(this.unifModel,!1,e),this.unifModelInvTr!==-1){let i=t();n(i,e),r(i,i),m.uniformMatrix4fv(this.unifModelInvTr,!1,i)}}setViewProjMatrix(e){this.use(),this.unifViewProj!==-1&&m.uniformMatrix4fv(this.unifViewProj,!1,e)}setGeometryColor(e){this.use(),this.unifColor!==-1&&m.uniform4fv(this.unifColor,e)}setTime(e){this.use(),this.unifTime!==-1&&m.uniform1f(this.unifTime,e)}setFireballParams(e){this.use(),this.unifLowFreqAmp!==-1&&m.uniform1f(this.unifLowFreqAmp,e.displacement),this.unifLowFreqScale!==-1&&m.uniform1f(this.unifLowFreqScale,e.lobeScale),this.unifFbmAmp!==-1&&m.uniform1f(this.unifFbmAmp,e.detail),this.unifFbmScale!==-1&&m.uniform1f(this.unifFbmScale,e.detailScale),this.unifOctaves!==-1&&m.uniform1i(this.unifOctaves,e.octaves),this.unifRoilSpeed!==-1&&m.uniform1f(this.unifRoilSpeed,e.roilSpeed),this.unifPulsePeriod!==-1&&m.uniform1f(this.unifPulsePeriod,e.pulsePeriod),this.unifPulseStrength!==-1&&m.uniform1f(this.unifPulseStrength,e.pulseStrength),this.unifHeat!==-1&&m.uniform1f(this.unifHeat,e.heat),this.unifFlow!==-1&&m.uniform1f(this.unifFlow,e.flow),this.unifBandBlend!==-1&&m.uniform1f(this.unifBandBlend,e.bandBlend),this.unifFlameHeight!==-1&&m.uniform1f(this.unifFlameHeight,e.flameHeight),this.unifTaper!==-1&&m.uniform1f(this.unifTaper,e.taper),this.unifBands!==-1&&m.uniform1f(this.unifBands,e.bands)}setCurvature(e){this.use(),this.unifCurvature!==-1&&m.uniform1f(this.unifCurvature,e)}setCameraPos(e){this.use(),this.unifCameraPos!==-1&&m.uniform3fv(this.unifCameraPos,e)}setDimensions(e,t){this.use(),this.unifDimensions!==-1&&m.uniform2f(this.unifDimensions,e,t)}setBackgroundParams(e){this.use(),this.unifHorizon!==-1&&m.uniform1f(this.unifHorizon,e.horizon),this.unifAtmosphere!==-1&&m.uniform1f(this.unifAtmosphere,e.atmosphere)}draw(e){this.use(),this.attrPos!=-1&&e.bindPos()&&(m.enableVertexAttribArray(this.attrPos),m.vertexAttribPointer(this.attrPos,4,m.FLOAT,!1,0,0)),this.attrNor!=-1&&e.bindNor()&&(m.enableVertexAttribArray(this.attrNor),m.vertexAttribPointer(this.attrNor,4,m.FLOAT,!1,0,0)),e.bindIdx(),m.drawElements(e.drawMode(),e.elemCount(),m.UNSIGNED_INT,0),this.attrPos!=-1&&m.disableVertexAttribArray(this.attrPos),this.attrNor!=-1&&m.disableVertexAttribArray(this.attrNor)}},k=`#version 300 es
+var e=typeof Float32Array<`u`?Float32Array:Array;function t(){var t=new e(16);return e!=Float32Array&&(t[1]=0,t[2]=0,t[3]=0,t[4]=0,t[6]=0,t[7]=0,t[8]=0,t[9]=0,t[11]=0,t[12]=0,t[13]=0,t[14]=0),t[0]=1,t[5]=1,t[10]=1,t[15]=1,t}function n(e,t){if(e===t){var n=t[1],r=t[2],i=t[3],a=t[6],o=t[7],s=t[11];e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=n,e[6]=t[9],e[7]=t[13],e[8]=r,e[9]=a,e[11]=t[14],e[12]=i,e[13]=o,e[14]=s}else e[0]=t[0],e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=t[1],e[5]=t[5],e[6]=t[9],e[7]=t[13],e[8]=t[2],e[9]=t[6],e[10]=t[10],e[11]=t[14],e[12]=t[3],e[13]=t[7],e[14]=t[11],e[15]=t[15];return e}function r(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=t[4],s=t[5],c=t[6],l=t[7],u=t[8],d=t[9],f=t[10],p=t[11],m=t[12],h=t[13],g=t[14],_=t[15],v=n*s-r*o,y=n*c-i*o,b=n*l-a*o,x=r*c-i*s,S=r*l-a*s,C=i*l-a*c,w=u*h-d*m,T=u*g-f*m,E=u*_-p*m,D=d*g-f*h,O=d*_-p*h,k=f*_-p*g,A=v*k-y*O+b*D+x*E-S*T+C*w;return A?(A=1/A,e[0]=(s*k-c*O+l*D)*A,e[1]=(i*O-r*k-a*D)*A,e[2]=(h*C-g*S+_*x)*A,e[3]=(f*S-d*C-p*x)*A,e[4]=(c*E-o*k-l*T)*A,e[5]=(n*k-i*E+a*T)*A,e[6]=(g*b-m*C-_*y)*A,e[7]=(u*C-f*b+p*y)*A,e[8]=(o*O-s*E+l*w)*A,e[9]=(r*E-n*O-a*w)*A,e[10]=(m*S-h*b+_*v)*A,e[11]=(d*b-u*S-p*v)*A,e[12]=(s*T-o*D-c*w)*A,e[13]=(n*D-r*T+i*w)*A,e[14]=(h*y-m*x-g*v)*A,e[15]=(u*x-d*y+f*v)*A,e):null}function i(e,t,n){var r=n[0],i=n[1],a=n[2];return e[0]=t[0]*r,e[1]=t[1]*r,e[2]=t[2]*r,e[3]=t[3]*r,e[4]=t[4]*i,e[5]=t[5]*i,e[6]=t[6]*i,e[7]=t[7]*i,e[8]=t[8]*a,e[9]=t[9]*a,e[10]=t[10]*a,e[11]=t[11]*a,e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15],e}function a(e,t){return e[0]=1,e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[5]=1,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=t[0],e[13]=t[1],e[14]=t[2],e[15]=1,e}function o(e,t){var n=Math.sin(t),r=Math.cos(t);return e[0]=r,e[1]=n,e[2]=0,e[3]=0,e[4]=-n,e[5]=r,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=0,e[13]=0,e[14]=0,e[15]=1,e}function s(){var t=new e(3);return e!=Float32Array&&(t[0]=0,t[1]=0,t[2]=0),t}function c(t,n,r){var i=new e(3);return i[0]=t,i[1]=n,i[2]=r,i}(function(){var e=s();return function(t,n,r,i,a,o){var s,c;for(n||=3,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2];return t}})();function l(){var t=new e(4);return e!=Float32Array&&(t[0]=0,t[1]=0,t[2]=0,t[3]=0),t}function u(t,n,r,i){var a=new e(4);return a[0]=t,a[1]=n,a[2]=r,a[3]=i,a}function d(e,t,n){return e[0]=t[0]+n[0],e[1]=t[1]+n[1],e[2]=t[2]+n[2],e[3]=t[3]+n[3],e}function f(e,t,n,r){return e[0]=t[0]+n[0]*r,e[1]=t[1]+n[1]*r,e[2]=t[2]+n[2]*r,e[3]=t[3]+n[3]*r,e}function p(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=n*n+r*r+i*i+a*a;return o>0&&(o=1/Math.sqrt(o)),e[0]=n*o,e[1]=r*o,e[2]=i*o,e[3]=a*o,e}(function(){var e=l();return function(t,n,r,i,a,o){var s,c;for(n||=4,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],e[3]=t[s+3],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2],t[s+3]=e[3];return t}})();var m;function h(e){m=e}var g=class{constructor(){this.count=0,this.idxBound=!1,this.posBound=!1,this.norBound=!1}destory(){m.deleteBuffer(this.bufIdx),m.deleteBuffer(this.bufPos),m.deleteBuffer(this.bufNor)}generateIdx(){this.idxBound=!0,this.bufIdx=m.createBuffer()}generatePos(){this.posBound=!0,this.bufPos=m.createBuffer()}generateNor(){this.norBound=!0,this.bufNor=m.createBuffer()}bindIdx(){return this.idxBound&&m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),this.idxBound}bindPos(){return this.posBound&&m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),this.posBound}bindNor(){return this.norBound&&m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),this.norBound}elemCount(){return this.count}drawMode(){return m.TRIANGLES}},_=class extends g{constructor(e,t,n){super(),this.radius=t,this.subdivisions=n,this.center=u(e[0],e[1],e[2],1)}create(){let e=.5257311121191336,t=.8506508083520399,n=20*4**this.subdivisions,r=10*4**this.subdivisions+2,i=new ArrayBuffer(n*3*Uint32Array.BYTES_PER_ELEMENT+r*4*Float32Array.BYTES_PER_ELEMENT+r*4*Float32Array.BYTES_PER_ELEMENT),a=new ArrayBuffer(n*3*Uint32Array.BYTES_PER_ELEMENT),o=[i,a],s=0,c=n*3*Uint32Array.BYTES_PER_ELEMENT,l=c,u=c+r*4*Float32Array.BYTES_PER_ELEMENT,h=Array(20),g=[];for(let e=0;e<20;++e)h[e]=new Uint32Array(o[s],0+e*3*Uint32Array.BYTES_PER_ELEMENT,3);let _=Array(12);for(let e=0;e<12;++e)_[e]=new Float32Array(i,c+e*4*Float32Array.BYTES_PER_ELEMENT,4);_[0].set([-.5257311121191336,0,t,0]),_[1].set([e,0,t,0]),_[2].set([-.5257311121191336,0,-.8506508083520399,0]),_[3].set([e,0,-.8506508083520399,0]),_[4].set([0,t,e,0]),_[5].set([0,t,-.5257311121191336,0]),_[6].set([0,-.8506508083520399,e,0]),_[7].set([0,-.8506508083520399,-.5257311121191336,0]),_[8].set([t,e,0,0]),_[9].set([-.8506508083520399,e,0,0]),_[10].set([t,-.5257311121191336,0,0]),_[11].set([-.8506508083520399,-.5257311121191336,0,0]),h[0].set([0,4,1]),h[1].set([0,9,4]),h[2].set([9,5,4]),h[3].set([4,5,8]),h[4].set([4,8,1]),h[5].set([8,10,1]),h[6].set([8,3,10]),h[7].set([5,3,8]),h[8].set([5,2,3]),h[9].set([2,7,3]),h[10].set([7,10,3]),h[11].set([7,6,10]),h[12].set([7,11,6]),h[13].set([11,0,6]),h[14].set([0,1,6]),h[15].set([6,1,10]),h[16].set([9,0,11]),h[17].set([9,11,2]),h[18].set([9,2,5]),h[19].set([7,2,11]);for(let e=0;e<this.subdivisions;++e){s=1-s,g.length=h.length*4;let e=0,t=new Map;function n(e,n){let r=[e,n].sort().join(`_`);if(!t.has(r)){let a=new Float32Array(i,c+_.length*4*Float32Array.BYTES_PER_ELEMENT,4);d(a,_[e],_[n]),p(a,a),t.set(r,_.length),_.push(a)}return t.get(r)}for(let t=0;t<h.length;++t){let r=h[t][0],i=h[t][1],a=h[t][2],c=n(r,i),l=n(i,a),u=n(a,r),d=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),f=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),p=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),m=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3);g.length,d.set([r,c,u]),f.set([c,l,u]),p.set([c,i,l]),m.set([u,l,a])}let r=h;h=g,g=r}if(s===1){let e=new Uint32Array(i,0,3*h.length),t=new Uint32Array(a,0,3*h.length);e.set(t)}for(let e=0;e<_.length;++e)f(new Float32Array(i,u+e*4*Float32Array.BYTES_PER_ELEMENT,4),this.center,_[e],this.radius);this.buffer=i,this.indices=new Uint32Array(this.buffer,0,h.length*3),this.normals=new Float32Array(this.buffer,l,_.length*4),this.positions=new Float32Array(this.buffer,u,_.length*4),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),m.bufferData(m.ELEMENT_ARRAY_BUFFER,this.indices,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),m.bufferData(m.ARRAY_BUFFER,this.normals,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),m.bufferData(m.ARRAY_BUFFER,this.positions,m.STATIC_DRAW),console.log(`Created icosphere with ${_.length} vertices`)}},v=class extends g{constructor(e){super(),this.center=u(e[0],e[1],e[2],1)}create(){this.indices=new Uint32Array([0,1,2,0,2,3]),this.normals=new Float32Array([0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0]),this.positions=new Float32Array([-1,-1,0,1,1,-1,0,1,1,1,0,1,-1,1,0,1]),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),m.bufferData(m.ELEMENT_ARRAY_BUFFER,this.indices,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),m.bufferData(m.ARRAY_BUFFER,this.normals,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),m.bufferData(m.ARRAY_BUFFER,this.positions,m.STATIC_DRAW),console.log(`Created square`)}},y=class{constructor(e){this.canvas=e}setClearColor(e,t,n,r){m.clearColor(e,t,n,r)}setSize(e,t){this.canvas.width=e,this.canvas.height=t}clear(){m.clear(m.COLOR_BUFFER_BIT|m.DEPTH_BUFFER_BIT)}render(e,t,n,r,i,a=1){let o=u(a,a,a,1);r.setModelMatrix(t),r.setViewProjMatrix(e),r.setGeometryColor(o),r.setCameraPos(n);for(let e of i)r.draw(e)}},b=70,x=.5,S=3.4,C=.16,w=1/120,T=class{constructor(){this.x=0,this.y=0,this.vx=0,this.vy=0,this.speed=0,this.curvature=0,this.anchorX=0,this.anchorY=0,this.anchorVx=0,this.anchorVy=0}reset(e,t){this.anchorX=e,this.anchorY=t,this.anchorVx=0,this.anchorVy=0}update(e,t,n,r){let i=0,a=0;for(let r=n;r>0;r-=w){let n=Math.min(r,w);i=49*(e-this.anchorX)-14*this.anchorVx,a=49*(t-this.anchorY)-14*this.anchorVy,this.anchorVx+=i*n,this.anchorVy+=a*n,this.anchorX+=this.anchorVx*n,this.anchorY+=this.anchorVy*n}let o=b,s=x,c=o*Math.sqrt(1-s*s),l=2*Math.PI/S,u=l*r,d=u;for(let e=0;e<5;++e)d-=(d-s*Math.sin(d)-u)/(1-s*Math.cos(d));let f=Math.cos(d),p=Math.sin(d),m=o*(f-s),h=c*p,g=l/(1-s*f),_=-70*p*g,v=c*f*g,y=Math.hypot(m,h),T=-(l*l*o*o*o)/(y*y*y),E=T*m,D=T*h,O=C*r,k=Math.cos(O),A=Math.sin(O),j=k*m-A*h,M=A*m+k*h,N=k*_-A*v-C*M,P=A*_+k*v+C*j,F=k*E-A*D,I=A*E+k*D;this.x=this.anchorX+j,this.y=this.anchorY+M,this.vx=this.anchorVx+N,this.vy=this.anchorVy+P;let L=i+F,R=a+I;this.speed=Math.hypot(this.vx,this.vy),this.curvature=this.speed>.001?(this.vx*R-this.vy*L)/(this.speed*this.speed*this.speed):0}},E=.03,D=.034;function O(e,t,n){return Math.min(1,Math.max(0,(e-t)/(n-t)))}function k(e){return e*e*(3-2*e)}function A(e){let t=D**+k(O(e,.3,.92));return{pan:k(O(e,0,.4)),zoom:1/t,cloudZoom:.97/(t-E),fog:k(O(e,.7,.9)),fade:k(O(e,.86,.96)),comet:1-k(O(e,.2,.35))}}var j=null,M=class{constructor(e,t){if(this.shader=m.createShader(e),m.shaderSource(this.shader,t),m.compileShader(this.shader),!m.getShaderParameter(this.shader,m.COMPILE_STATUS))throw m.getShaderInfoLog(this.shader)}},N=class{constructor(e){this.prog=m.createProgram();for(let t of e)m.attachShader(this.prog,t.shader);if(m.linkProgram(this.prog),!m.getProgramParameter(this.prog,m.LINK_STATUS))throw m.getProgramInfoLog(this.prog);this.attrPos=m.getAttribLocation(this.prog,`vs_Pos`),this.attrNor=m.getAttribLocation(this.prog,`vs_Nor`),this.attrCol=m.getAttribLocation(this.prog,`vs_Col`),this.unifModel=m.getUniformLocation(this.prog,`u_Model`),this.unifModelInvTr=m.getUniformLocation(this.prog,`u_ModelInvTr`),this.unifViewProj=m.getUniformLocation(this.prog,`u_ViewProj`),this.unifColor=m.getUniformLocation(this.prog,`u_Color`),this.unifTime=m.getUniformLocation(this.prog,`u_Time`),this.unifLowFreqAmp=m.getUniformLocation(this.prog,`u_LowFreqAmp`),this.unifLowFreqScale=m.getUniformLocation(this.prog,`u_LowFreqScale`),this.unifFbmAmp=m.getUniformLocation(this.prog,`u_FbmAmp`),this.unifFbmScale=m.getUniformLocation(this.prog,`u_FbmScale`),this.unifOctaves=m.getUniformLocation(this.prog,`u_Octaves`),this.unifRoilSpeed=m.getUniformLocation(this.prog,`u_RoilSpeed`),this.unifPulsePeriod=m.getUniformLocation(this.prog,`u_PulsePeriod`),this.unifPulseStrength=m.getUniformLocation(this.prog,`u_PulseStrength`),this.unifHeat=m.getUniformLocation(this.prog,`u_Heat`),this.unifFlow=m.getUniformLocation(this.prog,`u_Flow`),this.unifBandBlend=m.getUniformLocation(this.prog,`u_BandBlend`),this.unifFlameHeight=m.getUniformLocation(this.prog,`u_FlameHeight`),this.unifTaper=m.getUniformLocation(this.prog,`u_Taper`),this.unifBands=m.getUniformLocation(this.prog,`u_Bands`),this.unifCameraPos=m.getUniformLocation(this.prog,`u_CameraPos`),this.unifCurvature=m.getUniformLocation(this.prog,`u_Curvature`),this.unifDimensions=m.getUniformLocation(this.prog,`u_Dimensions`),this.unifHorizon=m.getUniformLocation(this.prog,`u_Horizon`),this.unifAtmosphere=m.getUniformLocation(this.prog,`u_Atmosphere`),this.unifPan=m.getUniformLocation(this.prog,`u_Pan`),this.unifZoom=m.getUniformLocation(this.prog,`u_Zoom`),this.unifCloudZoom=m.getUniformLocation(this.prog,`u_CloudZoom`),this.unifSpin=m.getUniformLocation(this.prog,`u_Spin`),this.unifCloudDrift=m.getUniformLocation(this.prog,`u_CloudDrift`),this.unifFog=m.getUniformLocation(this.prog,`u_Fog`),this.unifFade=m.getUniformLocation(this.prog,`u_Fade`)}use(){j!==this.prog&&(m.useProgram(this.prog),j=this.prog)}setModelMatrix(e){if(this.use(),this.unifModel!==-1&&m.uniformMatrix4fv(this.unifModel,!1,e),this.unifModelInvTr!==-1){let i=t();n(i,e),r(i,i),m.uniformMatrix4fv(this.unifModelInvTr,!1,i)}}setViewProjMatrix(e){this.use(),this.unifViewProj!==-1&&m.uniformMatrix4fv(this.unifViewProj,!1,e)}setGeometryColor(e){this.use(),this.unifColor!==-1&&m.uniform4fv(this.unifColor,e)}setTime(e){this.use(),this.unifTime!==-1&&m.uniform1f(this.unifTime,e)}setFireballParams(e){this.use(),this.unifLowFreqAmp!==-1&&m.uniform1f(this.unifLowFreqAmp,e.displacement),this.unifLowFreqScale!==-1&&m.uniform1f(this.unifLowFreqScale,e.lobeScale),this.unifFbmAmp!==-1&&m.uniform1f(this.unifFbmAmp,e.detail),this.unifFbmScale!==-1&&m.uniform1f(this.unifFbmScale,e.detailScale),this.unifOctaves!==-1&&m.uniform1i(this.unifOctaves,e.octaves),this.unifRoilSpeed!==-1&&m.uniform1f(this.unifRoilSpeed,e.roilSpeed),this.unifPulsePeriod!==-1&&m.uniform1f(this.unifPulsePeriod,e.pulsePeriod),this.unifPulseStrength!==-1&&m.uniform1f(this.unifPulseStrength,e.pulseStrength),this.unifHeat!==-1&&m.uniform1f(this.unifHeat,e.heat),this.unifFlow!==-1&&m.uniform1f(this.unifFlow,e.flow),this.unifBandBlend!==-1&&m.uniform1f(this.unifBandBlend,e.bandBlend),this.unifFlameHeight!==-1&&m.uniform1f(this.unifFlameHeight,e.flameHeight),this.unifTaper!==-1&&m.uniform1f(this.unifTaper,e.taper),this.unifBands!==-1&&m.uniform1f(this.unifBands,e.bands)}setCurvature(e){this.use(),this.unifCurvature!==-1&&m.uniform1f(this.unifCurvature,e)}setCameraPos(e){this.use(),this.unifCameraPos!==-1&&m.uniform3fv(this.unifCameraPos,e)}setDimensions(e,t){this.use(),this.unifDimensions!==-1&&m.uniform2f(this.unifDimensions,e,t)}setBackgroundParams(e){this.use(),this.unifHorizon!==-1&&m.uniform1f(this.unifHorizon,e.horizon),this.unifAtmosphere!==-1&&m.uniform1f(this.unifAtmosphere,e.atmosphere)}setBackgroundView(e){this.use(),this.unifPan!==-1&&m.uniform1f(this.unifPan,e.pan),this.unifZoom!==-1&&m.uniform1f(this.unifZoom,e.zoom),this.unifCloudZoom!==-1&&m.uniform1f(this.unifCloudZoom,e.cloudZoom),this.unifSpin!==-1&&m.uniform1f(this.unifSpin,e.spin),this.unifCloudDrift!==-1&&m.uniform1f(this.unifCloudDrift,e.cloudDrift),this.unifFog!==-1&&m.uniform1f(this.unifFog,e.fog),this.unifFade!==-1&&m.uniform1f(this.unifFade,e.fade)}draw(e){this.use(),this.attrPos!=-1&&e.bindPos()&&(m.enableVertexAttribArray(this.attrPos),m.vertexAttribPointer(this.attrPos,4,m.FLOAT,!1,0,0)),this.attrNor!=-1&&e.bindNor()&&(m.enableVertexAttribArray(this.attrNor),m.vertexAttribPointer(this.attrNor,4,m.FLOAT,!1,0,0)),e.bindIdx(),m.drawElements(e.drawMode(),e.elemCount(),m.UNSIGNED_INT,0),this.attrPos!=-1&&m.disableVertexAttribArray(this.attrPos),this.attrNor!=-1&&m.disableVertexAttribArray(this.attrNor)}},P=`#version 300 es
 
 //This is a vertex shader. While it is called a "shader" due to outdated conventions, this file
 //is used to apply matrix transformations to the arrays of vertex data passed to it.
@@ -366,7 +366,7 @@ void main()
     gl_Position = u_ViewProj * modelposition;// gl_Position is a built-in variable of OpenGL which is
                                              // used to render the final positions of the geometry's vertices
 }
-`,A=`#version 300 es
+`,F=`#version 300 es
 
 // This is a fragment shader. If you've opened this file first, please
 // open and read lambert.vert.glsl before reading on.
@@ -641,7 +641,7 @@ void main()
     // the comet rather than painting over it.
     out_Col = vec4(color * glow * u_Color.rgb, 1.0);
 }
-`,j=`#version 300 es
+`,I=`#version 300 es
 
 // The background is drawn as a single full-screen quad. The Square's vertices
 // are already in normalized device coordinates, so they go straight to
@@ -661,7 +661,7 @@ void main()
     // pins this quad to the screen while the camera orbits the flame.
     gl_Position = vs_Pos;
 }
-`,M=`#version 300 es
+`,L=`#version 300 es
 
 // Procedural background: an Earth-sized sphere filling the lower part of the
 // frame, its atmosphere fading up into starfield. Nothing here is textured or
@@ -669,10 +669,23 @@ void main()
 // screen, shaded as a sphere and surfaced with noise.
 precision highp float;
 
-uniform float u_Time;        // Seconds since start, for cloud drift and star twinkle.
+uniform float u_Time;        // Seconds since start, for star twinkle.
 uniform vec2  u_Dimensions;  // Canvas size in pixels, used only for the aspect ratio.
 uniform float u_Horizon;     // Screen height at which the limb crosses the centre line.
 uniform float u_Atmosphere;  // Thickness of the atmospheric halo, as a fraction of the radius.
+
+// The scroll-driven landing, set from Descent.ts. At the top of the page they
+// leave the scene exactly as the standalone project drew it: no pan, both zooms
+// 1, no fog, no fade.
+uniform float u_Pan;         // 0 at rest, 1 once the camera looks straight at the planet's centre.
+uniform float u_Zoom;        // Magnification of the ground, about the middle of the screen.
+uniform float u_CloudZoom;   // Magnification of the cloud layer. It is nearer the camera, so it
+                             // grows faster than the ground: the parallax that makes the zoom
+                             // read as a fall rather than a picture being enlarged.
+uniform float u_Spin;        // How far the planet has turned, in radians.
+uniform float u_CloudDrift;  // How far the clouds have drifted through their noise.
+uniform float u_Fog;         // 0 to 1: the white-out of dropping through the cloud deck.
+uniform float u_Fade;        // 0 to 1: the blend into the page's own background colour.
 
 in vec2 fs_Pos;
 
@@ -700,6 +713,16 @@ const vec3 OCEAN_SHALLOW = vec3(0.034, 0.125, 0.305);
 const vec3 LAND          = vec3(0.115, 0.120, 0.105);
 const vec3 CLOUD         = vec3(0.920, 0.940, 0.970);
 const vec3 SKY           = vec3(0.350, 0.620, 1.000); // atmospheric scattering tint
+const vec3 FOG           = vec3(0.955, 0.965, 0.980); // inside the cloud deck
+const vec3 PAGE          = vec3(250.0 / 255.0);       // the content page's background, rgb(250, 250, 250)
+
+// The stars and the sun are far beyond the planet, so while the camera pans
+// they slide by at only this fraction of its speed.
+const float SKY_PARALLAX = 0.2;
+
+// Zooming in adds octaves of noise so the surface keeps its detail; this caps
+// how many, since by the deepest zoom the fog covers everything anyway.
+const int MAX_OCTAVES = 11;
 
 // ---------------------------------------------------------------------------
 // Noise. GLSL has no include mechanism, so this is the same value-noise
@@ -740,18 +763,39 @@ float valueNoise(vec3 p)
                u.z);
 }
 
-float fbm(vec3 p, int octaves)
+// The octave count is fractional: the last octave fades in by its fraction, so
+// detail grows smoothly with the zoom instead of popping in an octave at a time.
+float fbm(vec3 p, float octaves)
 {
     float sum = 0.0, amp = 0.5, freq = 1.0, norm = 0.0;
-    for (int i = 0; i < 6; ++i)
+    for (int i = 0; i < MAX_OCTAVES; ++i)
     {
-        if (i >= octaves) break;
-        sum  += amp * valueNoise(p * freq + float(i) * 17.3);
-        norm += amp;
+        float weight = clamp(octaves - float(i), 0.0, 1.0);
+        if (weight <= 0.0) break;
+        sum  += weight * amp * valueNoise(p * freq + float(i) * 17.3);
+        norm += weight * amp;
         amp  *= 0.5;
         freq *= 2.0;
     }
     return sum / norm;
+}
+
+vec2 rotate2(vec2 v, float a)
+{
+    float c = cos(a), s = sin(a);
+    return vec2(v.x * c - v.y * s, v.x * s + v.y * c);
+}
+
+// The point on the planet under a scene position, as a unit normal: the sphere
+// reconstructed from the disc coordinate, then turned about the pole by the
+// planet's spin. \`toward\` is measured from the planet's centre.
+vec3 surfacePoint(vec2 toward)
+{
+    vec2  uv = toward / EARTH_RADIUS;
+    float z  = sqrt(max(0.0, 1.0 - min(1.0, dot(uv, uv))));
+    vec3  n  = vec3(uv, z);
+    float ca = cos(u_Spin), sa = sin(u_Spin);
+    return vec3(n.x * ca + n.z * sa, n.y, -n.x * sa + n.z * ca);
 }
 
 // One star per grid cell at most, placed at a hashed position inside it. Most
@@ -780,25 +824,30 @@ void main()
 {
     // Aspect-correct screen coordinates: y stays in [-1, 1] and x widens with
     // the canvas, so the planet stays circular at any window shape.
-    vec2 p = fs_Pos;
-    p.x *= u_Dimensions.x / max(1.0, u_Dimensions.y);
+    vec2 screen = fs_Pos;
+    screen.x *= u_Dimensions.x / max(1.0, u_Dimensions.y);
 
-    // Tilt the scene so the limb runs diagonally across the frame.
-    float ct = cos(TILT), st = sin(TILT);
-    vec2  q  = vec2(p.x * ct - p.y * st, p.x * st + p.y * ct);
+    // The scene is tilted so the limb runs diagonally across the frame, which
+    // puts the planet's centre below and a little to the right of the screen.
+    // The camera pans toward that point, then zooms in about the middle.
+    vec2 center = vec2(0.0, u_Horizon - EARTH_RADIUS);
+    vec2 look   = rotate2(center, -TILT) * u_Pan;
+    vec2 p      = look + screen / u_Zoom;
+    vec2 q      = rotate2(p, TILT);
 
-    vec2  center = vec2(0.0, u_Horizon - EARTH_RADIUS);
     vec2  toward = q - center;
     float dist   = length(toward);
     float t      = dist / EARTH_RADIUS;   // exactly 1.0 on the limb
 
     // ---- space ------------------------------------------------------------
+    // Too far away to zoom, and panning past at a fraction of the speed.
+    vec2 sky   = screen + look * SKY_PARALLAX;
     vec3 color = SPACE;
-    color += vec3(1.0, 0.97, 0.93) * starField(q * 28.0);
+    color += vec3(1.0, 0.97, 0.93) * starField(rotate2(sky, TILT) * 28.0);
 
     // A distant sun just off the top-right corner. It is the same direction
     // that lights the planet, so the whole frame agrees on where the light is.
-    float sunDist = length(p - vec2(1.35, 0.78));
+    float sunDist = length(sky - vec2(1.35, 0.78));
     color += vec3(1.0, 0.95, 0.88) * 0.16 / (1.0 + 26.0 * sunDist * sunDist);
 
     // ---- atmosphere -------------------------------------------------------
@@ -821,21 +870,32 @@ void main()
     float z  = sqrt(max(0.0, 1.0 - min(1.0, dot(uv, uv))));
     vec3  n  = vec3(uv, z);
 
-    // Turn the lookup slowly about the pole so the planet rotates under us.
-    float a  = u_Time * 0.012;
-    float ca = cos(a), sa = sin(a);
-    vec3  sp = vec3(n.x * ca + n.z * sa, n.y, -n.x * sa + n.z * ca);
+    // The lookup turns slowly about the pole so the planet rotates under us.
+    vec3 sp = surfacePoint(toward);
 
-    float continents = fbm(sp * 1.8, 4);
+    // Every doubling of the zoom gets another octave, so the coastlines keep
+    // their detail all the way down.
+    float continents = fbm(sp * 1.8, 4.0 + log2(u_Zoom));
     vec3  surface    = mix(OCEAN_DEEP, OCEAN_SHALLOW, smoothstep(0.30, 0.56, continents));
     surface = mix(surface, LAND, smoothstep(0.54, 0.62, continents));
 
     // Clouds are a second, finer field drifting at its own rate, so they slide
     // over the continents instead of being locked to them. Two layers at
-    // different scales keep the banks from reading as one blurry blob.
-    vec3  cloudPos = sp * 6.5 + vec3(0.0, 0.0, u_Time * 0.02);
-    float clouds   = fbm(cloudPos, 5) * 0.72 + fbm(cloudPos * 2.7, 4) * 0.28;
-    surface = mix(surface, CLOUD, smoothstep(0.47, 0.66, clouds) * 0.88);
+    // different scales keep the banks from reading as one blurry blob. They
+    // sit nearer the camera than the ground, so they are looked up through
+    // their own, faster zoom.
+    vec2  cloudToward = rotate2(look + screen / u_CloudZoom, TILT) - center;
+    vec3  cloudPos    = surfacePoint(cloudToward) * 6.5 + vec3(0.0, 0.0, u_CloudDrift);
+    float cloudDetail = log2(u_CloudZoom);
+    float clouds      = fbm(cloudPos, 5.0 + cloudDetail) * 0.72
+                      + fbm(cloudPos * 2.7, 4.0 + cloudDetail) * 0.28;
+    // Nearing the deck, the clouds thicken: they spread out from the banks into
+    // the gaps until they close over entirely, so the camera flies into them
+    // rather than just watching the picture turn white. Measured in doublings
+    // of the cloud zoom, which is how the approach to the deck feels.
+    float approach   = clamp((log2(u_CloudZoom) - 2.0) / 4.5, 0.0, 1.0);
+    float cloudCover = smoothstep(0.47, 0.66, clouds + 0.3 * approach);
+    surface = mix(surface, CLOUD, cloudCover * 0.88);
 
     // Wrapped diffuse. A hard terminator would put half the disc in shadow; the
     // reference is lit from over the shoulder with the night side out of frame.
@@ -848,6 +908,15 @@ void main()
     // looking straight down, so the last sliver of the disc washes out to blue.
     surface = mix(surface, SKY * 1.3, smoothstep(0.88, 1.0, t) * 0.8 * light);
 
+    // Falling into the atmosphere puts more and more air between the camera and
+    // the ground, so the view hazes over to a lighter blue on the way down.
+    float haze = clamp(log2(u_Zoom) / 4.0, 0.0, 1.0);
+    surface = mix(surface, SKY * 0.75, haze * 0.35);
+
+    // And the nearer the cloud tops, the more they read as the brilliant white
+    // they are in full sun, rather than the dimmed grey of a distant view.
+    surface = mix(surface, FOG, cloudCover * approach * 0.6);
+
     // ---- composite --------------------------------------------------------
     // fwidth gives the edge a one-pixel blend at any resolution, so the limb
     // does not alias into a staircase.
@@ -856,6 +925,19 @@ void main()
 
     color = mix(color, surface, disc);
 
+    // ---- landing ----------------------------------------------------------
+    // Dropping into the cloud deck. The white-out comes in through wisps of it
+    // that swell and slide out past the edges of the screen as the camera
+    // falls, and through the banks already in view before the gaps between
+    // them, so it billows in rather than washing over evenly.
+    float wisps = fbm(vec3(screen * 2.5 / sqrt(u_CloudZoom), 3.7), 4.0);
+    float fog   = clamp(u_Fog * 2.2 - 1.2 + 0.5 * cloudCover + 0.6 * wisps, 0.0, 1.0);
+    color = mix(color, FOG, fog);
+
+    // Then settle on the page's own background, exactly, so the content
+    // section below carries on from the canvas with no visible seam.
+    color = mix(color, PAGE, u_Fade);
+
     out_Col = vec4(color, 1.0);
 }
-`,N=1.5,P=16,F=6.5,I=.75,L=290,R=.3,z=.5,B=c(0,0,100),V={tesselations:5,displacement:.18,lobeScale:1.2,detail:.37,detailScale:6,octaves:5,roilSpeed:1.1,pulsePeriod:4.7,pulseStrength:.59,heat:.5,flow:.42,bandBlend:.79,flameHeight:1.5,taper:.12,bands:0,horizon:-.3,atmosphere:.028};function H(e){let t=new O([new D(e.VERTEX_SHADER,k),new D(e.FRAGMENT_SHADER,A)]),n=new _(c(0,0,0),1,V.tesselations);return n.create(),{lambert:t,icosphere:n}}function U(){let e=document.getElementById(`hero-canvas`);if(!e)return;let n=e.getContext(`webgl2`);if(!n)return;h(n);let r=new v(c(0,0,0));r.create();let s=new y(e);s.setClearColor(.004,.006,.014,1);let l=new O([new D(n.VERTEX_SHADER,j),new D(n.FRAGMENT_SHADER,M)]),u=H(n),d=new T,f={...V},p=t(),m=t(),g=0,_=0,b=!1,x=-1;window.addEventListener(`pointermove`,e=>{e.pointerType===`mouse`&&(g=e.clientX,_=e.clientY,b=!0)},{passive:!0});function S(){let t=Math.min(window.devicePixelRatio||1,N),n=Math.max(1,Math.round(e.clientWidth*t)),r=Math.max(1,Math.round(e.clientHeight*t));(e.width!==n||e.height!==r)&&s.setSize(n,r)}let C=performance.now(),w=0,E=0;function k(){S();let t=(performance.now()-C)*.001,c=Math.min(t-w,.1);w=t,n.viewport(0,0,e.width,e.height),s.clear(),n.disable(n.DEPTH_TEST),l.setTime(t),l.setDimensions(e.width,e.height),l.setBackgroundParams(V),l.draw(r);let h=e.getBoundingClientRect();if(u&&b&&h.width>=1&&h.height>=1){let e=g-h.left,r=h.bottom-_;x<0&&(d.reset(e,r),x=t),d.update(e,r,c,t);let l=1-Math.exp(-d.speed/L);f.flameHeight=V.flameHeight+(F-V.flameHeight)*l,f.taper=V.taper+(I-V.taper)*l;let v=Math.min(1,(t-x)/z),y=P*v*v*(3-2*v);a(p,[2*d.x/h.width-1,2*d.y/h.height-1,0]),i(p,p,[2*y/h.width,2*y/h.height,-.1]),o(m,Math.atan2(d.vx,-d.vy));let b=Math.max(-.3,Math.min(R,d.curvature*P));n.enable(n.BLEND),n.blendFunc(n.ONE,n.ONE),u.lambert.setTime(t),u.lambert.setFireballParams(f),u.lambert.setCurvature(b),s.render(p,m,B,u.lambert,[u.icosphere]),n.disable(n.BLEND)}E=requestAnimationFrame(k)}new IntersectionObserver(e=>{let t=e[e.length-1].isIntersecting;t&&!E?E=requestAnimationFrame(k):!t&&E&&(cancelAnimationFrame(E),E=0)}).observe(e)}U();
+`,R=1.5,z=.012,B=.02,V=12,H=16,U=6.5,W=.75,G=290,K=.3,q=.5,J=c(0,0,100),Y={tesselations:5,displacement:.18,lobeScale:1.2,detail:.37,detailScale:6,octaves:5,roilSpeed:1.1,pulsePeriod:4.7,pulseStrength:.59,heat:.5,flow:.42,bandBlend:.79,flameHeight:1.5,taper:.12,bands:0,horizon:-.3,atmosphere:.028};function X(e){let t=new N([new M(e.VERTEX_SHADER,P),new M(e.FRAGMENT_SHADER,F)]),n=new _(c(0,0,0),1,Y.tesselations);return n.create(),{lambert:t,icosphere:n}}function Z(){let e=document.getElementById(`hero-canvas`);if(!e)return;let n=e.getContext(`webgl2`);if(!n)return;h(n);let r=new v(c(0,0,0));r.create();let s=new y(e);s.setClearColor(.004,.006,.014,1);let l=new N([new M(n.VERTEX_SHADER,I),new M(n.FRAGMENT_SHADER,L)]),u=X(n),d=new T,f={...Y},p=t(),m=t(),g=0,_=0,b=!1,x=-1;window.addEventListener(`pointermove`,e=>{e.pointerType===`mouse`&&(g=e.clientX,_=e.clientY,b=!0)},{passive:!0});function S(){let t=Math.min(window.devicePixelRatio||1,R),n=Math.max(1,Math.round(e.clientWidth*t)),r=Math.max(1,Math.round(e.clientHeight*t));(e.width!==n||e.height!==r)&&s.setSize(n,r)}let C=e.closest(`.home-hero`)||e,w={pan:0,zoom:1,cloudZoom:1,spin:0,cloudDrift:0,fog:0,fade:0},E=-1,D=performance.now(),O=0,k=0;function j(){S();let t=(performance.now()-D)*.001,c=Math.min(t-O,.1);O=t,n.viewport(0,0,e.width,e.height),s.clear();let h=C.getBoundingClientRect(),v=e.getBoundingClientRect(),y=h.height-v.height,T=y>0?Math.min(1,Math.max(0,-h.top/y)):0;E=E<0?T:E+(T-E)*(1-Math.exp(-c*V));let M=A(E);if(w.pan=M.pan,w.zoom=M.zoom,w.cloudZoom=M.cloudZoom,w.fog=M.fog,w.fade=M.fade,w.spin+=c*z/M.zoom,w.cloudDrift+=c*B/M.cloudZoom,n.disable(n.DEPTH_TEST),l.setTime(t),l.setDimensions(e.width,e.height),l.setBackgroundParams(Y),l.setBackgroundView(w),l.draw(r),u&&b&&M.comet>0&&v.width>=1&&v.height>=1){let e=g-v.left,r=v.bottom-_;x<0&&(d.reset(e,r),x=t),d.update(e,r,c,t);let l=1-Math.exp(-d.speed/G);f.flameHeight=Y.flameHeight+(U-Y.flameHeight)*l,f.taper=Y.taper+(W-Y.taper)*l;let h=Math.min(1,(t-x)/q),y=H*h*h*(3-2*h);a(p,[2*d.x/v.width-1,2*d.y/v.height-1,0]),i(p,p,[2*y/v.width,2*y/v.height,-.1]),o(m,Math.atan2(d.vx,-d.vy));let b=Math.max(-.3,Math.min(K,d.curvature*H));n.enable(n.BLEND),n.blendFunc(n.ONE,n.ONE),u.lambert.setTime(t),u.lambert.setFireballParams(f),u.lambert.setCurvature(b),s.render(p,m,J,u.lambert,[u.icosphere],M.comet),n.disable(n.BLEND)}k=requestAnimationFrame(j)}new IntersectionObserver(e=>{let t=e[e.length-1].isIntersecting;t&&!k?k=requestAnimationFrame(j):!t&&k&&(cancelAnimationFrame(k),k=0)}).observe(e)}Z();

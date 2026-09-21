@@ -23,11 +23,12 @@ class OpenGLRenderer {
 
   // `viewProj` places and sizes the drawables on screen, `model` turns them,
   // and `eye` is the world-space eye position the rim glow looks back toward.
+  // `brightness` dims them, for fading out.
   render(viewProj: mat4, model: mat4, eye: vec3, prog: ShaderProgram,
-         drawables: Array<Drawable>) {
-    // The fireball's fragment shader supplies its own fire gradient and treats
-    // this as a tint, so a neutral white leaves that palette as authored.
-    let color = vec4.fromValues(1, 1, 1, 1);
+         drawables: Array<Drawable>, brightness: number = 1) {
+    // The fireball's fragment shader supplies its own gradient and treats this
+    // as a tint, so a neutral white leaves that palette as authored.
+    let color = vec4.fromValues(brightness, brightness, brightness, 1);
 
     prog.setModelMatrix(model);
     prog.setViewProjMatrix(viewProj);

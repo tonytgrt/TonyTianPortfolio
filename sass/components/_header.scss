@@ -5,6 +5,8 @@
   background: #000;
   background: #fff;
   box-shadow: 0 10px 100px rgba(0, 0, 0, 0.1);
+  // For sliding in and out over the home page's hero, below.
+  transition: transform .4s, opacity .4s, visibility .4s;
 
   &__content {
     display: flex;
@@ -145,4 +147,12 @@
   &__sm-menu-link-last {
     border-bottom: 0;
   }
+}
+
+// On the home page the header stays out of the space scene and slides in once
+// the landing hands over to the content (index.js adds `landed` to the body).
+.has-hero:not(.landed) .header {
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
 }

@@ -10,6 +10,17 @@ export interface BackgroundParams {
   atmosphere: number;   // u_Atmosphere
 }
 
+// Where the camera is in the scroll-driven landing, read by background-frag.glsl.
+export interface BackgroundView {
+  pan: number;          // u_Pan
+  zoom: number;         // u_Zoom
+  cloudZoom: number;    // u_CloudZoom
+  spin: number;         // u_Spin
+  cloudDrift: number;   // u_CloudDrift
+  fog: number;          // u_Fog
+  fade: number;         // u_Fade
+}
+
 // The shape parameters the fireball's vertex shader reads. `params` in main.ts
 // satisfies this.
 export interface FireballParams {
@@ -74,6 +85,13 @@ class ShaderProgram {
   unifDimensions: WebGLUniformLocation;
   unifHorizon: WebGLUniformLocation;
   unifAtmosphere: WebGLUniformLocation;
+  unifPan: WebGLUniformLocation;
+  unifZoom: WebGLUniformLocation;
+  unifCloudZoom: WebGLUniformLocation;
+  unifSpin: WebGLUniformLocation;
+  unifCloudDrift: WebGLUniformLocation;
+  unifFog: WebGLUniformLocation;
+  unifFade: WebGLUniformLocation;
 
   constructor(shaders: Array<Shader>) {
     this.prog = gl.createProgram();
@@ -115,6 +133,14 @@ class ShaderProgram {
     this.unifDimensions    = gl.getUniformLocation(this.prog, "u_Dimensions");
     this.unifHorizon       = gl.getUniformLocation(this.prog, "u_Horizon");
     this.unifAtmosphere    = gl.getUniformLocation(this.prog, "u_Atmosphere");
+
+    this.unifPan           = gl.getUniformLocation(this.prog, "u_Pan");
+    this.unifZoom          = gl.getUniformLocation(this.prog, "u_Zoom");
+    this.unifCloudZoom     = gl.getUniformLocation(this.prog, "u_CloudZoom");
+    this.unifSpin          = gl.getUniformLocation(this.prog, "u_Spin");
+    this.unifCloudDrift    = gl.getUniformLocation(this.prog, "u_CloudDrift");
+    this.unifFog           = gl.getUniformLocation(this.prog, "u_Fog");
+    this.unifFade          = gl.getUniformLocation(this.prog, "u_Fade");
   }
 
   use() {
@@ -240,6 +266,31 @@ class ShaderProgram {
     }
     if (this.unifAtmosphere !== -1) {
       gl.uniform1f(this.unifAtmosphere, p.atmosphere);
+    }
+  }
+
+  setBackgroundView(v: BackgroundView) {
+    this.use();
+    if (this.unifPan !== -1) {
+      gl.uniform1f(this.unifPan, v.pan);
+    }
+    if (this.unifZoom !== -1) {
+      gl.uniform1f(this.unifZoom, v.zoom);
+    }
+    if (this.unifCloudZoom !== -1) {
+      gl.uniform1f(this.unifCloudZoom, v.cloudZoom);
+    }
+    if (this.unifSpin !== -1) {
+      gl.uniform1f(this.unifSpin, v.spin);
+    }
+    if (this.unifCloudDrift !== -1) {
+      gl.uniform1f(this.unifCloudDrift, v.cloudDrift);
+    }
+    if (this.unifFog !== -1) {
+      gl.uniform1f(this.unifFog, v.fog);
+    }
+    if (this.unifFade !== -1) {
+      gl.uniform1f(this.unifFade, v.fade);
     }
   }
 

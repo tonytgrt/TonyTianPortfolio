@@ -55,6 +55,14 @@ project, TypeScript + GLSL): a procedural planet with a comet circling the mouse
 cursor. Vite builds it into `js/fireball.js` (`npm run build:fireball`, or
 `npm run watch:fireball` while working on it).
 
+The home page's hero is a tall scroll track with the canvas pinned in it.
+Scrolling through it plays a landing: the camera pans to the planet, falls
+through the clouds and whites out into the About section. The timeline is in
+`fireball/src/Descent.ts`, and the track's length (`$heroTravel`) and how far
+About overlaps its end (`$heroOverlap`) are in `sass/pages/_home.scss`. The
+header and the social links are hidden until the landing ends: `index.js` adds
+`landed` to the body.
+
 ### Cache busting
 The site sits behind Cloudflare, which caches CSS, JS and images for hours.
 Every local asset reference in the pages (and every `url()` in the CSS) carries

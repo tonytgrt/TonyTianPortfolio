@@ -7,7 +7,7 @@
     <title>Tony Yiding Tian's Portfolio</title>
     <meta name="description" content="Portfolio of Tony Yiding Tian - Computer Graphics & Game Technology Engineer specializing in GPU programming, real-time rendering, and high-performance computing at University of Pennsylvania" />
 
-    <link rel="stylesheet" href="css/style.css?v=c65ad3e9" />
+    <link rel="stylesheet" href="css/style.css?v=b817086d" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +16,7 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class="has-hero">
     <header class="header">
       <div class="header__content">
         <div class="header__logo-container">
@@ -90,42 +90,46 @@
       </div>
     </header>
     <section class="home-hero">
-      <canvas id="hero-canvas" class="home-hero__canvas" aria-hidden="true"></canvas>
-      <div class="home-hero__content">
-        <h1 class="heading-primary">Tony Tian</h1>
-        <div class="home-hero__info">
-          <p class="text-primary">
-            Computer Graphics & Computer Engineering @ UPenn
-          </p>
-        </div>
-        <!-- <div class="home-hero__cta">
-          <a href="./#projects" class="btn btn--bg">Projects</a>
-        </div> -->
+      <div class="home-hero__stage">
+        <canvas id="hero-canvas" class="home-hero__canvas" aria-hidden="true"></canvas>
       </div>
-      <div class="home-hero__socials">
-        <div class="home-hero__social">
-          <a href="https://linkedin.com/in/ytian1109" class="home-hero__social-icon-link">
-            <img
-              src="./assets/png/linkedin-ico.png?v=c2ee22db"
-              alt="icon"
-              class="home-hero__social-icon"
-            />
-          </a>
+      <div class="home-hero__intro">
+        <div class="home-hero__content">
+          <h1 class="heading-primary">Tony Tian</h1>
+          <div class="home-hero__info">
+            <p class="text-primary">
+              Computer Graphics & Computer Engineering @ UPenn
+            </p>
+          </div>
+          <!-- <div class="home-hero__cta">
+            <a href="./#projects" class="btn btn--bg">Projects</a>
+          </div> -->
         </div>
-        <div class="home-hero__social">
-          <a href="https://github.com/tonytgrt" class="home-hero__social-icon-link">
-            <img
-              src="./assets/png/github-ico.png?v=df69e520"
-              alt="icon"
-              class="home-hero__social-icon"
-            />
-          </a>
+        <div class="home-hero__mouse-scroll-cont">
+          <div class="mouse"></div>
         </div>
-      </div>
-      <div class="home-hero__mouse-scroll-cont">
-        <div class="mouse"></div>
       </div>
     </section>
+    <div class="socials">
+      <div class="socials__item">
+        <a href="https://linkedin.com/in/ytian1109" class="socials__link">
+          <img
+            src="./assets/png/linkedin-ico.png?v=c2ee22db"
+            alt="icon"
+            class="socials__icon"
+          />
+        </a>
+      </div>
+      <div class="socials__item">
+        <a href="https://github.com/tonytgrt" class="socials__link">
+          <img
+            src="./assets/png/github-ico.png?v=df69e520"
+            alt="icon"
+            class="socials__icon"
+          />
+        </a>
+      </div>
+    </div>
     <section id="about" class="about sec-pad">
       <div class="main-container">
         <h2 class="heading heading-sec heading-sec__mb-med">
@@ -443,7 +447,7 @@
       </div>
     </footer>
 
-    <script src="./index.js?v=b533550c"></script>
-    <script type="module" src="./js/fireball.js?v=fc099ce7"></script>
+    <script src="./index.js?v=8fcc5610"></script>
+    <script type="module" src="./js/fireball.js?v=c5cdf4f7"></script>
   </body>
 </html>

@@ -8,8 +8,9 @@ import Icosphere from './geometry/Icosphere';
 import Square from './geometry/Square';
 import OpenGLRenderer from './rendering/gl/OpenGLRenderer';
 import Comet from './Comet';
+import {descentView} from './Descent';
 import {setGL} from './globals';
-import ShaderProgram, {Shader, FireballParams, BackgroundParams} from './rendering/gl/ShaderProgram';
+import ShaderProgram, {Shader, FireballParams, BackgroundParams, BackgroundView} from './rendering/gl/ShaderProgram';
 
 import lambertVertSource from './shaders/lambert-vert.glsl?raw';
 import lambertFragSource from './shaders/lambert-frag.glsl?raw';
@@ -22,6 +23,17 @@ const SHOW_FIREBALL = true;
 // Full device resolution on a high-DPI screen quadruples the fragment work for
 // a backdrop that is mostly soft noise, so the pixel ratio is capped.
 const MAX_PIXEL_RATIO = 1.5;
+
+// How fast the planet turns and its clouds drift, as seen from where the
+// landing starts. Both are divided by the zoom as the camera falls, so the
+// ground doesn't race past once it is magnified.
+const SPIN_RATE = 0.012;
+const CLOUD_DRIFT_RATE = 0.02;
+
+// How quickly the landing catches up with the scroll position, per second.
+// A mouse wheel scrolls in steps; following them this way turns each one into
+// a short glide instead of a jump.
+const SCROLL_SMOOTHING = 12;
 
 // Radius of the comet's head in CSS pixels. Its glow thins out toward the edge,
 // so the bright part of the head reads a little smaller than this.
@@ -136,9 +148,8 @@ function main() {
     }
   }, {passive: true});
 
-  // Match the drawing buffer to the canvas's CSS size, which follows the hero
-  // section rather than the window. Checked every frame, so a resize, a change
-  // of pixel ratio, or the hero's own min/max height all come out right.
+  // Match the drawing buffer to the canvas's CSS size. Checked every frame, so
+  // a resize or a change of pixel ratio comes out right.
   function resize() {
     const ratio = Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO);
     const width = Math.max(1, Math.round(canvas.clientWidth * ratio));
@@ -148,6 +159,14 @@ function main() {
     }
     renderer.setSize(width, height);
   }
+
+  // The hero is a tall track the canvas stays pinned in while the visitor
+  // scrolls through it, and how far through it they are drives the landing.
+  const hero = canvas.closest<HTMLElement>('.home-hero') || canvas;
+  const view: BackgroundView = {
+    pan: 0, zoom: 1, cloudZoom: 1, spin: 0, cloudDrift: 0, fog: 0, fade: 0,
+  };
+  let progress = -1;
 
   const startTime = performance.now();
   let lastTime = 0;
@@ -165,6 +184,27 @@ function main() {
     gl.viewport(0, 0, canvas.width, canvas.height);
     renderer.clear();
 
+    // 0 at the top of the page, 1 where the content takes over. The canvas is
+    // pinned the whole way, so the distance scrolled through is the hero's
+    // height less the canvas's. The first frame starts where the page already
+    // is, so a reload halfway down doesn't replay the landing.
+    const heroRect = hero.getBoundingClientRect();
+    const rect = canvas.getBoundingClientRect();
+    const travel = heroRect.height - rect.height;
+    const target = travel > 0 ? Math.min(1, Math.max(0, -heroRect.top / travel)) : 0;
+    progress = progress < 0
+      ? target
+      : progress + (target - progress) * (1 - Math.exp(-dt * SCROLL_SMOOTHING));
+
+    const descent = descentView(progress);
+    view.pan = descent.pan;
+    view.zoom = descent.zoom;
+    view.cloudZoom = descent.cloudZoom;
+    view.fog = descent.fog;
+    view.fade = descent.fade;
+    view.spin += dt * SPIN_RATE / descent.zoom;
+    view.cloudDrift += dt * CLOUD_DRIFT_RATE / descent.cloudZoom;
+
     // The background is a screen-space quad drawn before anything else. With
     // the depth test off it neither tests nor writes depth, so it can never
     // occlude the flame no matter where the camera is.
@@ -172,10 +212,10 @@ function main() {
     background.setTime(time);
     background.setDimensions(canvas.width, canvas.height);
     background.setBackgroundParams(params);
+    background.setBackgroundView(view);
     background.draw(square);
 
-    const rect = canvas.getBoundingClientRect();
-    if (fireball && hasPointer && rect.width >= 1 && rect.height >= 1) {
+    if (fireball && hasPointer && descent.comet > 0 && rect.width >= 1 && rect.height >= 1) {
       // The cursor in the comet's coordinates: CSS pixels from the canvas's
       // bottom-left corner, y up. Read fresh each frame, since scrolling moves
       // the canvas under a mouse that hasn't moved.
@@ -213,7 +253,8 @@ function main() {
       fireball.lambert.setTime(time);
       fireball.lambert.setFireballParams(shape);
       fireball.lambert.setCurvature(curvature);
-      renderer.render(viewProj, model, EYE, fireball.lambert, [fireball.icosphere]);
+      renderer.render(viewProj, model, EYE, fireball.lambert, [fireball.icosphere],
+                      descent.comet);
       gl.disable(gl.BLEND);
     }
 
