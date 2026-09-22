@@ -70,6 +70,12 @@ hero paints its space colour only until the `webgl` class is set, which
 `main.ts` does once the first frame is drawn. The header and the social links are hidden
 until the landing ends: `index.js` adds `landed` to the body.
 
+The home page has no footer beyond a copyright line. It ends in `.finale`,
+another tall track: once the last content has scrolled away, scrolling
+through it pitches the camera up from the sea to the horizon as night falls,
+and the copyright sits at its very bottom. Its length is `$finaleTravel` in
+`sass/pages/_home.scss`. The project pages keep the old `.main-footer`.
+
 ### Cache busting
 The site sits behind Cloudflare, which caches CSS, JS and images for hours.
 Every local asset reference in the pages (and every `url()` in the CSS) carries

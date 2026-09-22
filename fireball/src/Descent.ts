@@ -37,7 +37,7 @@ function span(x: number, a: number, b: number) {
 }
 
 // Eased in and out, so no stage starts or stops with a jolt.
-function ease(x: number) {
+export function ease(x: number) {
   return x * x * (3 - 2 * x);
 }
 

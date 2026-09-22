@@ -4,9 +4,13 @@
 $heroTravel: 250vh;
 
 // How far the section after the hero rides up over the end of that track. It
-// arrives during the white-out, so its content rises out of the clouds rather
-// than after a blank screen.
+// arrives as the sea comes into view, so its content rises out of the landing
+// rather than after a blank screen.
 $heroOverlap: 50vh;
+
+// How far the visitor scrolls, once the content has all gone, while the camera
+// looks up from the sea to the horizon at the end of the page.
+$finaleTravel: 120vh;
 
 .home-hero {
   color: #fff;
@@ -184,6 +188,32 @@ $heroOverlap: 50vh;
           }
         }
       }
+    }
+  }
+}
+
+// The end of the home page: a stretch with nothing on it. Its first screen is
+// the last of the content scrolling away over the sea; the rest is where the
+// camera looks up to the horizon as night falls (fireball/src/main.ts), with
+// the copyright waiting at the very bottom.
+.finale {
+  height: calc(100vh + #{$finaleTravel});
+  position: relative;
+
+  &__copyright {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 3rem 0;
+    text-align: center;
+    font-size: 1.3rem;
+    color: $themeClrTextBody;
+
+    a {
+      text-decoration: underline;
+      font-weight: bold;
+      margin-left: 2px;
     }
   }
 }

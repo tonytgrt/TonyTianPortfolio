@@ -8,7 +8,7 @@ import Icosphere from './geometry/Icosphere';
 import Square from './geometry/Square';
 import OpenGLRenderer from './rendering/gl/OpenGLRenderer';
 import Comet from './Comet';
-import {descentView} from './Descent';
+import {descentView, ease} from './Descent';
 import {setGL} from './globals';
 import ShaderProgram, {Shader, FireballParams, BackgroundParams, BackgroundView} from './rendering/gl/ShaderProgram';
 
@@ -167,10 +167,15 @@ function main() {
   // The hero is a tall track of scroll the landing plays out over; the canvas
   // itself is fixed behind the whole page.
   const hero = document.querySelector<HTMLElement>('.home-hero');
+  // And the end of the page is another, below the content: once the last of
+  // it has scrolled away, scrolling on looks up from the sea to the horizon
+  // as night falls.
+  const finale = document.querySelector<HTMLElement>('.finale');
   const view: BackgroundView = {
-    pan: 0, zoom: 1, cloudZoom: 1, spin: 0, cloudDrift: 0, inside: 0, scroll: 0,
+    pan: 0, zoom: 1, cloudZoom: 1, spin: 0, cloudDrift: 0, inside: 0, scroll: 0, finale: 0,
   };
   let progress = -1;
+  let finaleProgress = -1;
 
   const startTime = performance.now();
   let lastTime = 0;
@@ -196,9 +201,20 @@ function main() {
       const travel = heroRect.height - rect.height;
       target = travel > 0 ? Math.min(1, Math.max(0, -heroRect.top / travel)) : 0;
     }
-    progress = progress < 0
-      ? target
-      : progress + (target - progress) * (1 - Math.exp(-dt * SCROLL_SMOOTHING));
+    const follow = 1 - Math.exp(-dt * SCROLL_SMOOTHING);
+    progress = progress < 0 ? target : progress + (target - progress) * follow;
+
+    // 0 once the content has all scrolled off the top, 1 at the very bottom
+    // of the page, measured against the visible height so that it gets there.
+    let finaleTarget = 0;
+    if (finale) {
+      const finaleRect = finale.getBoundingClientRect();
+      const travel = finaleRect.height - window.innerHeight;
+      finaleTarget = travel > 0 ? Math.min(1, Math.max(0, -finaleRect.top / travel)) : 0;
+    }
+    finaleProgress = finaleProgress < 0
+      ? finaleTarget
+      : finaleProgress + (finaleTarget - finaleProgress) * follow;
 
     const descent = descentView(progress);
     view.pan = descent.pan;
@@ -206,6 +222,7 @@ function main() {
     view.cloudZoom = descent.cloudZoom;
     view.inside = descent.inside;
     view.scroll = window.scrollY / Math.max(1, rect.height);
+    view.finale = ease(finaleProgress);
     view.spin += dt * SPIN_RATE / descent.zoom;
     view.cloudDrift += dt * CLOUD_DRIFT_RATE / descent.cloudZoom;
 

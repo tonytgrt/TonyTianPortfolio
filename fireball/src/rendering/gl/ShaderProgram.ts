@@ -19,6 +19,7 @@ export interface BackgroundView {
   cloudDrift: number;   // u_CloudDrift
   inside: number;       // u_Inside
   scroll: number;       // u_Scroll
+  finale: number;       // u_Finale
 }
 
 // The shape parameters the fireball's vertex shader reads. `params` in main.ts
@@ -92,6 +93,7 @@ class ShaderProgram {
   unifCloudDrift: WebGLUniformLocation;
   unifInside: WebGLUniformLocation;
   unifScroll: WebGLUniformLocation;
+  unifFinale: WebGLUniformLocation;
 
   constructor(shaders: Array<Shader>) {
     this.prog = gl.createProgram();
@@ -141,6 +143,7 @@ class ShaderProgram {
     this.unifCloudDrift    = gl.getUniformLocation(this.prog, "u_CloudDrift");
     this.unifInside        = gl.getUniformLocation(this.prog, "u_Inside");
     this.unifScroll        = gl.getUniformLocation(this.prog, "u_Scroll");
+    this.unifFinale        = gl.getUniformLocation(this.prog, "u_Finale");
   }
 
   use() {
@@ -291,6 +294,9 @@ class ShaderProgram {
     }
     if (this.unifScroll !== -1) {
       gl.uniform1f(this.unifScroll, v.scroll);
+    }
+    if (this.unifFinale !== -1) {
+      gl.uniform1f(this.unifFinale, v.finale);
     }
   }
 
