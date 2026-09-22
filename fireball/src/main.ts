@@ -27,6 +27,8 @@ const MAX_PIXEL_RATIO = 1.5;
 // Once the landing is over, the ocean behind the content is drawn at less than
 // one pixel per CSS pixel, whatever the screen's density. It is on screen for
 // as long as the visitor reads, and it is soft enough to lose nothing by it.
+// The end of the page goes back to full resolution once the camera starts to
+// look up, for the horizon, the stars and the face of the moon.
 const OCEAN_PIXEL_RATIO = 0.75;
 
 // How fast the planet turns and its clouds drift, as seen from where the
@@ -167,14 +169,15 @@ function main() {
   // The hero is a tall track of scroll the landing plays out over; the canvas
   // itself is fixed behind the whole page.
   const hero = document.querySelector<HTMLElement>('.home-hero');
-  // And the end of the page is another, below the content: once the last of
-  // it has scrolled away, scrolling on looks up from the sea to the horizon
-  // as night falls.
+  // And the end of the page is another, below the content: night falls as
+  // the last of it scrolls away, and once it has gone, scrolling on looks up
+  // from the sea to the horizon.
   const finale = document.querySelector<HTMLElement>('.finale');
   const view: BackgroundView = {
-    pan: 0, zoom: 1, cloudZoom: 1, spin: 0, cloudDrift: 0, inside: 0, scroll: 0, finale: 0,
+    pan: 0, zoom: 1, cloudZoom: 1, spin: 0, cloudDrift: 0, inside: 0, scroll: 0, night: 0, finale: 0,
   };
   let progress = -1;
+  let nightProgress = -1;
   let finaleProgress = -1;
 
   const startTime = performance.now();
@@ -204,14 +207,22 @@ function main() {
     const follow = 1 - Math.exp(-dt * SCROLL_SMOOTHING);
     progress = progress < 0 ? target : progress + (target - progress) * follow;
 
-    // 0 once the content has all scrolled off the top, 1 at the very bottom
-    // of the page, measured against the visible height so that it gets there.
+    // Night: 0 as the end of the content reaches the bottom of the screen, 1
+    // as it leaves the top, so the sky is all night before the camera looks
+    // up at it. Then the look up: 0 there, 1 at the very bottom of the page,
+    // measured against the visible height so that it gets there.
+    let nightTarget = 0;
     let finaleTarget = 0;
     if (finale) {
       const finaleRect = finale.getBoundingClientRect();
-      const travel = finaleRect.height - window.innerHeight;
+      const screen = window.innerHeight;
+      const travel = finaleRect.height - screen;
+      nightTarget = Math.min(1, Math.max(0, (screen - finaleRect.top) / screen));
       finaleTarget = travel > 0 ? Math.min(1, Math.max(0, -finaleRect.top / travel)) : 0;
     }
+    nightProgress = nightProgress < 0
+      ? nightTarget
+      : nightProgress + (nightTarget - nightProgress) * follow;
     finaleProgress = finaleProgress < 0
       ? finaleTarget
       : finaleProgress + (finaleTarget - finaleProgress) * follow;
@@ -222,13 +233,13 @@ function main() {
     view.cloudZoom = descent.cloudZoom;
     view.inside = descent.inside;
     view.scroll = window.scrollY / Math.max(1, rect.height);
+    view.night = ease(nightProgress);
     view.finale = ease(finaleProgress);
     view.spin += dt * SPIN_RATE / descent.zoom;
     view.cloudDrift += dt * CLOUD_DRIFT_RATE / descent.cloudZoom;
 
-    resize(descent.inside >= 1
-      ? OCEAN_PIXEL_RATIO
-      : Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO));
+    const fullRatio = Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO);
+    resize(descent.inside >= 1 && view.finale <= 0 ? OCEAN_PIXEL_RATIO : fullRatio);
     gl.viewport(0, 0, canvas.width, canvas.height);
     renderer.clear();
 

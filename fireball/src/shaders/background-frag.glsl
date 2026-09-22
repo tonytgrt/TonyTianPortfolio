@@ -23,7 +23,8 @@ uniform float u_Spin;        // How far the planet has turned, in radians.
 uniform float u_CloudDrift;  // How far the clouds have drifted through their noise.
 uniform float u_Inside;      // 0 to 1: from the planet's own ocean to the close view of it.
 uniform float u_Scroll;      // How far the page has scrolled, in screen heights.
-uniform float u_Finale;      // 0 to 1: the end of the page, looking up to the horizon as night falls.
+uniform float u_Night;       // 0 to 1: night falling at the end of the page, as the last content leaves.
+uniform float u_Finale;      // 0 to 1: then the camera looking up from the sea to the horizon.
 
 in vec2 fs_Pos;
 
@@ -310,6 +311,8 @@ const float SEA_PITCH       = 1.40;  // how far below the horizon the camera loo
                                      // reaches a little way out, toward brighter sky
 const float SEA_SCROLL      = 3.0;   // how far the camera flies on per screen of scrolling
 const float SEA_DRIFT       = 0.05;  // how fast it glides on by itself
+const float SEA_RADIUS      = 4000.0; // the planet's, which curves the horizon: from the
+                                      // finale's height it dips about 4 degrees below level
 const float WAVE_SPEED      = 0.35;  // the waves' pace against the original's: a calm sea
 const float OCEAN_EXPOSURE  = 1.1;   // kept low, to stay within the site's dark palette
 
@@ -369,25 +372,34 @@ vec3 daySky(vec3 dir)
 // little so the whole disc fits on a widescreen.
 const vec3  MOON_DIR        = normalize(vec3(1.0, 0.2, 1.0));
 const float MOON_RADIUS     = 0.04;  // radians: far larger than the real one, to be seen
-const float MOON_BRIGHTNESS = 1.8;
+const float MOON_BRIGHTNESS = 2.0;
 const vec3  MOON_COLOR      = vec3(1.0, 0.96, 0.88);
 
-// The light's glitter on the water: a broad lobe off the surface, which the
-// waves break up into a path of glints. The low sun's behind the content,
-// dimmed as it turns into the moon's at the end of the page.
-const float SUN_GLINT  = 210.0;
-const float MOON_GLINT = 50.0;
+// Where the sunlight falls on the moon from, in the screen's terms: from a
+// little to the left of the viewer, so it hangs just past full.
+const vec3  MOON_LIT        = normalize(vec3(-0.5, 0.25, 0.83));
+
+// The light's glitter on the water. Behind the content it is the low sun's:
+// a broad lobe that the waves break up into a wide spread of glints. At the
+// end of the page it is the moon's own disc, mirrored only in the wave faces
+// that happen to catch it, which lays the narrow path of light across the sea
+// that a real moon does.
+const float SUN_GLINT    = 210.0;
+const float MOON_REFLECT = 5.0;
 
 // Where the light on the water comes from: the low sun behind the content,
 // moving to the moon as night falls.
 vec3 lightDir()
 {
-    return normalize(mix(OCEAN_SUN, MOON_DIR, u_Finale));
+    return normalize(mix(OCEAN_SUN, MOON_DIR, u_Night));
 }
 
 float glint(vec3 dir, vec3 light)
 {
-    return pow(max(0.0, dot(dir, light)), 720.0) * mix(SUN_GLINT, MOON_GLINT, u_Finale);
+    float toward = dot(dir, light);
+    float sun    = pow(max(0.0, toward), 720.0) * SUN_GLINT;
+    float moon   = smoothstep(1.1, 0.8, acos(clamp(toward, -1.0, 1.0)) / MOON_RADIUS) * MOON_REFLECT;
+    return mix(sun, moon, u_Night);
 }
 
 // The night sky the page ends under: deep blue overhead, the last of the dusk
@@ -429,9 +441,9 @@ vec3 nightSky(vec3 dir, bool direct, vec3 light)
 }
 
 // The moon's face, where it falls on the screen for a camera pitched down by
-// `pitch`: the darker patches of its seas, and a little darkening toward the
-// rim where the face turns away. Drawn round on the screen itself, since a
-// disc of sky this far off to the side comes out stretched by the perspective.
+// `pitch`, shaded as the sphere it is. Drawn round on the screen itself, since
+// a disc of sky this far off to the side comes out stretched by the
+// perspective.
 vec3 moonFace(vec2 screen, vec3 light, float pitch)
 {
     // The light's direction as the camera sees it: the view's pitch undone.
@@ -442,13 +454,30 @@ vec3 moonFace(vec2 screen, vec3 light, float pitch)
     }
 
     vec2  uv   = (screen - v.xy / v.z * 1.5) / (MOON_RADIUS * 1.5);
-    float disc = smoothstep(1.0, 0.96, length(uv));
+    float r2   = dot(uv, uv);
+    float disc = smoothstep(1.0, 0.96, sqrt(r2));
     if (disc <= 0.0) {
         return vec3(0.0);
     }
-    float seas = smoothstep(0.45, 0.7, fbm(vec3(uv * 1.6 + 3.1, 7.7), 5.0));
-    float limb = 0.75 + 0.25 * sqrt(max(0.0, 1.0 - dot(uv, uv)));
-    return MOON_COLOR * MOON_BRIGHTNESS * mix(1.0, 0.5, seas) * limb * disc;
+
+    // The point of the sphere under this pixel, which is also its normal.
+    vec3 n = vec3(uv, sqrt(max(0.0, 1.0 - r2)));
+
+    // Its dark seas, and a finer grain of craters, laid on the sphere rather
+    // than on the flat disc, so they crowd together toward the rim as the
+    // surface curves away.
+    float seas   = smoothstep(0.45, 0.7, fbm(n * 1.8 + 3.1, 5.0));
+    float grain  = fbm(n * 6.0 + 1.7, 3.0);
+    float albedo = mix(1.0, 0.5, seas) * mix(0.8, 1.1, grain);
+
+    // Lit from off to the left, which leaves a soft terminator down its right
+    // side with only faint earthshine beyond it, and darkened toward the rim
+    // all round, where the face turns away. Between them they give it its form.
+    float lit   = smoothstep(-0.15, 0.55, dot(n, MOON_LIT));
+    float rim   = mix(0.45, 1.0, pow(n.z, 0.6));
+    float shade = mix(0.03, 1.0, lit) * rim;
+
+    return MOON_COLOR * MOON_BRIGHTNESS * albedo * shade * disc;
 }
 
 // The sky over the sea: the day's behind the content, the night's at the end
@@ -456,11 +485,11 @@ vec3 moonFace(vec2 screen, vec3 light, float pitch)
 vec3 sky(vec3 dir, bool direct, vec3 light)
 {
     vec3 color = vec3(0.0);
-    if (u_Finale < 1.0) {
+    if (u_Night < 1.0) {
         color = daySky(dir);
     }
-    if (u_Finale > 0.0) {
-        color = mix(color, nightSky(dir, direct, light), u_Finale);
+    if (u_Night > 0.0) {
+        color = mix(color, nightSky(dir, direct, light), u_Night);
     }
     return color;
 }
@@ -486,9 +515,14 @@ vec3 ocean(vec2 screen)
     // them; lower still at the end of the page, looking out over the water.
     float height = mix(mix(40.0, 12.0, u_Inside), 3.0, u_Finale);
 
-    // Almost straight down behind the content, and level at the end of the
-    // page, with the horizon across the middle of the screen.
-    float pitch = mix(SEA_PITCH, 0.0, u_Finale);
+    // How far the horizon dips below level from this height, over a sea that
+    // curves away with the planet.
+    float dip = acos(SEA_RADIUS / (SEA_RADIUS + height));
+
+    // Almost straight down behind the content. At the end of the page, down by
+    // just the horizon's dip, so the top of its curve lies across the middle
+    // of the screen and it falls away toward the edges.
+    float pitch = mix(SEA_PITCH, dip, u_Finale);
 
     // The view ray, with the top of the screen toward the horizon.
     vec3  ray = normalize(vec3(screen, 1.5));
@@ -498,21 +532,36 @@ vec3 ocean(vec2 screen)
     // The sun's own disc is never looked at: it only ever shows on the water.
     // By the time the sky comes into view, it is the moon's.
     vec3 light = lightDir();
-    if (ray.y >= 0.0) {
-        vec3 color = sky(ray, true, light) + moonFace(screen, light, pitch) * u_Finale;
+
+    // Where the ray meets the sea: a sphere the planet's size with its top
+    // under the camera. Looking down behind the content the patch in view is
+    // too small for the curve to show; looking out at the end of the page it
+    // is what bends the horizon. Rays that pass over it see the sky.
+    float b    = (SEA_RADIUS + height) * ray.y;
+    float disc = b * b - height * (height + 2.0 * SEA_RADIUS);
+    //
+    // Just above the curved horizon the rays still point a little below level;
+    // the sky is looked up level with it there, the horizon's own colour.
+    if (ray.y >= 0.0 || disc < 0.0) {
+        vec3 skyRay = normalize(vec3(ray.x, max(ray.y, 0.0), ray.z));
+        vec3 color  = sky(skyRay, true, light) + moonFace(screen, light, pitch) * u_Night;
         return acesTonemap(color * OCEAN_EXPOSURE);
     }
 
-    vec3 origin = vec3(0.0, height, u_Time * SEA_DRIFT + u_Scroll * SEA_SCROLL);
-    float dist  = -origin.y / ray.y;
-    vec3  hit   = origin + ray * dist;
+    vec3  origin = vec3(0.0, height, u_Time * SEA_DRIFT + u_Scroll * SEA_SCROLL);
+    float dist   = -b - sqrt(disc);
+    vec3  hit    = origin + ray * dist;
+
+    // The sea's own up where the ray lands, tipped away from the camera's by
+    // the curve, which the waves' normal is laid onto.
+    vec3 up = normalize(vec3(hit.x - origin.x, hit.y + SEA_RADIUS, hit.z - origin.z));
 
     vec3 w = waves(hit.xz);
-    vec3 n = normalize(vec3(-w.y * WATER_DEPTH, 1.0, -w.z * WATER_DEPTH));
+    vec3 n = normalize(vec3(-w.y * WATER_DEPTH, 1.0, -w.z * WATER_DEPTH) + up - vec3(0.0, 1.0, 0.0));
 
     // Flattened with distance, so the far water doesn't fizz with detail finer
     // than its pixels.
-    n = normalize(mix(n, vec3(0.0, 1.0, 0.0), 0.8 * min(1.0, sqrt(dist * 0.01) * 1.1)));
+    n = normalize(mix(n, up, 0.8 * min(1.0, sqrt(dist * 0.01) * 1.1)));
 
     float fresnel = 0.04 + 0.96 * pow(1.0 - max(0.0, dot(-n, ray)), 5.0);
     vec3  r = reflect(ray, n);

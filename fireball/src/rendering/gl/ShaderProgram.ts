@@ -19,6 +19,7 @@ export interface BackgroundView {
   cloudDrift: number;   // u_CloudDrift
   inside: number;       // u_Inside
   scroll: number;       // u_Scroll
+  night: number;        // u_Night
   finale: number;       // u_Finale
 }
 
@@ -93,6 +94,7 @@ class ShaderProgram {
   unifCloudDrift: WebGLUniformLocation;
   unifInside: WebGLUniformLocation;
   unifScroll: WebGLUniformLocation;
+  unifNight: WebGLUniformLocation;
   unifFinale: WebGLUniformLocation;
 
   constructor(shaders: Array<Shader>) {
@@ -143,6 +145,7 @@ class ShaderProgram {
     this.unifCloudDrift    = gl.getUniformLocation(this.prog, "u_CloudDrift");
     this.unifInside        = gl.getUniformLocation(this.prog, "u_Inside");
     this.unifScroll        = gl.getUniformLocation(this.prog, "u_Scroll");
+    this.unifNight         = gl.getUniformLocation(this.prog, "u_Night");
     this.unifFinale        = gl.getUniformLocation(this.prog, "u_Finale");
   }
 
@@ -294,6 +297,9 @@ class ShaderProgram {
     }
     if (this.unifScroll !== -1) {
       gl.uniform1f(this.unifScroll, v.scroll);
+    }
+    if (this.unifNight !== -1) {
+      gl.uniform1f(this.unifNight, v.night);
     }
     if (this.unifFinale !== -1) {
       gl.uniform1f(this.unifFinale, v.finale);

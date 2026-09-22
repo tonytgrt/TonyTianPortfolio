@@ -71,9 +71,10 @@ hero paints its space colour only until the `webgl` class is set, which
 until the landing ends: `index.js` adds `landed` to the body.
 
 The home page has no footer beyond a copyright line. It ends in `.finale`,
-another tall track: once the last content has scrolled away, scrolling
-through it pitches the camera up from the sea to the horizon as night falls,
-and the copyright sits at its very bottom. Its length is `$finaleTravel` in
+another tall track: night falls while the last content scrolls away (so the
+sky is fully night before any of it is in view), then scrolling on pitches
+the camera up from the sea to the horizon, and the copyright sits at its very
+bottom. Its length is `$finaleTravel` in
 `sass/pages/_home.scss`. The project pages keep the old `.main-footer`.
 
 ### Cache busting
