@@ -45,7 +45,7 @@
       top: calc(100% + 1.5rem);
       height: 5px;
       width: 3rem;
-      background: $themeClrPrimary;
+      background: $themeClrAccent;
       left: 50%;
       transform: translateX(-50%);
       border-radius: $commonBorderRadius;
@@ -59,7 +59,7 @@
   &__sub {
     display: block;
     text-align: center;
-    color: #777;
+    color: $themeClrTextBody;
     font-size: 2rem;
     font-weight: 500;
     max-width: 80rem;
@@ -96,7 +96,7 @@
   display: inline-block;
   font-weight: 700;
   border-radius: $commonBorderRadius;
-  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.35);
   transition: transform .3s;
 
   &:hover {
@@ -117,9 +117,9 @@
     color: #fff;
   }
   &--theme-inv {
-    color: $themeClrPrimary;
-    background: #fff;
-    border: 2px solid $themeClrPrimary;
+    color: $themeClrAccent;
+    background: transparent;
+    border: 2px solid $themeClrAccent;
     box-shadow: none;
     padding: calc(1.5rem - 2px) calc(5rem - 2px);
   }

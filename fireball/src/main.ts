@@ -24,10 +24,10 @@ const SHOW_FIREBALL = true;
 // a backdrop that is mostly soft noise, so the pixel ratio is capped.
 const MAX_PIXEL_RATIO = 1.5;
 
-// Once the landing is over, the clouds behind the content are drawn at less
-// than one pixel per CSS pixel. They are soft through and through, so nothing
-// is lost, and they are on screen for as long as the visitor reads.
-const CLOUDS_PIXEL_RATIO = 0.75;
+// Once the landing is over, the ocean behind the content is drawn at less than
+// one pixel per CSS pixel, whatever the screen's density. It is on screen for
+// as long as the visitor reads, and it is soft enough to lose nothing by it.
+const OCEAN_PIXEL_RATIO = 0.75;
 
 // How fast the planet turns and its clouds drift, as seen from where the
 // landing starts. Both are divided by the zoom as the camera falls, so the
@@ -168,7 +168,7 @@ function main() {
   // itself is fixed behind the whole page.
   const hero = document.querySelector<HTMLElement>('.home-hero');
   const view: BackgroundView = {
-    pan: 0, zoom: 1, cloudZoom: 1, spin: 0, cloudDrift: 0, fog: 0, inside: 0, scroll: 0,
+    pan: 0, zoom: 1, cloudZoom: 1, spin: 0, cloudDrift: 0, inside: 0, scroll: 0,
   };
   let progress = -1;
 
@@ -188,7 +188,7 @@ function main() {
     // 0 at the top of the page, 1 where the content takes over: the distance
     // scrolled through is the hero's height less the screen's. The first frame
     // starts where the page already is, so a reload halfway down doesn't
-    // replay the landing. Without a hero there is no landing, only the clouds.
+    // replay the landing. Without a hero there is no landing, only the ocean.
     const rect = canvas.getBoundingClientRect();
     let target = 1;
     if (hero) {
@@ -204,14 +204,13 @@ function main() {
     view.pan = descent.pan;
     view.zoom = descent.zoom;
     view.cloudZoom = descent.cloudZoom;
-    view.fog = descent.fog;
     view.inside = descent.inside;
     view.scroll = window.scrollY / Math.max(1, rect.height);
     view.spin += dt * SPIN_RATE / descent.zoom;
     view.cloudDrift += dt * CLOUD_DRIFT_RATE / descent.cloudZoom;
 
     resize(descent.inside >= 1
-      ? CLOUDS_PIXEL_RATIO
+      ? OCEAN_PIXEL_RATIO
       : Math.min(window.devicePixelRatio || 1, MAX_PIXEL_RATIO));
     gl.viewport(0, 0, canvas.width, canvas.height);
     renderer.clear();

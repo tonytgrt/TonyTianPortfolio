@@ -1,5 +1,6 @@
 .main-footer {
-  background: #000;
+  background: $themeClrBgDeep;
+  border-top: 1px solid $themeClrBorder;
   color: #fff;
   &__upper {
     display: flex;
@@ -49,7 +50,7 @@
 
   &__lower {
     padding: 4rem 0;
-    border-top: 1px solid #444;
+    border-top: 1px solid $themeClrBorder;
     color: #eee;
     font-size: 1.2rem;
     text-align: left;

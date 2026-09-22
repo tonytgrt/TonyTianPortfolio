@@ -2,9 +2,12 @@
   position: fixed;
   width: 100%;
   z-index: 1000;
-  background: #000;
-  background: #fff;
-  box-shadow: 0 10px 100px rgba(0, 0, 0, 0.1);
+  // Dark glass: the page shows through it, blurred.
+  background: $themeClrPanel;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid $themeClrBorder;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
   // For sliding in and out over the home page's hero, below.
   transition: transform .4s, opacity .4s, visibility .4s;
 
@@ -22,11 +25,11 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: #333;
+    color: $themeClrText;
     transition: color .3s;
 
     &:hover {
-      color: $themeClrPrimary;
+      color: $themeClrAccent;
     }
   }
   &__logo-img-cont {
@@ -66,14 +69,14 @@
     padding: 2.2rem 3rem;
     display: inline-block;
     font-size: 1.6rem;
-    color: #333;
+    color: $themeClrText;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
     transition: color .3s;
 
     &:hover {
-      color: $themeClrPrimary;
+      color: $themeClrAccent;
     }
     @include respond(tab-port) {
       padding: 3rem 1.8rem;
@@ -99,16 +102,16 @@
   }
 
   &__sm-menu {
-    background: #fff;
+    background: rgba(3, 12, 22, 0.96);
     position: absolute;
     width: 100%;
     top: 100%;
     visibility: hidden;
     opacity: 0;
     transition: all .3s;
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.35);
 
     &--active {
       visibility: hidden;
@@ -126,21 +129,21 @@
       text-decoration: none;
       padding: 2.5rem 3rem;
       font-size: 1.6rem;
-      color: #333;
+      color: $themeClrText;
       text-align: right;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid $themeClrBorder;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 2px;
       transition: color .3s;
       
       &:hover {
-        color: $themeClrPrimary;
+        color: $themeClrAccent;
       }
     }
     &:first-child {
       a {
-        border-top: 1px solid #eee;
+        border-top: 1px solid $themeClrBorder;
       }
     }
   }

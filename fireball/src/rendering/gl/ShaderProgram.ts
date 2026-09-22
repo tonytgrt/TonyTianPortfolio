@@ -17,7 +17,6 @@ export interface BackgroundView {
   cloudZoom: number;    // u_CloudZoom
   spin: number;         // u_Spin
   cloudDrift: number;   // u_CloudDrift
-  fog: number;          // u_Fog
   inside: number;       // u_Inside
   scroll: number;       // u_Scroll
 }
@@ -91,7 +90,6 @@ class ShaderProgram {
   unifCloudZoom: WebGLUniformLocation;
   unifSpin: WebGLUniformLocation;
   unifCloudDrift: WebGLUniformLocation;
-  unifFog: WebGLUniformLocation;
   unifInside: WebGLUniformLocation;
   unifScroll: WebGLUniformLocation;
 
@@ -141,7 +139,6 @@ class ShaderProgram {
     this.unifCloudZoom     = gl.getUniformLocation(this.prog, "u_CloudZoom");
     this.unifSpin          = gl.getUniformLocation(this.prog, "u_Spin");
     this.unifCloudDrift    = gl.getUniformLocation(this.prog, "u_CloudDrift");
-    this.unifFog           = gl.getUniformLocation(this.prog, "u_Fog");
     this.unifInside        = gl.getUniformLocation(this.prog, "u_Inside");
     this.unifScroll        = gl.getUniformLocation(this.prog, "u_Scroll");
   }
@@ -288,9 +285,6 @@ class ShaderProgram {
     }
     if (this.unifCloudDrift !== -1) {
       gl.uniform1f(this.unifCloudDrift, v.cloudDrift);
-    }
-    if (this.unifFog !== -1) {
-      gl.uniform1f(this.unifFog, v.fog);
     }
     if (this.unifInside !== -1) {
       gl.uniform1f(this.unifInside, v.inside);

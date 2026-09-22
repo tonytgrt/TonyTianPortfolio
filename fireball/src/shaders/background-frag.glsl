@@ -21,8 +21,7 @@ uniform float u_CloudZoom;   // Magnification of the cloud layer. It is nearer t
                              // read as a fall rather than a picture being enlarged.
 uniform float u_Spin;        // How far the planet has turned, in radians.
 uniform float u_CloudDrift;  // How far the clouds have drifted through their noise.
-uniform float u_Fog;         // 0 to 1: the white-out of dropping through the cloud deck.
-uniform float u_Inside;      // 0 to 1: the blend into the clouds the content page sits in.
+uniform float u_Inside;      // 0 to 1: from the planet's own ocean to the close view of it.
 uniform float u_Scroll;      // How far the page has scrolled, in screen heights.
 
 in vec2 fs_Pos;
@@ -51,7 +50,6 @@ const vec3 OCEAN_SHALLOW = vec3(0.034, 0.125, 0.305);
 const vec3 LAND          = vec3(0.115, 0.120, 0.105);
 const vec3 CLOUD         = vec3(0.920, 0.940, 0.970);
 const vec3 SKY           = vec3(0.350, 0.620, 1.000); // atmospheric scattering tint
-const vec3 FOG           = vec3(0.955, 0.965, 0.980); // inside the cloud deck
 
 // The stars and the sun are far beyond the planet, so while the camera pans
 // they slide by at only this fraction of its speed.
@@ -208,28 +206,35 @@ vec3 landing(vec2 screen)
     vec3 sp = surfacePoint(toward);
 
     // Every doubling of the zoom gets another octave, so the coastlines keep
-    // their detail all the way down.
+    // their detail all the way down. The sea also rises as the camera falls,
+    // so whatever the planet has turned under the middle of the screen, the
+    // camera comes down over open water, deepening toward the sea it lands on.
     float continents = fbm(sp * 1.8, 4.0 + log2(u_Zoom));
-    vec3  surface    = mix(OCEAN_DEEP, OCEAN_SHALLOW, smoothstep(0.30, 0.56, continents));
-    surface = mix(surface, LAND, smoothstep(0.54, 0.62, continents));
+    float seaLevel   = 0.3 * smoothstep(1.5, 4.0, log2(u_Zoom));
+    vec3  surface    = mix(OCEAN_DEEP, OCEAN_SHALLOW,
+                           smoothstep(0.30 + seaLevel, 0.56 + seaLevel, continents));
+    surface = mix(surface, LAND, smoothstep(0.54 + seaLevel, 0.62 + seaLevel, continents));
 
     // Clouds are a second, finer field drifting at its own rate, so they slide
     // over the continents instead of being locked to them. Two layers at
     // different scales keep the banks from reading as one blurry blob. They
     // sit nearer the camera than the ground, so they are looked up through
     // their own, faster zoom.
-    vec2  cloudToward = rotate2(look + screen / u_CloudZoom, TILT) - center;
-    vec3  cloudPos    = surfacePoint(cloudToward) * 6.5 + vec3(0.0, 0.0, u_CloudDrift);
-    float cloudDetail = log2(u_CloudZoom);
-    float clouds      = fbm(cloudPos, 5.0 + cloudDetail) * 0.72
-                      + fbm(cloudPos * 2.7, 4.0 + cloudDetail) * 0.28;
-    // Nearing the deck, the clouds thicken: they spread out from the banks into
-    // the gaps until they close over entirely, so the camera flies into them
-    // rather than just watching the picture turn white. Measured in doublings
-    // of the cloud zoom, which is how the approach to the deck feels.
-    float approach   = clamp((log2(u_CloudZoom) - 2.0) / 4.5, 0.0, 1.0);
-    float cloudCover = smoothstep(0.47, 0.66, clouds + 0.3 * approach);
-    surface = mix(surface, CLOUD, cloudCover * 0.88);
+    //
+    // Nearing the deck, the clouds swell out past the edges of the screen and
+    // thin away as they go, so the camera drops through them into clear air
+    // rather than into a wall of white. Measured in doublings of the cloud
+    // zoom, which is how the approach to the deck feels; once they are gone
+    // they cost nothing.
+    float passing = 1.0 - smoothstep(3.0, 6.0, log2(u_CloudZoom));
+    if (passing > 0.0) {
+        vec2  cloudToward = rotate2(look + screen / u_CloudZoom, TILT) - center;
+        vec3  cloudPos    = surfacePoint(cloudToward) * 6.5 + vec3(0.0, 0.0, u_CloudDrift);
+        float cloudDetail = log2(u_CloudZoom);
+        float clouds      = fbm(cloudPos, 5.0 + cloudDetail) * 0.72
+                          + fbm(cloudPos * 2.7, 4.0 + cloudDetail) * 0.28;
+        surface = mix(surface, CLOUD, smoothstep(0.47, 0.66, clouds) * 0.88 * passing);
+    }
 
     // Wrapped diffuse. A hard terminator would put half the disc in shadow; the
     // reference is lit from over the shoulder with the night side out of frame.
@@ -243,13 +248,10 @@ vec3 landing(vec2 screen)
     surface = mix(surface, SKY * 1.3, smoothstep(0.88, 1.0, t) * 0.8 * light);
 
     // Falling into the atmosphere puts more and more air between the camera and
-    // the ground, so the view hazes over to a lighter blue on the way down.
+    // the ground, so the view hazes over a little on the way down. Kept dark,
+    // to meet the deep blue of the sea it hands over to.
     float haze = clamp(log2(u_Zoom) / 4.0, 0.0, 1.0);
-    surface = mix(surface, SKY * 0.75, haze * 0.35);
-
-    // And the nearer the cloud tops, the more they read as the brilliant white
-    // they are in full sun, rather than the dimmed grey of a distant view.
-    surface = mix(surface, FOG, cloudCover * approach * 0.6);
+    surface = mix(surface, SKY * 0.4, haze * 0.25);
 
     // ---- composite --------------------------------------------------------
     // fwidth gives the edge a one-pixel blend at any resolution, so the limb
@@ -259,66 +261,170 @@ vec3 landing(vec2 screen)
 
     color = mix(color, surface, disc);
 
-    // ---- landing ----------------------------------------------------------
-    // Dropping into the cloud deck. The white-out comes in through wisps of it
-    // that swell and slide out past the edges of the screen as the camera
-    // falls, and through the banks already in view before the gaps between
-    // them, so it billows in rather than washing over evenly.
-    float wisps = fbm(vec3(screen * 2.5 / sqrt(u_CloudZoom), 3.7), 4.0);
-    float fog   = clamp(u_Fog * 2.2 - 1.2 + 0.5 * cloudCover + 0.6 * wisps, 0.0, 1.0);
-    color = mix(color, FOG, fog);
-
     return color;
 }
 
 // ---------------------------------------------------------------------------
-// Inside the clouds: where the landing comes out, and the backdrop to the
-// content page from then on. Banks of cloud at three depths drift with the
-// wind and slide past as the page scrolls, the nearer ones faster, over a pale
-// sky. It stays bright throughout, since the page's text sits on top of it.
+// The ocean: where the fall comes out below the clouds, and the backdrop to
+// the content page from then on. The camera breaks out of the cloud base
+// looking almost straight down, as it has all the way from space, and stays
+// that way, gliding on over the sea, and further as the page scrolls.
+//
+// The wave model and the water's shading are adapted from afl_ext's "Very
+// fast procedural ocean" shader, under the MIT License:
+//
+//   Copyright (c) 2017-2024 afl_ext
+//
+//   Permission is hereby granted, free of charge, to any person obtaining a
+//   copy of this software and associated documentation files (the
+//   "Software"), to deal in the Software without restriction, including
+//   without limitation the rights to use, copy, modify, merge, publish,
+//   distribute, sublicense, and/or sell copies of the Software, and to permit
+//   persons to whom the Software is furnished to do so, subject to the
+//   following conditions:
+//
+//   The above copyright notice and this permission notice shall be included
+//   in all copies or substantial portions of the Software.
+//
+//   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+//   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+//   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+//   NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+//   DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+//   OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+//   USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+// Changed from the original to run behind a page all the time: there is no
+// raymarch, the view ray meets the water's top plane directly, and the slope
+// is summed alongside the height instead of differenced from three more
+// evaluations of it. That is 24 wave evaluations a pixel rather than hundreds.
 // ---------------------------------------------------------------------------
 
-const vec3 SKY_HIGH    = vec3(0.74, 0.85, 0.97); // the sky above, seen through the gaps
-const vec3 SKY_LOW     = vec3(0.90, 0.94, 0.99);
-const vec3 CLOUD_SHADE = vec3(0.83, 0.87, 0.94); // the shadowed undersides of the banks
-const vec3 CLOUD_LIT   = vec3(1.00, 1.00, 1.00);
+const float WATER_DEPTH     = 1.0;   // from the crests down to the troughs
+const float DRAG_MULT       = 0.38;  // how far each wave drags the water along for the next
+const int   WAVE_ITERATIONS = 24;
+const float SEA_PITCH       = 1.40;  // how far below the horizon the camera looks, radians:
+                                     // just short of straight down, so the top of the view
+                                     // reaches a little way out, toward brighter sky
+const float SEA_SCROLL      = 3.0;   // how far the camera flies on per screen of scrolling
+const float SEA_DRIFT       = 0.05;  // how fast it glides on by itself
+const float WAVE_SPEED      = 0.35;  // the waves' pace against the original's: a calm sea
+const float OCEAN_EXPOSURE  = 1.1;   // kept low, to stay within the site's dark palette
 
-const float WIND = 0.03;  // screen heights a second the nearest bank drifts
+// Low, and far enough off to the right that its path of glitter on the water
+// runs down the edge of the screen rather than behind the page's text.
+const vec3 OCEAN_SUN = normalize(vec3(1.2, 0.2, 1.0));
 
-// Density of one bank at `screen`. `depth` runs from 0 for the farthest to 1
-// for the nearest: nearer banks are larger, drift faster, and scroll past
-// faster, though even the nearest at only half the page's own speed.
-float cloudBank(vec2 screen, float depth, float seed)
+// The water's height at `position`, from 0 in the troughs to 1 on the crests,
+// and its slope: (height, d/dx, d/dz). Waves of rising frequency in
+// well-spread directions, each sharpened to a peaked crest by exp(sin - 1),
+// and each dragging the point along for the next, which bunches the crests
+// together the way real ones are. The slope is the sum of each wave's own,
+// leaving out how the drag moves the point, which shows nowhere.
+vec3 waves(vec2 position)
 {
-    vec2 drift = vec2(u_Time * WIND, u_Scroll * 2.0) * mix(0.2, 1.0, depth) * 0.5;
-    vec2 p     = (screen - drift) * mix(1.8, 0.8, depth);
-    return fbm(vec3(p, seed + u_Time * 0.015), 4.0);
+    float phaseShift = length(position) * 0.1;
+    float iter = 0.0, frequency = 1.0, timeMultiplier = 2.0, weight = 1.0;
+    float height = 0.0, weights = 0.0;
+    vec2  slope  = vec2(0.0);
+    for (int i = 0; i < WAVE_ITERATIONS; ++i)
+    {
+        vec2  dir  = vec2(sin(iter), cos(iter));
+        float x    = dot(dir, position) * frequency + u_Time * WAVE_SPEED * timeMultiplier + phaseShift;
+        float wave = exp(sin(x) - 1.0);
+        float dx   = wave * cos(x);
+
+        position -= dir * dx * weight * DRAG_MULT;
+        height   += wave * weight;
+        slope    += dir * dx * frequency * weight;
+        weights  += weight;
+
+        weight          = mix(weight, 0.0, 0.2);
+        frequency      *= 1.18;
+        timeMultiplier *= 1.07;
+        iter           += 1232.399963;
+    }
+    return vec3(height, slope) / weights;
 }
 
-vec3 insideClouds(vec2 screen)
+// A very cheap sky: blue overhead, paling toward the horizon, with a glow
+// round the sun.
+vec3 atmosphere(vec3 dir)
 {
-    vec3 color = mix(SKY_LOW, SKY_HIGH, smoothstep(-1.0, 1.0, screen.y));
+    vec3  zenith   = vec3(5.5, 13.0, 22.4) / 22.4;
+    float thick    = 1.0 / (dir.y + 0.1);
+    float lowSun   = 1.0 / (OCEAN_SUN.y * 11.0 + 1.0);
+    float around   = pow(abs(dot(OCEAN_SUN, dir)), 2.0);
+    vec3  sunColor = mix(vec3(1.0), max(vec3(0.0), vec3(1.0) - zenith), lowSun);
+    vec3  sky      = max(vec3(0.0), zenith * sunColor
+                         - vec3(5.5, 13.0, 22.4) * 0.002 * (thick - 6.0 * OCEAN_SUN.y * OCEAN_SUN.y));
+    sky *= thick * (0.24 + around * 0.24);
+    return sky * (1.0 + pow(1.0 - dir.y, 3.0)) * 0.5;
+}
 
-    // Far to near, each bank laid over the ones behind it.
-    for (int i = 0; i < 3; ++i)
-    {
-        float depth   = float(i) * 0.5;
-        float seed    = float(i) * 13.1;
-        float density = cloudBank(screen, depth, seed);
-        float cover   = smoothstep(0.44, 0.60, density);
+float sunDisc(vec3 dir)
+{
+    return pow(max(0.0, dot(dir, OCEAN_SUN)), 720.0) * 210.0;
+}
 
-        // Lit from above: where the bank thins out going up, its top catches
-        // the sun, and where it thickens, that is its shadowed underside.
-        float above = cloudBank(screen + vec2(0.0, 0.06), depth, seed);
-        float lit   = clamp(0.5 + (density - above) * 4.0, 0.0, 1.0);
-        vec3  bank  = mix(CLOUD_SHADE, CLOUD_LIT, lit);
+// Filmic tone mapping (ACES), from linear light to the screen.
+vec3 acesTonemap(vec3 color)
+{
+    mat3 m1 = mat3(0.59719, 0.07600, 0.02840,
+                   0.35458, 0.90834, 0.13383,
+                   0.04823, 0.01566, 0.83777);
+    mat3 m2 = mat3( 1.60475, -0.10208, -0.00327,
+                   -0.53108,  1.10813, -0.07276,
+                   -0.07367, -0.00605,  1.07602);
+    vec3 v = m1 * color;
+    vec3 a = v * (v + 0.0245786) - 0.000090537;
+    vec3 b = v * (0.983729 * v + 0.4329510) + 0.238081;
+    return pow(clamp(m2 * (a / b), 0.0, 1.0), vec3(1.0 / 2.2));
+}
 
-        // The farther banks are paler and thinner, fading into the sky.
-        bank  = mix(bank, color, (1.0 - depth) * 0.35);
-        color = mix(color, bank, cover * mix(0.55, 0.9, depth));
+vec3 ocean(vec2 screen)
+{
+    // High as the camera breaks out of the clouds, and falling as it clears
+    // them.
+    float height = mix(40.0, 12.0, u_Inside);
+
+    // The view ray, with the top of the screen toward the horizon.
+    vec3  ray = normalize(vec3(screen, 1.5));
+    float cp = cos(SEA_PITCH), sp = sin(SEA_PITCH);
+    ray = vec3(ray.x, ray.y * cp - ray.z * sp, ray.y * sp + ray.z * cp);
+
+    if (ray.y >= 0.0) {
+        return acesTonemap((atmosphere(ray) + sunDisc(ray)) * OCEAN_EXPOSURE);
     }
 
-    return color;
+    vec3 origin = vec3(0.0, height, u_Time * SEA_DRIFT + u_Scroll * SEA_SCROLL);
+    float dist  = -origin.y / ray.y;
+    vec3  hit   = origin + ray * dist;
+
+    vec3 w = waves(hit.xz);
+    vec3 n = normalize(vec3(-w.y * WATER_DEPTH, 1.0, -w.z * WATER_DEPTH));
+
+    // Flattened with distance, so the far water doesn't fizz with detail finer
+    // than its pixels.
+    n = normalize(mix(n, vec3(0.0, 1.0, 0.0), 0.8 * min(1.0, sqrt(dist * 0.01) * 1.1)));
+
+    float fresnel = 0.04 + 0.96 * pow(1.0 - max(0.0, dot(-n, ray)), 5.0);
+    vec3  r = reflect(ray, n);
+    r.y = abs(r.y);
+
+    // The sky and sun reflected off the surface: little of it this close to
+    // straight down, more toward the edges of the view, where the water is
+    // seen more obliquely and mirrors the brighter sky nearer the horizon.
+    vec3 reflection = atmosphere(r) + sunDisc(r);
+
+    // And light scattered back up through the water, which is what lights the
+    // middle of the view, where there is next to nothing to reflect. More of
+    // it comes through the crests, and off the faces turned toward the low
+    // sun, so the middle shows the waves' relief rather than a flat wash.
+    float sunward    = max(dot(n, OCEAN_SUN), 0.0);
+    vec3  scattering = vec3(0.0293, 0.0698, 0.1717) * 0.3 * (0.2 + w.x) * (1.0 + 2.0 * sunward);
+
+    return acesTonemap((fresnel * reflection + scattering) * OCEAN_EXPOSURE);
 }
 
 void main()
@@ -329,13 +435,15 @@ void main()
     screen.x *= u_Dimensions.x / max(1.0, u_Dimensions.y);
 
     // Each scene is only worked out while it can be seen, so the content page
-    // pays for its clouds alone and the landing for nothing extra.
-    vec3 color = FOG;
+    // pays for its ocean alone and the landing for nothing extra.
+    vec3 color = vec3(0.0);
     if (u_Inside < 1.0) {
         color = landing(screen);
     }
     if (u_Inside > 0.0) {
-        color = mix(color, insideClouds(screen), u_Inside);
+        // Below the clouds, the close view of the water fades up over the
+        // planet's own ocean, the two the same deep blue.
+        color = mix(color, ocean(screen), u_Inside);
     }
 
     out_Col = vec4(color, 1.0);

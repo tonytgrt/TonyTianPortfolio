@@ -1,4 +1,4 @@
-var e=typeof Float32Array<`u`?Float32Array:Array;function t(){var t=new e(16);return e!=Float32Array&&(t[1]=0,t[2]=0,t[3]=0,t[4]=0,t[6]=0,t[7]=0,t[8]=0,t[9]=0,t[11]=0,t[12]=0,t[13]=0,t[14]=0),t[0]=1,t[5]=1,t[10]=1,t[15]=1,t}function n(e,t){if(e===t){var n=t[1],r=t[2],i=t[3],a=t[6],o=t[7],s=t[11];e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=n,e[6]=t[9],e[7]=t[13],e[8]=r,e[9]=a,e[11]=t[14],e[12]=i,e[13]=o,e[14]=s}else e[0]=t[0],e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=t[1],e[5]=t[5],e[6]=t[9],e[7]=t[13],e[8]=t[2],e[9]=t[6],e[10]=t[10],e[11]=t[14],e[12]=t[3],e[13]=t[7],e[14]=t[11],e[15]=t[15];return e}function r(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=t[4],s=t[5],c=t[6],l=t[7],u=t[8],d=t[9],f=t[10],p=t[11],m=t[12],h=t[13],g=t[14],_=t[15],v=n*s-r*o,y=n*c-i*o,b=n*l-a*o,x=r*c-i*s,S=r*l-a*s,C=i*l-a*c,w=u*h-d*m,T=u*g-f*m,E=u*_-p*m,D=d*g-f*h,O=d*_-p*h,k=f*_-p*g,A=v*k-y*O+b*D+x*E-S*T+C*w;return A?(A=1/A,e[0]=(s*k-c*O+l*D)*A,e[1]=(i*O-r*k-a*D)*A,e[2]=(h*C-g*S+_*x)*A,e[3]=(f*S-d*C-p*x)*A,e[4]=(c*E-o*k-l*T)*A,e[5]=(n*k-i*E+a*T)*A,e[6]=(g*b-m*C-_*y)*A,e[7]=(u*C-f*b+p*y)*A,e[8]=(o*O-s*E+l*w)*A,e[9]=(r*E-n*O-a*w)*A,e[10]=(m*S-h*b+_*v)*A,e[11]=(d*b-u*S-p*v)*A,e[12]=(s*T-o*D-c*w)*A,e[13]=(n*D-r*T+i*w)*A,e[14]=(h*y-m*x-g*v)*A,e[15]=(u*x-d*y+f*v)*A,e):null}function i(e,t,n){var r=n[0],i=n[1],a=n[2];return e[0]=t[0]*r,e[1]=t[1]*r,e[2]=t[2]*r,e[3]=t[3]*r,e[4]=t[4]*i,e[5]=t[5]*i,e[6]=t[6]*i,e[7]=t[7]*i,e[8]=t[8]*a,e[9]=t[9]*a,e[10]=t[10]*a,e[11]=t[11]*a,e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15],e}function a(e,t){return e[0]=1,e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[5]=1,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=t[0],e[13]=t[1],e[14]=t[2],e[15]=1,e}function o(e,t){var n=Math.sin(t),r=Math.cos(t);return e[0]=r,e[1]=n,e[2]=0,e[3]=0,e[4]=-n,e[5]=r,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=0,e[13]=0,e[14]=0,e[15]=1,e}function s(){var t=new e(3);return e!=Float32Array&&(t[0]=0,t[1]=0,t[2]=0),t}function c(t,n,r){var i=new e(3);return i[0]=t,i[1]=n,i[2]=r,i}(function(){var e=s();return function(t,n,r,i,a,o){var s,c;for(n||=3,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2];return t}})();function l(){var t=new e(4);return e!=Float32Array&&(t[0]=0,t[1]=0,t[2]=0,t[3]=0),t}function u(t,n,r,i){var a=new e(4);return a[0]=t,a[1]=n,a[2]=r,a[3]=i,a}function d(e,t,n){return e[0]=t[0]+n[0],e[1]=t[1]+n[1],e[2]=t[2]+n[2],e[3]=t[3]+n[3],e}function f(e,t,n,r){return e[0]=t[0]+n[0]*r,e[1]=t[1]+n[1]*r,e[2]=t[2]+n[2]*r,e[3]=t[3]+n[3]*r,e}function p(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=n*n+r*r+i*i+a*a;return o>0&&(o=1/Math.sqrt(o)),e[0]=n*o,e[1]=r*o,e[2]=i*o,e[3]=a*o,e}(function(){var e=l();return function(t,n,r,i,a,o){var s,c;for(n||=4,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],e[3]=t[s+3],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2],t[s+3]=e[3];return t}})();var m;function h(e){m=e}var g=class{constructor(){this.count=0,this.idxBound=!1,this.posBound=!1,this.norBound=!1}destory(){m.deleteBuffer(this.bufIdx),m.deleteBuffer(this.bufPos),m.deleteBuffer(this.bufNor)}generateIdx(){this.idxBound=!0,this.bufIdx=m.createBuffer()}generatePos(){this.posBound=!0,this.bufPos=m.createBuffer()}generateNor(){this.norBound=!0,this.bufNor=m.createBuffer()}bindIdx(){return this.idxBound&&m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),this.idxBound}bindPos(){return this.posBound&&m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),this.posBound}bindNor(){return this.norBound&&m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),this.norBound}elemCount(){return this.count}drawMode(){return m.TRIANGLES}},_=class extends g{constructor(e,t,n){super(),this.radius=t,this.subdivisions=n,this.center=u(e[0],e[1],e[2],1)}create(){let e=.5257311121191336,t=.8506508083520399,n=20*4**this.subdivisions,r=10*4**this.subdivisions+2,i=new ArrayBuffer(n*3*Uint32Array.BYTES_PER_ELEMENT+r*4*Float32Array.BYTES_PER_ELEMENT+r*4*Float32Array.BYTES_PER_ELEMENT),a=new ArrayBuffer(n*3*Uint32Array.BYTES_PER_ELEMENT),o=[i,a],s=0,c=n*3*Uint32Array.BYTES_PER_ELEMENT,l=c,u=c+r*4*Float32Array.BYTES_PER_ELEMENT,h=Array(20),g=[];for(let e=0;e<20;++e)h[e]=new Uint32Array(o[s],0+e*3*Uint32Array.BYTES_PER_ELEMENT,3);let _=Array(12);for(let e=0;e<12;++e)_[e]=new Float32Array(i,c+e*4*Float32Array.BYTES_PER_ELEMENT,4);_[0].set([-.5257311121191336,0,t,0]),_[1].set([e,0,t,0]),_[2].set([-.5257311121191336,0,-.8506508083520399,0]),_[3].set([e,0,-.8506508083520399,0]),_[4].set([0,t,e,0]),_[5].set([0,t,-.5257311121191336,0]),_[6].set([0,-.8506508083520399,e,0]),_[7].set([0,-.8506508083520399,-.5257311121191336,0]),_[8].set([t,e,0,0]),_[9].set([-.8506508083520399,e,0,0]),_[10].set([t,-.5257311121191336,0,0]),_[11].set([-.8506508083520399,-.5257311121191336,0,0]),h[0].set([0,4,1]),h[1].set([0,9,4]),h[2].set([9,5,4]),h[3].set([4,5,8]),h[4].set([4,8,1]),h[5].set([8,10,1]),h[6].set([8,3,10]),h[7].set([5,3,8]),h[8].set([5,2,3]),h[9].set([2,7,3]),h[10].set([7,10,3]),h[11].set([7,6,10]),h[12].set([7,11,6]),h[13].set([11,0,6]),h[14].set([0,1,6]),h[15].set([6,1,10]),h[16].set([9,0,11]),h[17].set([9,11,2]),h[18].set([9,2,5]),h[19].set([7,2,11]);for(let e=0;e<this.subdivisions;++e){s=1-s,g.length=h.length*4;let e=0,t=new Map;function n(e,n){let r=[e,n].sort().join(`_`);if(!t.has(r)){let a=new Float32Array(i,c+_.length*4*Float32Array.BYTES_PER_ELEMENT,4);d(a,_[e],_[n]),p(a,a),t.set(r,_.length),_.push(a)}return t.get(r)}for(let t=0;t<h.length;++t){let r=h[t][0],i=h[t][1],a=h[t][2],c=n(r,i),l=n(i,a),u=n(a,r),d=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),f=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),p=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),m=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3);g.length,d.set([r,c,u]),f.set([c,l,u]),p.set([c,i,l]),m.set([u,l,a])}let r=h;h=g,g=r}if(s===1){let e=new Uint32Array(i,0,3*h.length),t=new Uint32Array(a,0,3*h.length);e.set(t)}for(let e=0;e<_.length;++e)f(new Float32Array(i,u+e*4*Float32Array.BYTES_PER_ELEMENT,4),this.center,_[e],this.radius);this.buffer=i,this.indices=new Uint32Array(this.buffer,0,h.length*3),this.normals=new Float32Array(this.buffer,l,_.length*4),this.positions=new Float32Array(this.buffer,u,_.length*4),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),m.bufferData(m.ELEMENT_ARRAY_BUFFER,this.indices,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),m.bufferData(m.ARRAY_BUFFER,this.normals,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),m.bufferData(m.ARRAY_BUFFER,this.positions,m.STATIC_DRAW),console.log(`Created icosphere with ${_.length} vertices`)}},v=class extends g{constructor(e){super(),this.center=u(e[0],e[1],e[2],1)}create(){this.indices=new Uint32Array([0,1,2,0,2,3]),this.normals=new Float32Array([0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0]),this.positions=new Float32Array([-1,-1,0,1,1,-1,0,1,1,1,0,1,-1,1,0,1]),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),m.bufferData(m.ELEMENT_ARRAY_BUFFER,this.indices,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),m.bufferData(m.ARRAY_BUFFER,this.normals,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),m.bufferData(m.ARRAY_BUFFER,this.positions,m.STATIC_DRAW),console.log(`Created square`)}},y=class{constructor(e){this.canvas=e}setClearColor(e,t,n,r){m.clearColor(e,t,n,r)}setSize(e,t){this.canvas.width=e,this.canvas.height=t}clear(){m.clear(m.COLOR_BUFFER_BIT|m.DEPTH_BUFFER_BIT)}render(e,t,n,r,i,a=1){let o=u(a,a,a,1);r.setModelMatrix(t),r.setViewProjMatrix(e),r.setGeometryColor(o),r.setCameraPos(n);for(let e of i)r.draw(e)}},b=70,x=.5,S=3.4,C=.16,w=1/120,T=class{constructor(){this.x=0,this.y=0,this.vx=0,this.vy=0,this.speed=0,this.curvature=0,this.anchorX=0,this.anchorY=0,this.anchorVx=0,this.anchorVy=0}reset(e,t){this.anchorX=e,this.anchorY=t,this.anchorVx=0,this.anchorVy=0}update(e,t,n,r){let i=0,a=0;for(let r=n;r>0;r-=w){let n=Math.min(r,w);i=49*(e-this.anchorX)-14*this.anchorVx,a=49*(t-this.anchorY)-14*this.anchorVy,this.anchorVx+=i*n,this.anchorVy+=a*n,this.anchorX+=this.anchorVx*n,this.anchorY+=this.anchorVy*n}let o=b,s=x,c=o*Math.sqrt(1-s*s),l=2*Math.PI/S,u=l*r,d=u;for(let e=0;e<5;++e)d-=(d-s*Math.sin(d)-u)/(1-s*Math.cos(d));let f=Math.cos(d),p=Math.sin(d),m=o*(f-s),h=c*p,g=l/(1-s*f),_=-70*p*g,v=c*f*g,y=Math.hypot(m,h),T=-(l*l*o*o*o)/(y*y*y),E=T*m,D=T*h,O=C*r,k=Math.cos(O),A=Math.sin(O),j=k*m-A*h,M=A*m+k*h,N=k*_-A*v-C*M,P=A*_+k*v+C*j,F=k*E-A*D,I=A*E+k*D;this.x=this.anchorX+j,this.y=this.anchorY+M,this.vx=this.anchorVx+N,this.vy=this.anchorVy+P;let L=i+F,R=a+I;this.speed=Math.hypot(this.vx,this.vy),this.curvature=this.speed>.001?(this.vx*R-this.vy*L)/(this.speed*this.speed*this.speed):0}},E=.03,D=.034;function O(e,t,n){return Math.min(1,Math.max(0,(e-t)/(n-t)))}function k(e){return e*e*(3-2*e)}function A(e){let t=D**+k(O(e,.3,.92));return{pan:k(O(e,0,.4)),zoom:1/t,cloudZoom:.97/(t-E),fog:k(O(e,.7,.9)),inside:k(O(e,.86,.96)),comet:1-k(O(e,.2,.35))}}var j=null,M=class{constructor(e,t){if(this.shader=m.createShader(e),m.shaderSource(this.shader,t),m.compileShader(this.shader),!m.getShaderParameter(this.shader,m.COMPILE_STATUS))throw m.getShaderInfoLog(this.shader)}},N=class{constructor(e){this.prog=m.createProgram();for(let t of e)m.attachShader(this.prog,t.shader);if(m.linkProgram(this.prog),!m.getProgramParameter(this.prog,m.LINK_STATUS))throw m.getProgramInfoLog(this.prog);this.attrPos=m.getAttribLocation(this.prog,`vs_Pos`),this.attrNor=m.getAttribLocation(this.prog,`vs_Nor`),this.attrCol=m.getAttribLocation(this.prog,`vs_Col`),this.unifModel=m.getUniformLocation(this.prog,`u_Model`),this.unifModelInvTr=m.getUniformLocation(this.prog,`u_ModelInvTr`),this.unifViewProj=m.getUniformLocation(this.prog,`u_ViewProj`),this.unifColor=m.getUniformLocation(this.prog,`u_Color`),this.unifTime=m.getUniformLocation(this.prog,`u_Time`),this.unifLowFreqAmp=m.getUniformLocation(this.prog,`u_LowFreqAmp`),this.unifLowFreqScale=m.getUniformLocation(this.prog,`u_LowFreqScale`),this.unifFbmAmp=m.getUniformLocation(this.prog,`u_FbmAmp`),this.unifFbmScale=m.getUniformLocation(this.prog,`u_FbmScale`),this.unifOctaves=m.getUniformLocation(this.prog,`u_Octaves`),this.unifRoilSpeed=m.getUniformLocation(this.prog,`u_RoilSpeed`),this.unifPulsePeriod=m.getUniformLocation(this.prog,`u_PulsePeriod`),this.unifPulseStrength=m.getUniformLocation(this.prog,`u_PulseStrength`),this.unifHeat=m.getUniformLocation(this.prog,`u_Heat`),this.unifFlow=m.getUniformLocation(this.prog,`u_Flow`),this.unifBandBlend=m.getUniformLocation(this.prog,`u_BandBlend`),this.unifFlameHeight=m.getUniformLocation(this.prog,`u_FlameHeight`),this.unifTaper=m.getUniformLocation(this.prog,`u_Taper`),this.unifBands=m.getUniformLocation(this.prog,`u_Bands`),this.unifCameraPos=m.getUniformLocation(this.prog,`u_CameraPos`),this.unifCurvature=m.getUniformLocation(this.prog,`u_Curvature`),this.unifDimensions=m.getUniformLocation(this.prog,`u_Dimensions`),this.unifHorizon=m.getUniformLocation(this.prog,`u_Horizon`),this.unifAtmosphere=m.getUniformLocation(this.prog,`u_Atmosphere`),this.unifPan=m.getUniformLocation(this.prog,`u_Pan`),this.unifZoom=m.getUniformLocation(this.prog,`u_Zoom`),this.unifCloudZoom=m.getUniformLocation(this.prog,`u_CloudZoom`),this.unifSpin=m.getUniformLocation(this.prog,`u_Spin`),this.unifCloudDrift=m.getUniformLocation(this.prog,`u_CloudDrift`),this.unifFog=m.getUniformLocation(this.prog,`u_Fog`),this.unifInside=m.getUniformLocation(this.prog,`u_Inside`),this.unifScroll=m.getUniformLocation(this.prog,`u_Scroll`)}use(){j!==this.prog&&(m.useProgram(this.prog),j=this.prog)}setModelMatrix(e){if(this.use(),this.unifModel!==-1&&m.uniformMatrix4fv(this.unifModel,!1,e),this.unifModelInvTr!==-1){let i=t();n(i,e),r(i,i),m.uniformMatrix4fv(this.unifModelInvTr,!1,i)}}setViewProjMatrix(e){this.use(),this.unifViewProj!==-1&&m.uniformMatrix4fv(this.unifViewProj,!1,e)}setGeometryColor(e){this.use(),this.unifColor!==-1&&m.uniform4fv(this.unifColor,e)}setTime(e){this.use(),this.unifTime!==-1&&m.uniform1f(this.unifTime,e)}setFireballParams(e){this.use(),this.unifLowFreqAmp!==-1&&m.uniform1f(this.unifLowFreqAmp,e.displacement),this.unifLowFreqScale!==-1&&m.uniform1f(this.unifLowFreqScale,e.lobeScale),this.unifFbmAmp!==-1&&m.uniform1f(this.unifFbmAmp,e.detail),this.unifFbmScale!==-1&&m.uniform1f(this.unifFbmScale,e.detailScale),this.unifOctaves!==-1&&m.uniform1i(this.unifOctaves,e.octaves),this.unifRoilSpeed!==-1&&m.uniform1f(this.unifRoilSpeed,e.roilSpeed),this.unifPulsePeriod!==-1&&m.uniform1f(this.unifPulsePeriod,e.pulsePeriod),this.unifPulseStrength!==-1&&m.uniform1f(this.unifPulseStrength,e.pulseStrength),this.unifHeat!==-1&&m.uniform1f(this.unifHeat,e.heat),this.unifFlow!==-1&&m.uniform1f(this.unifFlow,e.flow),this.unifBandBlend!==-1&&m.uniform1f(this.unifBandBlend,e.bandBlend),this.unifFlameHeight!==-1&&m.uniform1f(this.unifFlameHeight,e.flameHeight),this.unifTaper!==-1&&m.uniform1f(this.unifTaper,e.taper),this.unifBands!==-1&&m.uniform1f(this.unifBands,e.bands)}setCurvature(e){this.use(),this.unifCurvature!==-1&&m.uniform1f(this.unifCurvature,e)}setCameraPos(e){this.use(),this.unifCameraPos!==-1&&m.uniform3fv(this.unifCameraPos,e)}setDimensions(e,t){this.use(),this.unifDimensions!==-1&&m.uniform2f(this.unifDimensions,e,t)}setBackgroundParams(e){this.use(),this.unifHorizon!==-1&&m.uniform1f(this.unifHorizon,e.horizon),this.unifAtmosphere!==-1&&m.uniform1f(this.unifAtmosphere,e.atmosphere)}setBackgroundView(e){this.use(),this.unifPan!==-1&&m.uniform1f(this.unifPan,e.pan),this.unifZoom!==-1&&m.uniform1f(this.unifZoom,e.zoom),this.unifCloudZoom!==-1&&m.uniform1f(this.unifCloudZoom,e.cloudZoom),this.unifSpin!==-1&&m.uniform1f(this.unifSpin,e.spin),this.unifCloudDrift!==-1&&m.uniform1f(this.unifCloudDrift,e.cloudDrift),this.unifFog!==-1&&m.uniform1f(this.unifFog,e.fog),this.unifInside!==-1&&m.uniform1f(this.unifInside,e.inside),this.unifScroll!==-1&&m.uniform1f(this.unifScroll,e.scroll)}draw(e){this.use(),this.attrPos!=-1&&e.bindPos()&&(m.enableVertexAttribArray(this.attrPos),m.vertexAttribPointer(this.attrPos,4,m.FLOAT,!1,0,0)),this.attrNor!=-1&&e.bindNor()&&(m.enableVertexAttribArray(this.attrNor),m.vertexAttribPointer(this.attrNor,4,m.FLOAT,!1,0,0)),e.bindIdx(),m.drawElements(e.drawMode(),e.elemCount(),m.UNSIGNED_INT,0),this.attrPos!=-1&&m.disableVertexAttribArray(this.attrPos),this.attrNor!=-1&&m.disableVertexAttribArray(this.attrNor)}},P=`#version 300 es
+var e=typeof Float32Array<`u`?Float32Array:Array;function t(){var t=new e(16);return e!=Float32Array&&(t[1]=0,t[2]=0,t[3]=0,t[4]=0,t[6]=0,t[7]=0,t[8]=0,t[9]=0,t[11]=0,t[12]=0,t[13]=0,t[14]=0),t[0]=1,t[5]=1,t[10]=1,t[15]=1,t}function n(e,t){if(e===t){var n=t[1],r=t[2],i=t[3],a=t[6],o=t[7],s=t[11];e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=n,e[6]=t[9],e[7]=t[13],e[8]=r,e[9]=a,e[11]=t[14],e[12]=i,e[13]=o,e[14]=s}else e[0]=t[0],e[1]=t[4],e[2]=t[8],e[3]=t[12],e[4]=t[1],e[5]=t[5],e[6]=t[9],e[7]=t[13],e[8]=t[2],e[9]=t[6],e[10]=t[10],e[11]=t[14],e[12]=t[3],e[13]=t[7],e[14]=t[11],e[15]=t[15];return e}function r(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=t[4],s=t[5],c=t[6],l=t[7],u=t[8],d=t[9],f=t[10],p=t[11],m=t[12],h=t[13],g=t[14],_=t[15],v=n*s-r*o,y=n*c-i*o,b=n*l-a*o,x=r*c-i*s,S=r*l-a*s,C=i*l-a*c,w=u*h-d*m,T=u*g-f*m,E=u*_-p*m,D=d*g-f*h,O=d*_-p*h,k=f*_-p*g,A=v*k-y*O+b*D+x*E-S*T+C*w;return A?(A=1/A,e[0]=(s*k-c*O+l*D)*A,e[1]=(i*O-r*k-a*D)*A,e[2]=(h*C-g*S+_*x)*A,e[3]=(f*S-d*C-p*x)*A,e[4]=(c*E-o*k-l*T)*A,e[5]=(n*k-i*E+a*T)*A,e[6]=(g*b-m*C-_*y)*A,e[7]=(u*C-f*b+p*y)*A,e[8]=(o*O-s*E+l*w)*A,e[9]=(r*E-n*O-a*w)*A,e[10]=(m*S-h*b+_*v)*A,e[11]=(d*b-u*S-p*v)*A,e[12]=(s*T-o*D-c*w)*A,e[13]=(n*D-r*T+i*w)*A,e[14]=(h*y-m*x-g*v)*A,e[15]=(u*x-d*y+f*v)*A,e):null}function i(e,t,n){var r=n[0],i=n[1],a=n[2];return e[0]=t[0]*r,e[1]=t[1]*r,e[2]=t[2]*r,e[3]=t[3]*r,e[4]=t[4]*i,e[5]=t[5]*i,e[6]=t[6]*i,e[7]=t[7]*i,e[8]=t[8]*a,e[9]=t[9]*a,e[10]=t[10]*a,e[11]=t[11]*a,e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15],e}function a(e,t){return e[0]=1,e[1]=0,e[2]=0,e[3]=0,e[4]=0,e[5]=1,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=t[0],e[13]=t[1],e[14]=t[2],e[15]=1,e}function o(e,t){var n=Math.sin(t),r=Math.cos(t);return e[0]=r,e[1]=n,e[2]=0,e[3]=0,e[4]=-n,e[5]=r,e[6]=0,e[7]=0,e[8]=0,e[9]=0,e[10]=1,e[11]=0,e[12]=0,e[13]=0,e[14]=0,e[15]=1,e}function s(){var t=new e(3);return e!=Float32Array&&(t[0]=0,t[1]=0,t[2]=0),t}function c(t,n,r){var i=new e(3);return i[0]=t,i[1]=n,i[2]=r,i}(function(){var e=s();return function(t,n,r,i,a,o){var s,c;for(n||=3,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2];return t}})();function l(){var t=new e(4);return e!=Float32Array&&(t[0]=0,t[1]=0,t[2]=0,t[3]=0),t}function u(t,n,r,i){var a=new e(4);return a[0]=t,a[1]=n,a[2]=r,a[3]=i,a}function d(e,t,n){return e[0]=t[0]+n[0],e[1]=t[1]+n[1],e[2]=t[2]+n[2],e[3]=t[3]+n[3],e}function f(e,t,n,r){return e[0]=t[0]+n[0]*r,e[1]=t[1]+n[1]*r,e[2]=t[2]+n[2]*r,e[3]=t[3]+n[3]*r,e}function p(e,t){var n=t[0],r=t[1],i=t[2],a=t[3],o=n*n+r*r+i*i+a*a;return o>0&&(o=1/Math.sqrt(o)),e[0]=n*o,e[1]=r*o,e[2]=i*o,e[3]=a*o,e}(function(){var e=l();return function(t,n,r,i,a,o){var s,c;for(n||=4,r||=0,c=i?Math.min(i*n+r,t.length):t.length,s=r;s<c;s+=n)e[0]=t[s],e[1]=t[s+1],e[2]=t[s+2],e[3]=t[s+3],a(e,e,o),t[s]=e[0],t[s+1]=e[1],t[s+2]=e[2],t[s+3]=e[3];return t}})();var m;function h(e){m=e}var g=class{constructor(){this.count=0,this.idxBound=!1,this.posBound=!1,this.norBound=!1}destory(){m.deleteBuffer(this.bufIdx),m.deleteBuffer(this.bufPos),m.deleteBuffer(this.bufNor)}generateIdx(){this.idxBound=!0,this.bufIdx=m.createBuffer()}generatePos(){this.posBound=!0,this.bufPos=m.createBuffer()}generateNor(){this.norBound=!0,this.bufNor=m.createBuffer()}bindIdx(){return this.idxBound&&m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),this.idxBound}bindPos(){return this.posBound&&m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),this.posBound}bindNor(){return this.norBound&&m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),this.norBound}elemCount(){return this.count}drawMode(){return m.TRIANGLES}},_=class extends g{constructor(e,t,n){super(),this.radius=t,this.subdivisions=n,this.center=u(e[0],e[1],e[2],1)}create(){let e=.5257311121191336,t=.8506508083520399,n=20*4**this.subdivisions,r=10*4**this.subdivisions+2,i=new ArrayBuffer(n*3*Uint32Array.BYTES_PER_ELEMENT+r*4*Float32Array.BYTES_PER_ELEMENT+r*4*Float32Array.BYTES_PER_ELEMENT),a=new ArrayBuffer(n*3*Uint32Array.BYTES_PER_ELEMENT),o=[i,a],s=0,c=n*3*Uint32Array.BYTES_PER_ELEMENT,l=c,u=c+r*4*Float32Array.BYTES_PER_ELEMENT,h=Array(20),g=[];for(let e=0;e<20;++e)h[e]=new Uint32Array(o[s],0+e*3*Uint32Array.BYTES_PER_ELEMENT,3);let _=Array(12);for(let e=0;e<12;++e)_[e]=new Float32Array(i,c+e*4*Float32Array.BYTES_PER_ELEMENT,4);_[0].set([-.5257311121191336,0,t,0]),_[1].set([e,0,t,0]),_[2].set([-.5257311121191336,0,-.8506508083520399,0]),_[3].set([e,0,-.8506508083520399,0]),_[4].set([0,t,e,0]),_[5].set([0,t,-.5257311121191336,0]),_[6].set([0,-.8506508083520399,e,0]),_[7].set([0,-.8506508083520399,-.5257311121191336,0]),_[8].set([t,e,0,0]),_[9].set([-.8506508083520399,e,0,0]),_[10].set([t,-.5257311121191336,0,0]),_[11].set([-.8506508083520399,-.5257311121191336,0,0]),h[0].set([0,4,1]),h[1].set([0,9,4]),h[2].set([9,5,4]),h[3].set([4,5,8]),h[4].set([4,8,1]),h[5].set([8,10,1]),h[6].set([8,3,10]),h[7].set([5,3,8]),h[8].set([5,2,3]),h[9].set([2,7,3]),h[10].set([7,10,3]),h[11].set([7,6,10]),h[12].set([7,11,6]),h[13].set([11,0,6]),h[14].set([0,1,6]),h[15].set([6,1,10]),h[16].set([9,0,11]),h[17].set([9,11,2]),h[18].set([9,2,5]),h[19].set([7,2,11]);for(let e=0;e<this.subdivisions;++e){s=1-s,g.length=h.length*4;let e=0,t=new Map;function n(e,n){let r=[e,n].sort().join(`_`);if(!t.has(r)){let a=new Float32Array(i,c+_.length*4*Float32Array.BYTES_PER_ELEMENT,4);d(a,_[e],_[n]),p(a,a),t.set(r,_.length),_.push(a)}return t.get(r)}for(let t=0;t<h.length;++t){let r=h[t][0],i=h[t][1],a=h[t][2],c=n(r,i),l=n(i,a),u=n(a,r),d=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),f=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),p=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3),m=g[e]=new Uint32Array(o[s],0+e++*3*Uint32Array.BYTES_PER_ELEMENT,3);g.length,d.set([r,c,u]),f.set([c,l,u]),p.set([c,i,l]),m.set([u,l,a])}let r=h;h=g,g=r}if(s===1){let e=new Uint32Array(i,0,3*h.length),t=new Uint32Array(a,0,3*h.length);e.set(t)}for(let e=0;e<_.length;++e)f(new Float32Array(i,u+e*4*Float32Array.BYTES_PER_ELEMENT,4),this.center,_[e],this.radius);this.buffer=i,this.indices=new Uint32Array(this.buffer,0,h.length*3),this.normals=new Float32Array(this.buffer,l,_.length*4),this.positions=new Float32Array(this.buffer,u,_.length*4),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),m.bufferData(m.ELEMENT_ARRAY_BUFFER,this.indices,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),m.bufferData(m.ARRAY_BUFFER,this.normals,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),m.bufferData(m.ARRAY_BUFFER,this.positions,m.STATIC_DRAW),console.log(`Created icosphere with ${_.length} vertices`)}},v=class extends g{constructor(e){super(),this.center=u(e[0],e[1],e[2],1)}create(){this.indices=new Uint32Array([0,1,2,0,2,3]),this.normals=new Float32Array([0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0]),this.positions=new Float32Array([-1,-1,0,1,1,-1,0,1,1,1,0,1,-1,1,0,1]),this.generateIdx(),this.generatePos(),this.generateNor(),this.count=this.indices.length,m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,this.bufIdx),m.bufferData(m.ELEMENT_ARRAY_BUFFER,this.indices,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufNor),m.bufferData(m.ARRAY_BUFFER,this.normals,m.STATIC_DRAW),m.bindBuffer(m.ARRAY_BUFFER,this.bufPos),m.bufferData(m.ARRAY_BUFFER,this.positions,m.STATIC_DRAW),console.log(`Created square`)}},y=class{constructor(e){this.canvas=e}setClearColor(e,t,n,r){m.clearColor(e,t,n,r)}setSize(e,t){this.canvas.width=e,this.canvas.height=t}clear(){m.clear(m.COLOR_BUFFER_BIT|m.DEPTH_BUFFER_BIT)}render(e,t,n,r,i,a=1){let o=u(a,a,a,1);r.setModelMatrix(t),r.setViewProjMatrix(e),r.setGeometryColor(o),r.setCameraPos(n);for(let e of i)r.draw(e)}},b=70,x=.5,S=3.4,C=.16,w=1/120,T=class{constructor(){this.x=0,this.y=0,this.vx=0,this.vy=0,this.speed=0,this.curvature=0,this.anchorX=0,this.anchorY=0,this.anchorVx=0,this.anchorVy=0}reset(e,t){this.anchorX=e,this.anchorY=t,this.anchorVx=0,this.anchorVy=0}update(e,t,n,r){let i=0,a=0;for(let r=n;r>0;r-=w){let n=Math.min(r,w);i=49*(e-this.anchorX)-14*this.anchorVx,a=49*(t-this.anchorY)-14*this.anchorVy,this.anchorVx+=i*n,this.anchorVy+=a*n,this.anchorX+=this.anchorVx*n,this.anchorY+=this.anchorVy*n}let o=b,s=x,c=o*Math.sqrt(1-s*s),l=2*Math.PI/S,u=l*r,d=u;for(let e=0;e<5;++e)d-=(d-s*Math.sin(d)-u)/(1-s*Math.cos(d));let f=Math.cos(d),p=Math.sin(d),m=o*(f-s),h=c*p,g=l/(1-s*f),_=-70*p*g,v=c*f*g,y=Math.hypot(m,h),T=-(l*l*o*o*o)/(y*y*y),E=T*m,D=T*h,O=C*r,k=Math.cos(O),A=Math.sin(O),j=k*m-A*h,M=A*m+k*h,N=k*_-A*v-C*M,P=A*_+k*v+C*j,F=k*E-A*D,I=A*E+k*D;this.x=this.anchorX+j,this.y=this.anchorY+M,this.vx=this.anchorVx+N,this.vy=this.anchorVy+P;let L=i+F,R=a+I;this.speed=Math.hypot(this.vx,this.vy),this.curvature=this.speed>.001?(this.vx*R-this.vy*L)/(this.speed*this.speed*this.speed):0}},E=.03,D=.034;function O(e,t,n){return Math.min(1,Math.max(0,(e-t)/(n-t)))}function k(e){return e*e*(3-2*e)}function A(e){let t=D**+k(O(e,.3,.85));return{pan:k(O(e,0,.4)),zoom:1/t,cloudZoom:.97/(t-E),inside:k(O(e,.64,.86)),comet:1-k(O(e,.2,.35))}}var j=null,M=class{constructor(e,t){if(this.shader=m.createShader(e),m.shaderSource(this.shader,t),m.compileShader(this.shader),!m.getShaderParameter(this.shader,m.COMPILE_STATUS))throw m.getShaderInfoLog(this.shader)}},N=class{constructor(e){this.prog=m.createProgram();for(let t of e)m.attachShader(this.prog,t.shader);if(m.linkProgram(this.prog),!m.getProgramParameter(this.prog,m.LINK_STATUS))throw m.getProgramInfoLog(this.prog);this.attrPos=m.getAttribLocation(this.prog,`vs_Pos`),this.attrNor=m.getAttribLocation(this.prog,`vs_Nor`),this.attrCol=m.getAttribLocation(this.prog,`vs_Col`),this.unifModel=m.getUniformLocation(this.prog,`u_Model`),this.unifModelInvTr=m.getUniformLocation(this.prog,`u_ModelInvTr`),this.unifViewProj=m.getUniformLocation(this.prog,`u_ViewProj`),this.unifColor=m.getUniformLocation(this.prog,`u_Color`),this.unifTime=m.getUniformLocation(this.prog,`u_Time`),this.unifLowFreqAmp=m.getUniformLocation(this.prog,`u_LowFreqAmp`),this.unifLowFreqScale=m.getUniformLocation(this.prog,`u_LowFreqScale`),this.unifFbmAmp=m.getUniformLocation(this.prog,`u_FbmAmp`),this.unifFbmScale=m.getUniformLocation(this.prog,`u_FbmScale`),this.unifOctaves=m.getUniformLocation(this.prog,`u_Octaves`),this.unifRoilSpeed=m.getUniformLocation(this.prog,`u_RoilSpeed`),this.unifPulsePeriod=m.getUniformLocation(this.prog,`u_PulsePeriod`),this.unifPulseStrength=m.getUniformLocation(this.prog,`u_PulseStrength`),this.unifHeat=m.getUniformLocation(this.prog,`u_Heat`),this.unifFlow=m.getUniformLocation(this.prog,`u_Flow`),this.unifBandBlend=m.getUniformLocation(this.prog,`u_BandBlend`),this.unifFlameHeight=m.getUniformLocation(this.prog,`u_FlameHeight`),this.unifTaper=m.getUniformLocation(this.prog,`u_Taper`),this.unifBands=m.getUniformLocation(this.prog,`u_Bands`),this.unifCameraPos=m.getUniformLocation(this.prog,`u_CameraPos`),this.unifCurvature=m.getUniformLocation(this.prog,`u_Curvature`),this.unifDimensions=m.getUniformLocation(this.prog,`u_Dimensions`),this.unifHorizon=m.getUniformLocation(this.prog,`u_Horizon`),this.unifAtmosphere=m.getUniformLocation(this.prog,`u_Atmosphere`),this.unifPan=m.getUniformLocation(this.prog,`u_Pan`),this.unifZoom=m.getUniformLocation(this.prog,`u_Zoom`),this.unifCloudZoom=m.getUniformLocation(this.prog,`u_CloudZoom`),this.unifSpin=m.getUniformLocation(this.prog,`u_Spin`),this.unifCloudDrift=m.getUniformLocation(this.prog,`u_CloudDrift`),this.unifInside=m.getUniformLocation(this.prog,`u_Inside`),this.unifScroll=m.getUniformLocation(this.prog,`u_Scroll`)}use(){j!==this.prog&&(m.useProgram(this.prog),j=this.prog)}setModelMatrix(e){if(this.use(),this.unifModel!==-1&&m.uniformMatrix4fv(this.unifModel,!1,e),this.unifModelInvTr!==-1){let i=t();n(i,e),r(i,i),m.uniformMatrix4fv(this.unifModelInvTr,!1,i)}}setViewProjMatrix(e){this.use(),this.unifViewProj!==-1&&m.uniformMatrix4fv(this.unifViewProj,!1,e)}setGeometryColor(e){this.use(),this.unifColor!==-1&&m.uniform4fv(this.unifColor,e)}setTime(e){this.use(),this.unifTime!==-1&&m.uniform1f(this.unifTime,e)}setFireballParams(e){this.use(),this.unifLowFreqAmp!==-1&&m.uniform1f(this.unifLowFreqAmp,e.displacement),this.unifLowFreqScale!==-1&&m.uniform1f(this.unifLowFreqScale,e.lobeScale),this.unifFbmAmp!==-1&&m.uniform1f(this.unifFbmAmp,e.detail),this.unifFbmScale!==-1&&m.uniform1f(this.unifFbmScale,e.detailScale),this.unifOctaves!==-1&&m.uniform1i(this.unifOctaves,e.octaves),this.unifRoilSpeed!==-1&&m.uniform1f(this.unifRoilSpeed,e.roilSpeed),this.unifPulsePeriod!==-1&&m.uniform1f(this.unifPulsePeriod,e.pulsePeriod),this.unifPulseStrength!==-1&&m.uniform1f(this.unifPulseStrength,e.pulseStrength),this.unifHeat!==-1&&m.uniform1f(this.unifHeat,e.heat),this.unifFlow!==-1&&m.uniform1f(this.unifFlow,e.flow),this.unifBandBlend!==-1&&m.uniform1f(this.unifBandBlend,e.bandBlend),this.unifFlameHeight!==-1&&m.uniform1f(this.unifFlameHeight,e.flameHeight),this.unifTaper!==-1&&m.uniform1f(this.unifTaper,e.taper),this.unifBands!==-1&&m.uniform1f(this.unifBands,e.bands)}setCurvature(e){this.use(),this.unifCurvature!==-1&&m.uniform1f(this.unifCurvature,e)}setCameraPos(e){this.use(),this.unifCameraPos!==-1&&m.uniform3fv(this.unifCameraPos,e)}setDimensions(e,t){this.use(),this.unifDimensions!==-1&&m.uniform2f(this.unifDimensions,e,t)}setBackgroundParams(e){this.use(),this.unifHorizon!==-1&&m.uniform1f(this.unifHorizon,e.horizon),this.unifAtmosphere!==-1&&m.uniform1f(this.unifAtmosphere,e.atmosphere)}setBackgroundView(e){this.use(),this.unifPan!==-1&&m.uniform1f(this.unifPan,e.pan),this.unifZoom!==-1&&m.uniform1f(this.unifZoom,e.zoom),this.unifCloudZoom!==-1&&m.uniform1f(this.unifCloudZoom,e.cloudZoom),this.unifSpin!==-1&&m.uniform1f(this.unifSpin,e.spin),this.unifCloudDrift!==-1&&m.uniform1f(this.unifCloudDrift,e.cloudDrift),this.unifInside!==-1&&m.uniform1f(this.unifInside,e.inside),this.unifScroll!==-1&&m.uniform1f(this.unifScroll,e.scroll)}draw(e){this.use(),this.attrPos!=-1&&e.bindPos()&&(m.enableVertexAttribArray(this.attrPos),m.vertexAttribPointer(this.attrPos,4,m.FLOAT,!1,0,0)),this.attrNor!=-1&&e.bindNor()&&(m.enableVertexAttribArray(this.attrNor),m.vertexAttribPointer(this.attrNor,4,m.FLOAT,!1,0,0)),e.bindIdx(),m.drawElements(e.drawMode(),e.elemCount(),m.UNSIGNED_INT,0),this.attrPos!=-1&&m.disableVertexAttribArray(this.attrPos),this.attrNor!=-1&&m.disableVertexAttribArray(this.attrNor)}},P=`#version 300 es
 
 //This is a vertex shader. While it is called a "shader" due to outdated conventions, this file
 //is used to apply matrix transformations to the arrays of vertex data passed to it.
@@ -684,8 +684,7 @@ uniform float u_CloudZoom;   // Magnification of the cloud layer. It is nearer t
                              // read as a fall rather than a picture being enlarged.
 uniform float u_Spin;        // How far the planet has turned, in radians.
 uniform float u_CloudDrift;  // How far the clouds have drifted through their noise.
-uniform float u_Fog;         // 0 to 1: the white-out of dropping through the cloud deck.
-uniform float u_Inside;      // 0 to 1: the blend into the clouds the content page sits in.
+uniform float u_Inside;      // 0 to 1: from the planet's own ocean to the close view of it.
 uniform float u_Scroll;      // How far the page has scrolled, in screen heights.
 
 in vec2 fs_Pos;
@@ -714,7 +713,6 @@ const vec3 OCEAN_SHALLOW = vec3(0.034, 0.125, 0.305);
 const vec3 LAND          = vec3(0.115, 0.120, 0.105);
 const vec3 CLOUD         = vec3(0.920, 0.940, 0.970);
 const vec3 SKY           = vec3(0.350, 0.620, 1.000); // atmospheric scattering tint
-const vec3 FOG           = vec3(0.955, 0.965, 0.980); // inside the cloud deck
 
 // The stars and the sun are far beyond the planet, so while the camera pans
 // they slide by at only this fraction of its speed.
@@ -871,28 +869,35 @@ vec3 landing(vec2 screen)
     vec3 sp = surfacePoint(toward);
 
     // Every doubling of the zoom gets another octave, so the coastlines keep
-    // their detail all the way down.
+    // their detail all the way down. The sea also rises as the camera falls,
+    // so whatever the planet has turned under the middle of the screen, the
+    // camera comes down over open water, deepening toward the sea it lands on.
     float continents = fbm(sp * 1.8, 4.0 + log2(u_Zoom));
-    vec3  surface    = mix(OCEAN_DEEP, OCEAN_SHALLOW, smoothstep(0.30, 0.56, continents));
-    surface = mix(surface, LAND, smoothstep(0.54, 0.62, continents));
+    float seaLevel   = 0.3 * smoothstep(1.5, 4.0, log2(u_Zoom));
+    vec3  surface    = mix(OCEAN_DEEP, OCEAN_SHALLOW,
+                           smoothstep(0.30 + seaLevel, 0.56 + seaLevel, continents));
+    surface = mix(surface, LAND, smoothstep(0.54 + seaLevel, 0.62 + seaLevel, continents));
 
     // Clouds are a second, finer field drifting at its own rate, so they slide
     // over the continents instead of being locked to them. Two layers at
     // different scales keep the banks from reading as one blurry blob. They
     // sit nearer the camera than the ground, so they are looked up through
     // their own, faster zoom.
-    vec2  cloudToward = rotate2(look + screen / u_CloudZoom, TILT) - center;
-    vec3  cloudPos    = surfacePoint(cloudToward) * 6.5 + vec3(0.0, 0.0, u_CloudDrift);
-    float cloudDetail = log2(u_CloudZoom);
-    float clouds      = fbm(cloudPos, 5.0 + cloudDetail) * 0.72
-                      + fbm(cloudPos * 2.7, 4.0 + cloudDetail) * 0.28;
-    // Nearing the deck, the clouds thicken: they spread out from the banks into
-    // the gaps until they close over entirely, so the camera flies into them
-    // rather than just watching the picture turn white. Measured in doublings
-    // of the cloud zoom, which is how the approach to the deck feels.
-    float approach   = clamp((log2(u_CloudZoom) - 2.0) / 4.5, 0.0, 1.0);
-    float cloudCover = smoothstep(0.47, 0.66, clouds + 0.3 * approach);
-    surface = mix(surface, CLOUD, cloudCover * 0.88);
+    //
+    // Nearing the deck, the clouds swell out past the edges of the screen and
+    // thin away as they go, so the camera drops through them into clear air
+    // rather than into a wall of white. Measured in doublings of the cloud
+    // zoom, which is how the approach to the deck feels; once they are gone
+    // they cost nothing.
+    float passing = 1.0 - smoothstep(3.0, 6.0, log2(u_CloudZoom));
+    if (passing > 0.0) {
+        vec2  cloudToward = rotate2(look + screen / u_CloudZoom, TILT) - center;
+        vec3  cloudPos    = surfacePoint(cloudToward) * 6.5 + vec3(0.0, 0.0, u_CloudDrift);
+        float cloudDetail = log2(u_CloudZoom);
+        float clouds      = fbm(cloudPos, 5.0 + cloudDetail) * 0.72
+                          + fbm(cloudPos * 2.7, 4.0 + cloudDetail) * 0.28;
+        surface = mix(surface, CLOUD, smoothstep(0.47, 0.66, clouds) * 0.88 * passing);
+    }
 
     // Wrapped diffuse. A hard terminator would put half the disc in shadow; the
     // reference is lit from over the shoulder with the night side out of frame.
@@ -906,13 +911,10 @@ vec3 landing(vec2 screen)
     surface = mix(surface, SKY * 1.3, smoothstep(0.88, 1.0, t) * 0.8 * light);
 
     // Falling into the atmosphere puts more and more air between the camera and
-    // the ground, so the view hazes over to a lighter blue on the way down.
+    // the ground, so the view hazes over a little on the way down. Kept dark,
+    // to meet the deep blue of the sea it hands over to.
     float haze = clamp(log2(u_Zoom) / 4.0, 0.0, 1.0);
-    surface = mix(surface, SKY * 0.75, haze * 0.35);
-
-    // And the nearer the cloud tops, the more they read as the brilliant white
-    // they are in full sun, rather than the dimmed grey of a distant view.
-    surface = mix(surface, FOG, cloudCover * approach * 0.6);
+    surface = mix(surface, SKY * 0.4, haze * 0.25);
 
     // ---- composite --------------------------------------------------------
     // fwidth gives the edge a one-pixel blend at any resolution, so the limb
@@ -922,66 +924,170 @@ vec3 landing(vec2 screen)
 
     color = mix(color, surface, disc);
 
-    // ---- landing ----------------------------------------------------------
-    // Dropping into the cloud deck. The white-out comes in through wisps of it
-    // that swell and slide out past the edges of the screen as the camera
-    // falls, and through the banks already in view before the gaps between
-    // them, so it billows in rather than washing over evenly.
-    float wisps = fbm(vec3(screen * 2.5 / sqrt(u_CloudZoom), 3.7), 4.0);
-    float fog   = clamp(u_Fog * 2.2 - 1.2 + 0.5 * cloudCover + 0.6 * wisps, 0.0, 1.0);
-    color = mix(color, FOG, fog);
-
     return color;
 }
 
 // ---------------------------------------------------------------------------
-// Inside the clouds: where the landing comes out, and the backdrop to the
-// content page from then on. Banks of cloud at three depths drift with the
-// wind and slide past as the page scrolls, the nearer ones faster, over a pale
-// sky. It stays bright throughout, since the page's text sits on top of it.
+// The ocean: where the fall comes out below the clouds, and the backdrop to
+// the content page from then on. The camera breaks out of the cloud base
+// looking almost straight down, as it has all the way from space, and stays
+// that way, gliding on over the sea, and further as the page scrolls.
+//
+// The wave model and the water's shading are adapted from afl_ext's "Very
+// fast procedural ocean" shader, under the MIT License:
+//
+//   Copyright (c) 2017-2024 afl_ext
+//
+//   Permission is hereby granted, free of charge, to any person obtaining a
+//   copy of this software and associated documentation files (the
+//   "Software"), to deal in the Software without restriction, including
+//   without limitation the rights to use, copy, modify, merge, publish,
+//   distribute, sublicense, and/or sell copies of the Software, and to permit
+//   persons to whom the Software is furnished to do so, subject to the
+//   following conditions:
+//
+//   The above copyright notice and this permission notice shall be included
+//   in all copies or substantial portions of the Software.
+//
+//   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+//   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+//   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+//   NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+//   DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+//   OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+//   USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+// Changed from the original to run behind a page all the time: there is no
+// raymarch, the view ray meets the water's top plane directly, and the slope
+// is summed alongside the height instead of differenced from three more
+// evaluations of it. That is 24 wave evaluations a pixel rather than hundreds.
 // ---------------------------------------------------------------------------
 
-const vec3 SKY_HIGH    = vec3(0.74, 0.85, 0.97); // the sky above, seen through the gaps
-const vec3 SKY_LOW     = vec3(0.90, 0.94, 0.99);
-const vec3 CLOUD_SHADE = vec3(0.83, 0.87, 0.94); // the shadowed undersides of the banks
-const vec3 CLOUD_LIT   = vec3(1.00, 1.00, 1.00);
+const float WATER_DEPTH     = 1.0;   // from the crests down to the troughs
+const float DRAG_MULT       = 0.38;  // how far each wave drags the water along for the next
+const int   WAVE_ITERATIONS = 24;
+const float SEA_PITCH       = 1.40;  // how far below the horizon the camera looks, radians:
+                                     // just short of straight down, so the top of the view
+                                     // reaches a little way out, toward brighter sky
+const float SEA_SCROLL      = 3.0;   // how far the camera flies on per screen of scrolling
+const float SEA_DRIFT       = 0.05;  // how fast it glides on by itself
+const float WAVE_SPEED      = 0.35;  // the waves' pace against the original's: a calm sea
+const float OCEAN_EXPOSURE  = 1.1;   // kept low, to stay within the site's dark palette
 
-const float WIND = 0.03;  // screen heights a second the nearest bank drifts
+// Low, and far enough off to the right that its path of glitter on the water
+// runs down the edge of the screen rather than behind the page's text.
+const vec3 OCEAN_SUN = normalize(vec3(1.2, 0.2, 1.0));
 
-// Density of one bank at \`screen\`. \`depth\` runs from 0 for the farthest to 1
-// for the nearest: nearer banks are larger, drift faster, and scroll past
-// faster, though even the nearest at only half the page's own speed.
-float cloudBank(vec2 screen, float depth, float seed)
+// The water's height at \`position\`, from 0 in the troughs to 1 on the crests,
+// and its slope: (height, d/dx, d/dz). Waves of rising frequency in
+// well-spread directions, each sharpened to a peaked crest by exp(sin - 1),
+// and each dragging the point along for the next, which bunches the crests
+// together the way real ones are. The slope is the sum of each wave's own,
+// leaving out how the drag moves the point, which shows nowhere.
+vec3 waves(vec2 position)
 {
-    vec2 drift = vec2(u_Time * WIND, u_Scroll * 2.0) * mix(0.2, 1.0, depth) * 0.5;
-    vec2 p     = (screen - drift) * mix(1.8, 0.8, depth);
-    return fbm(vec3(p, seed + u_Time * 0.015), 4.0);
+    float phaseShift = length(position) * 0.1;
+    float iter = 0.0, frequency = 1.0, timeMultiplier = 2.0, weight = 1.0;
+    float height = 0.0, weights = 0.0;
+    vec2  slope  = vec2(0.0);
+    for (int i = 0; i < WAVE_ITERATIONS; ++i)
+    {
+        vec2  dir  = vec2(sin(iter), cos(iter));
+        float x    = dot(dir, position) * frequency + u_Time * WAVE_SPEED * timeMultiplier + phaseShift;
+        float wave = exp(sin(x) - 1.0);
+        float dx   = wave * cos(x);
+
+        position -= dir * dx * weight * DRAG_MULT;
+        height   += wave * weight;
+        slope    += dir * dx * frequency * weight;
+        weights  += weight;
+
+        weight          = mix(weight, 0.0, 0.2);
+        frequency      *= 1.18;
+        timeMultiplier *= 1.07;
+        iter           += 1232.399963;
+    }
+    return vec3(height, slope) / weights;
 }
 
-vec3 insideClouds(vec2 screen)
+// A very cheap sky: blue overhead, paling toward the horizon, with a glow
+// round the sun.
+vec3 atmosphere(vec3 dir)
 {
-    vec3 color = mix(SKY_LOW, SKY_HIGH, smoothstep(-1.0, 1.0, screen.y));
+    vec3  zenith   = vec3(5.5, 13.0, 22.4) / 22.4;
+    float thick    = 1.0 / (dir.y + 0.1);
+    float lowSun   = 1.0 / (OCEAN_SUN.y * 11.0 + 1.0);
+    float around   = pow(abs(dot(OCEAN_SUN, dir)), 2.0);
+    vec3  sunColor = mix(vec3(1.0), max(vec3(0.0), vec3(1.0) - zenith), lowSun);
+    vec3  sky      = max(vec3(0.0), zenith * sunColor
+                         - vec3(5.5, 13.0, 22.4) * 0.002 * (thick - 6.0 * OCEAN_SUN.y * OCEAN_SUN.y));
+    sky *= thick * (0.24 + around * 0.24);
+    return sky * (1.0 + pow(1.0 - dir.y, 3.0)) * 0.5;
+}
 
-    // Far to near, each bank laid over the ones behind it.
-    for (int i = 0; i < 3; ++i)
-    {
-        float depth   = float(i) * 0.5;
-        float seed    = float(i) * 13.1;
-        float density = cloudBank(screen, depth, seed);
-        float cover   = smoothstep(0.44, 0.60, density);
+float sunDisc(vec3 dir)
+{
+    return pow(max(0.0, dot(dir, OCEAN_SUN)), 720.0) * 210.0;
+}
 
-        // Lit from above: where the bank thins out going up, its top catches
-        // the sun, and where it thickens, that is its shadowed underside.
-        float above = cloudBank(screen + vec2(0.0, 0.06), depth, seed);
-        float lit   = clamp(0.5 + (density - above) * 4.0, 0.0, 1.0);
-        vec3  bank  = mix(CLOUD_SHADE, CLOUD_LIT, lit);
+// Filmic tone mapping (ACES), from linear light to the screen.
+vec3 acesTonemap(vec3 color)
+{
+    mat3 m1 = mat3(0.59719, 0.07600, 0.02840,
+                   0.35458, 0.90834, 0.13383,
+                   0.04823, 0.01566, 0.83777);
+    mat3 m2 = mat3( 1.60475, -0.10208, -0.00327,
+                   -0.53108,  1.10813, -0.07276,
+                   -0.07367, -0.00605,  1.07602);
+    vec3 v = m1 * color;
+    vec3 a = v * (v + 0.0245786) - 0.000090537;
+    vec3 b = v * (0.983729 * v + 0.4329510) + 0.238081;
+    return pow(clamp(m2 * (a / b), 0.0, 1.0), vec3(1.0 / 2.2));
+}
 
-        // The farther banks are paler and thinner, fading into the sky.
-        bank  = mix(bank, color, (1.0 - depth) * 0.35);
-        color = mix(color, bank, cover * mix(0.55, 0.9, depth));
+vec3 ocean(vec2 screen)
+{
+    // High as the camera breaks out of the clouds, and falling as it clears
+    // them.
+    float height = mix(40.0, 12.0, u_Inside);
+
+    // The view ray, with the top of the screen toward the horizon.
+    vec3  ray = normalize(vec3(screen, 1.5));
+    float cp = cos(SEA_PITCH), sp = sin(SEA_PITCH);
+    ray = vec3(ray.x, ray.y * cp - ray.z * sp, ray.y * sp + ray.z * cp);
+
+    if (ray.y >= 0.0) {
+        return acesTonemap((atmosphere(ray) + sunDisc(ray)) * OCEAN_EXPOSURE);
     }
 
-    return color;
+    vec3 origin = vec3(0.0, height, u_Time * SEA_DRIFT + u_Scroll * SEA_SCROLL);
+    float dist  = -origin.y / ray.y;
+    vec3  hit   = origin + ray * dist;
+
+    vec3 w = waves(hit.xz);
+    vec3 n = normalize(vec3(-w.y * WATER_DEPTH, 1.0, -w.z * WATER_DEPTH));
+
+    // Flattened with distance, so the far water doesn't fizz with detail finer
+    // than its pixels.
+    n = normalize(mix(n, vec3(0.0, 1.0, 0.0), 0.8 * min(1.0, sqrt(dist * 0.01) * 1.1)));
+
+    float fresnel = 0.04 + 0.96 * pow(1.0 - max(0.0, dot(-n, ray)), 5.0);
+    vec3  r = reflect(ray, n);
+    r.y = abs(r.y);
+
+    // The sky and sun reflected off the surface: little of it this close to
+    // straight down, more toward the edges of the view, where the water is
+    // seen more obliquely and mirrors the brighter sky nearer the horizon.
+    vec3 reflection = atmosphere(r) + sunDisc(r);
+
+    // And light scattered back up through the water, which is what lights the
+    // middle of the view, where there is next to nothing to reflect. More of
+    // it comes through the crests, and off the faces turned toward the low
+    // sun, so the middle shows the waves' relief rather than a flat wash.
+    float sunward    = max(dot(n, OCEAN_SUN), 0.0);
+    vec3  scattering = vec3(0.0293, 0.0698, 0.1717) * 0.3 * (0.2 + w.x) * (1.0 + 2.0 * sunward);
+
+    return acesTonemap((fresnel * reflection + scattering) * OCEAN_EXPOSURE);
 }
 
 void main()
@@ -992,15 +1098,17 @@ void main()
     screen.x *= u_Dimensions.x / max(1.0, u_Dimensions.y);
 
     // Each scene is only worked out while it can be seen, so the content page
-    // pays for its clouds alone and the landing for nothing extra.
-    vec3 color = FOG;
+    // pays for its ocean alone and the landing for nothing extra.
+    vec3 color = vec3(0.0);
     if (u_Inside < 1.0) {
         color = landing(screen);
     }
     if (u_Inside > 0.0) {
-        color = mix(color, insideClouds(screen), u_Inside);
+        // Below the clouds, the close view of the water fades up over the
+        // planet's own ocean, the two the same deep blue.
+        color = mix(color, ocean(screen), u_Inside);
     }
 
     out_Col = vec4(color, 1.0);
 }
-`,R=1.5,z=.75,B=.012,V=.02,H=12,U=16,W=6.5,G=.75,K=290,q=.3,J=.5,Y=c(0,0,100),X={tesselations:5,displacement:.18,lobeScale:1.2,detail:.37,detailScale:6,octaves:5,roilSpeed:1.1,pulsePeriod:4.7,pulseStrength:.59,heat:.5,flow:.42,bandBlend:.79,flameHeight:1.5,taper:.12,bands:0,horizon:-.3,atmosphere:.028};function Z(e){let t=new N([new M(e.VERTEX_SHADER,P),new M(e.FRAGMENT_SHADER,F)]),n=new _(c(0,0,0),1,X.tesselations);return n.create(),{lambert:t,icosphere:n}}function Q(){let e=document.getElementById(`backdrop-canvas`);if(!e)return;let n=e.getContext(`webgl2`);if(!n)return;h(n);let r=new v(c(0,0,0));r.create();let s=new y(e);s.setClearColor(.004,.006,.014,1);let l=new N([new M(n.VERTEX_SHADER,I),new M(n.FRAGMENT_SHADER,L)]),u=Z(n),d=new T,f={...X},p=t(),m=t(),g=0,_=0,b=!1,x=-1;window.addEventListener(`pointermove`,e=>{e.pointerType===`mouse`&&(g=e.clientX,_=e.clientY,b=!0)},{passive:!0});function S(t){let n=Math.max(1,Math.round(e.clientWidth*t)),r=Math.max(1,Math.round(e.clientHeight*t));(e.width!==n||e.height!==r)&&s.setSize(n,r)}let C=document.querySelector(`.home-hero`),w={pan:0,zoom:1,cloudZoom:1,spin:0,cloudDrift:0,fog:0,inside:0,scroll:0},E=-1,D=performance.now(),O=0,k=!1;function j(){let t=(performance.now()-D)*.001,c=Math.min(t-O,.1);O=t;let h=e.getBoundingClientRect(),v=1;if(C){let e=C.getBoundingClientRect(),t=e.height-h.height;v=t>0?Math.min(1,Math.max(0,-e.top/t)):0}E=E<0?v:E+(v-E)*(1-Math.exp(-c*H));let y=A(E);if(w.pan=y.pan,w.zoom=y.zoom,w.cloudZoom=y.cloudZoom,w.fog=y.fog,w.inside=y.inside,w.scroll=window.scrollY/Math.max(1,h.height),w.spin+=c*B/y.zoom,w.cloudDrift+=c*V/y.cloudZoom,S(y.inside>=1?z:Math.min(window.devicePixelRatio||1,R)),n.viewport(0,0,e.width,e.height),s.clear(),n.disable(n.DEPTH_TEST),l.setTime(t),l.setDimensions(e.width,e.height),l.setBackgroundParams(X),l.setBackgroundView(w),l.draw(r),u&&b&&y.comet>0&&h.width>=1&&h.height>=1){let e=g-h.left,r=h.bottom-_;x<0&&(d.reset(e,r),x=t),d.update(e,r,c,t);let l=1-Math.exp(-d.speed/K);f.flameHeight=X.flameHeight+(W-X.flameHeight)*l,f.taper=X.taper+(G-X.taper)*l;let v=Math.min(1,(t-x)/J),b=U*v*v*(3-2*v);a(p,[2*d.x/h.width-1,2*d.y/h.height-1,0]),i(p,p,[2*b/h.width,2*b/h.height,-.1]),o(m,Math.atan2(d.vx,-d.vy));let S=Math.max(-.3,Math.min(q,d.curvature*U));n.enable(n.BLEND),n.blendFunc(n.ONE,n.ONE),u.lambert.setTime(t),u.lambert.setFireballParams(f),u.lambert.setCurvature(S),s.render(p,m,Y,u.lambert,[u.icosphere],y.comet),n.disable(n.BLEND)}k||=(document.documentElement.classList.add(`webgl`),!0),requestAnimationFrame(j)}requestAnimationFrame(j)}Q();
+`,R=1.5,z=.75,B=.012,V=.02,H=12,U=16,W=6.5,G=.75,K=290,q=.3,J=.5,Y=c(0,0,100),X={tesselations:5,displacement:.18,lobeScale:1.2,detail:.37,detailScale:6,octaves:5,roilSpeed:1.1,pulsePeriod:4.7,pulseStrength:.59,heat:.5,flow:.42,bandBlend:.79,flameHeight:1.5,taper:.12,bands:0,horizon:-.3,atmosphere:.028};function Z(e){let t=new N([new M(e.VERTEX_SHADER,P),new M(e.FRAGMENT_SHADER,F)]),n=new _(c(0,0,0),1,X.tesselations);return n.create(),{lambert:t,icosphere:n}}function Q(){let e=document.getElementById(`backdrop-canvas`);if(!e)return;let n=e.getContext(`webgl2`);if(!n)return;h(n);let r=new v(c(0,0,0));r.create();let s=new y(e);s.setClearColor(.004,.006,.014,1);let l=new N([new M(n.VERTEX_SHADER,I),new M(n.FRAGMENT_SHADER,L)]),u=Z(n),d=new T,f={...X},p=t(),m=t(),g=0,_=0,b=!1,x=-1;window.addEventListener(`pointermove`,e=>{e.pointerType===`mouse`&&(g=e.clientX,_=e.clientY,b=!0)},{passive:!0});function S(t){let n=Math.max(1,Math.round(e.clientWidth*t)),r=Math.max(1,Math.round(e.clientHeight*t));(e.width!==n||e.height!==r)&&s.setSize(n,r)}let C=document.querySelector(`.home-hero`),w={pan:0,zoom:1,cloudZoom:1,spin:0,cloudDrift:0,inside:0,scroll:0},E=-1,D=performance.now(),O=0,k=!1;function j(){let t=(performance.now()-D)*.001,c=Math.min(t-O,.1);O=t;let h=e.getBoundingClientRect(),v=1;if(C){let e=C.getBoundingClientRect(),t=e.height-h.height;v=t>0?Math.min(1,Math.max(0,-e.top/t)):0}E=E<0?v:E+(v-E)*(1-Math.exp(-c*H));let y=A(E);if(w.pan=y.pan,w.zoom=y.zoom,w.cloudZoom=y.cloudZoom,w.inside=y.inside,w.scroll=window.scrollY/Math.max(1,h.height),w.spin+=c*B/y.zoom,w.cloudDrift+=c*V/y.cloudZoom,S(y.inside>=1?z:Math.min(window.devicePixelRatio||1,R)),n.viewport(0,0,e.width,e.height),s.clear(),n.disable(n.DEPTH_TEST),l.setTime(t),l.setDimensions(e.width,e.height),l.setBackgroundParams(X),l.setBackgroundView(w),l.draw(r),u&&b&&y.comet>0&&h.width>=1&&h.height>=1){let e=g-h.left,r=h.bottom-_;x<0&&(d.reset(e,r),x=t),d.update(e,r,c,t);let l=1-Math.exp(-d.speed/K);f.flameHeight=X.flameHeight+(W-X.flameHeight)*l,f.taper=X.taper+(G-X.taper)*l;let v=Math.min(1,(t-x)/J),b=U*v*v*(3-2*v);a(p,[2*d.x/h.width-1,2*d.y/h.height-1,0]),i(p,p,[2*b/h.width,2*b/h.height,-.1]),o(m,Math.atan2(d.vx,-d.vy));let S=Math.max(-.3,Math.min(q,d.curvature*U));n.enable(n.BLEND),n.blendFunc(n.ONE,n.ONE),u.lambert.setTime(t),u.lambert.setFireballParams(f),u.lambert.setCurvature(S),s.render(p,m,Y,u.lambert,[u.icosphere],y.comet),n.disable(n.BLEND)}k||=(document.documentElement.classList.add(`webgl`),!0),requestAnimationFrame(j)}requestAnimationFrame(j)}Q();

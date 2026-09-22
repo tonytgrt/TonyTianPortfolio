@@ -1,9 +1,9 @@
 .project-cs-hero {
   color: #fff;
   background: linear-gradient(
-      to right,
-      rgba($themeClrPrimary, 0.8),
-      rgba($themeClrPrimary, 0.8)
+      to bottom,
+      rgba(#0a3456, 0.85),
+      rgba($themeClrBg, 0.95)
     ),
     url(../../assets/svg/common-bg.svg);
   background-size: cover;
@@ -74,7 +74,7 @@
     &-para {
       font-size: 1.8rem;
       line-height: 1.7;
-      color: grey;
+      color: $themeClrTextBody;
       margin-bottom: 2rem;
     }
   }
@@ -90,10 +90,11 @@
       margin-bottom: 1.5rem;
       margin-right: 1.5rem;
       font-size: 1.6rem;
-      background: rgba(#999, 0.2);
+      background: rgba(#fff, 0.06);
+      border: 1px solid $themeClrBorder;
       border-radius: $commonBorderRadius;
       font-weight: 600;
-      color: #777;
+      color: $themeClrTextBody;
     }
   }
   &__links {

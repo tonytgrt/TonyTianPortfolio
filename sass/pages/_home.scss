@@ -67,16 +67,10 @@ $heroOverlap: 50vh;
 }
 
 .about {
-  // Above the end of the hero, which it slides up over. With WebGL the clouds
-  // behind the page show through it; without, its top fades from clear into
-  // its own colour, so it still meets the dark hero without an edge.
+  // Above the end of the hero, which it slides up over. It has no background
+  // of its own: the ocean shows through it, or the page's without WebGL.
   position: relative;
   z-index: 1;
-  background: linear-gradient(rgba(250, 250, 250, 0), rgb(250, 250, 250) $heroOverlap);
-
-  .webgl & {
-    background: transparent;
-  }
   &__content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -95,13 +89,16 @@ $heroOverlap: 50vh;
     }
     &-details-para {
       font-size: 1.8rem;
-      color: grey;
+      color: $themeClrTextBody;
       max-width: 60rem;
       line-height: 1.7;
       margin-bottom: 1rem;
       &--hl {
         font-weight: 700;
         margin: 0 3px;
+      }
+      strong {
+        color: $themeClrText;
       }
       &:last-child {
         margin-bottom: 4rem;
@@ -160,12 +157,16 @@ $heroOverlap: 50vh;
       }
       &-desc {
         font-size: 1.8rem;
-        color: grey;
+        color: $themeClrTextBody;
         max-width: 60rem;
         line-height: 1.7;
         margin-bottom: 3rem;
         @include respond(phone) {
           font-size: 1.7rem;
+        }
+
+        strong {
+          color: $themeClrText;
         }
 
         ul {

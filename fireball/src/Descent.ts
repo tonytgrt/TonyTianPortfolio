@@ -1,16 +1,19 @@
 // The landing that plays as the visitor scrolls through the hero: the camera
 // pans down to look straight at the planet, falls toward it, drops through the
-// cloud deck, and comes out inside the clouds the content page sits in.
+// clouds as they thin away, and comes down over the ocean the content page
+// sits on, still looking down at it.
 // `progress` runs from 0 at the top of the page to 1 where the hero hands over
 // to the content.
 //
 //   0.00 - 0.40  pan down and a little right until the planet's centre is mid-screen
-//   0.30 - 0.92  fall: the ground zooms in, and the nearer cloud deck faster still
-//   0.70 - 0.90  white-out, dropping into the clouds
-//   0.86 - 0.96  come out among them, in the scene behind the content
+//   0.30 - 0.85  fall: the ground zooms in, and the nearer clouds faster still,
+//                swelling past the edges of the screen and thinning away
+//   0.64 - 0.86  the close view of the sea fades up as the last clouds clear, and
+//                the camera drops toward it
 //
-// The last stretch is inside the clouds alone, so the smoothing in main.ts has
-// caught up before the content arrives.
+// The sea is in view before the content's light text starts to rise over it
+// (see $heroOverlap), and the last stretch is the sea alone, so the smoothing
+// in main.ts has caught up by the time the content takes over.
 
 // Height of the cloud deck and the lowest the camera gets, both as fractions of
 // the altitude it starts from. Each layer's magnification is the starting
@@ -23,8 +26,7 @@ export interface DescentView {
   pan: number;        // 0 to 1, toward looking straight at the planet's centre
   zoom: number;       // magnification of the ground
   cloudZoom: number;  // magnification of the cloud deck
-  fog: number;        // 0 to 1
-  inside: number;     // 0 to 1, from the landing to the clouds behind the content
+  inside: number;     // 0 to 1, from the planet's own ocean to the close view of it
   comet: number;      // brightness of the comet, which belongs to space and fades
                       // out before the fall
 }
@@ -42,14 +44,13 @@ function ease(x: number) {
 export function descentView(progress: number): DescentView {
   // The altitude falls geometrically, so the magnification multiplies at an
   // even rate rather than lurching at the end.
-  const altitude = Math.pow(LOWEST, ease(span(progress, 0.30, 0.92)));
+  const altitude = Math.pow(LOWEST, ease(span(progress, 0.30, 0.85)));
 
   return {
     pan: ease(span(progress, 0.0, 0.40)),
     zoom: 1 / altitude,
     cloudZoom: (1 - CLOUD_DECK) / (altitude - CLOUD_DECK),
-    fog: ease(span(progress, 0.70, 0.90)),
-    inside: ease(span(progress, 0.86, 0.96)),
+    inside: ease(span(progress, 0.64, 0.86)),
     comet: 1 - ease(span(progress, 0.20, 0.35)),
   };
 }

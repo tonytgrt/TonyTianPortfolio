@@ -42,7 +42,7 @@ SASS files are organized in `sass/` using a modular structure:
 - `pages/` - Page-specific styles (home, project case studies)
 - `main.scss` - Main entry point that imports all partials
 
-**Theme customization**: Change the primary color by editing `$themeClrPrimary` in `sass/abstracts/_variables.scss`.
+**Theme**: the site is dark, its palette taken from the ocean the home page lands on. All of it is in the `$themeClr*` variables in `sass/abstracts/_variables.scss`; use those rather than new hard-coded colours. The hamburger icons in `assets/svg/` carry their own stroke colour.
 
 ### JavaScript
 `index.js` contains vanilla JavaScript for:
@@ -57,13 +57,17 @@ cursor. Vite builds it into `js/fireball.js` (`npm run build:fireball`, or
 
 The canvas is fixed behind the whole home page (`.backdrop`). The hero is a
 tall scroll track in front of it; scrolling through it plays a landing: the
-camera pans to the planet, falls through the clouds and comes out inside them,
-and those clouds stay as the background to all the content below. The timeline
-is in `fireball/src/Descent.ts`, and the track's length (`$heroTravel`) and how
-far About overlaps its end (`$heroOverlap`) are in `sass/pages/_home.scss`.
-Sections over the canvas must stay transparent: they clear their backgrounds
-under the `webgl` class, which `main.ts` sets once the first frame is drawn, so
-without WebGL they keep plain ones. The header and the social links are hidden
+camera pans to the planet, falls through the clouds as they thin away and
+comes down over the ocean, which stays as the background to all the content
+below. It stays dark the whole way: there is no white-out. The
+ocean is adapted from afl_ext's MIT-licensed "Very fast procedural ocean"
+shader; its copyright and license notice in `background-frag.glsl` must stay
+with it. The
+timeline is in `fireball/src/Descent.ts`, and the track's length
+(`$heroTravel`) and how far About overlaps its end (`$heroOverlap`) are in
+`sass/pages/_home.scss`. Sections over the canvas must stay transparent; the
+hero paints its space colour only until the `webgl` class is set, which
+`main.ts` does once the first frame is drawn. The header and the social links are hidden
 until the landing ends: `index.js` adds `landed` to the body.
 
 ### Cache busting
